@@ -1,0 +1,2158 @@
+---
+title: "CuraLit 🔬"
+subtitle: "Your Personal Research Assistant from PubMed Literature"
+author: "CuraLit Project"
+date: "June 15, 2026"
+format:
+  revealjs:
+    theme: sky
+    transition: slide
+    slide-number: true
+    preview-links: auto
+    logo: ""
+    css: custom.css
+    footer: "CuraLit v0.3.4 - Literature-Driven LLM Generator with RAG & Database"
+    incremental: false
+    smaller: false
+    scrollable: true
+    embed-resources: true
+    
+---
+
+# Welcome! 👋 {background-color="#e7f3ff"}
+
+## What We'll Cover Today
+
+:::: {.columns}
+::: {.column width="60%"}
+<!-- ### What We'll Cover Today -->
+
+- 🎯 What is CuraLit and why you need it
+- 🚀 Getting started (installation)
+- 🔍 Finding relevant research articles
+- 📊 Understanding your corpus
+- 🤖 Creating custom AI assistants
+- 📦 Sharing models with colleagues
+- 💡 Tips for successful research
+:::
+
+::: {.column width="40%"}
+::: {.callout-tip icon=true}
+## No Prior Experience Needed!
+
+This presentation is designed for researchers new to:
+
+- Command-line tools
+- AI/LLMs
+- Programming
+:::
+:::
+::::
+
+::: {.notes}
+Welcome everyone! Today we're going to learn about CuraLit, a powerful tool that helps researchers create custom AI assistants trained on specific scientific literature. Don't worry if you're not technical - we'll walk through everything step by step.
+:::
+
+# The Research Challenge 🤔 {background-color="#fff5e6"}
+
+## Too Much Information! 📚
+
+:::: {.columns}
+::: {.column width="50%"}
+### The Problem
+
+- PubMed contains **36+ million** articles
+- New studies published **every day**
+- Hard to keep up with your field
+- Generic AI doesn't know *your* research area
+- Need specialized knowledge on demand
+
+:::
+
+::: {.column width="50%"}
+### What Researchers Need
+
+::: {.fragment .fade-in}
+✅ Focused literature search
+
+✅ Quick synthesis of findings
+
+✅ Custom AI trained on specific topics
+
+✅ Help for both beginners and experts
+
+✅ Easy to share with colleagues
+:::
+:::
+::::
+
+::: {.notes}
+Researchers face an overwhelming amount of information. PubMed alone has over 36 million articles. Generic AI assistants like ChatGPT don't have deep knowledge of specific research areas. That's where CuraLit comes in.
+:::
+
+# What is CuraLit? 🔬 {background-color="#e8f5e9"}
+
+## Your Custom Research Assistant
+
+::: {.callout-note icon=true appearance="default"}
+## In Simple Terms
+
+CuraLit helps you **filter** PubMed articles by keywords, **analyze** the results, and **create** a custom AI assistant that knows about those specific studies.
+:::
+
+:::: {.columns}
+::: {.column width="33%"}
+### 🔍 Step 1: Filter
+Search millions of PubMed articles for keywords relevant to your research
+:::
+
+::: {.column width="33%"}
+### 📊 Step 2: Analyze
+Get statistics and visualizations about your article corpus
+:::
+
+::: {.column width="33%"}
+### 🤖 Step 3: Generate
+Create a custom AI model trained on those specific articles
+:::
+::::
+
+::: {.fragment .fade-in}
+### 🎁 Bonus: Share!
+Package your model to share with colleagues or collaborators
+:::
+
+# Real-World Use Cases 🌟 {background-color="#fff3e0"}
+
+## How Researchers Use CuraLit
+
+:::: {.columns}
+::: {.column width="50%"}
+### 👩‍🔬 PhD Student - Maria
+
+**Challenge:** Literature review for thesis on cancer immunotherapy
+
+**Solution with CuraLit:**
+
+- Searched 500+ relevant articles
+- Created AI assistant to answer questions
+- Identified research gaps
+- Generated hypothesis ideas
+
+**Time Saved:** Weeks → Days
+:::
+
+::: {.column width="50%"}
+### 👨‍⚕️ Medical Researcher - Dr. Chen
+
+**Challenge:** Stay current with diabetes research
+
+**Solution with CuraLit:**
+
+- Monthly updates on diabetes studies
+- AI model for patient education
+- Shared model with research team
+- Accessible explanations for patients
+
+**Benefit:** Better patient communication
+:::
+::::
+
+---
+
+## More Use Cases
+
+::: {.incremental}
+1. **Literature Reviews** - Synthesize findings from hundreds of papers
+2. **Grant Writing** - Quick access to relevant background research
+3. **Teaching** - Create educational AI for students
+4. **Clinical Practice** - Evidence-based treatment summaries
+5. **Hypothesis Generation** - Identify gaps and opportunities
+6. **Team Collaboration** - Shared knowledge base for labs
+:::
+
+::: {.notes}
+CuraLit is versatile and can support many different research workflows. From PhD students to medical professionals, it helps make sense of large amounts of literature.
+:::
+
+# Getting Started 🚀 {background-color="#e3f2fd"}
+
+## What You Need
+
+### Prerequisites
+
+:::: {.columns}
+::: {.column width="50%"}
+#### Required Software
+
+::: {.incremental}
+1. **Rust** (v1.70+)
+   - Programming language
+   - Used to run CuraLit
+
+2. **Ollama** 
+   - Runs AI models locally
+   - Free and open-source
+
+3. **Python** (v3.8+)
+   - For visualizations
+   - Likely already installed
+:::
+:::
+
+::: {.column width="50%"}
+#### Helpful But Optional
+
+- Basic command-line knowledge
+- Text editor (VS Code, etc.)
+- 8GB+ RAM recommended
+- Internet for downloading PubMed data
+:::
+::::
+
+::: {.callout-warning icon=true}
+Don't worry! We'll walk through installation step-by-step.
+:::
+
+---
+
+## Installation Steps {.smaller}
+
+### 1. Install Rust
+
+```bash
+# On Linux/Mac
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+# Restart your terminal after installation
+```
+
+### 2. Install Ollama
+
+Visit [ollama.ai/download](https://ollama.ai/download) and install for your system
+
+```bash
+# Verify installation
+ollama --version
+```
+
+### 3. Install Python Dependencies
+
+```bash
+pip install plotly pandas seaborn matplotlib numpy
+```
+
+### 4. Download the Corpus
+
+
+This project extracts results from the Pubmed _Baseline_ body of scientific literature which is made available by the National Library of Medicine. More information may be found about this collection of literature at [https://pubmed.ncbi.nlm.nih.gov/download/](https://pubmed.ncbi.nlm.nih.gov/download/).
+
++ Baseline URL: [https://ftp.ncbi.nlm.nih.gov/pubmed/baseline/](https://ftp.ncbi.nlm.nih.gov/pubmed/baseline/)
++ Updatefiles URL: [https://ftp.ncbi.nlm.nih.gov/pubmed/updatefiles/](https://ftp.ncbi.nlm.nih.gov/pubmed/updatefiles/)
+
+From the above links, download the `.gz` files from both the _Baseline_ and _Updatefiles_ URLs and save them to the `data/` directory (which you may have to create).
+
+---
+
+## Installing CuraLit
+
+### Clone and Build
+
+```bash
+# Download CuraLit
+git clone https://github.com/yourusername/curalit.git
+cd curalit
+
+# Build the release version
+cargo build --release
+
+# Test it works
+./target/release/curalit --version
+```
+
+::: {.callout-tip icon=true}
+## Quick Test
+Use the included sample data to test: `./data/short_pubmed26n0001.xml`
+:::
+
+### Optional: Install Globally
+
+```bash
+cargo install --path .
+# Now you can use 'curalit' from anywhere!
+```
+
+# The CuraLit Workflow 🔄 {background-color="#f3e5f5"}
+
+## Six Simple Steps
+
+```{mermaid}
+%%| fig-width: 10
+%%| fig-height: 5
+graph LR
+    A[🔍 Search<br/>Articles] --> B[📊 Review<br/>Statistics]
+    B --> C[📈 Visualize<br/>Results]
+    C --> D[🤖 Generate<br/>Model]
+    D --> E[📦 Package<br/>Optional]
+    E --> F[🚀 Use<br/>Model]
+    
+    style A fill:#e3f2fd
+    style B fill:#fff9c4
+    style C fill:#f3e5f5
+    style D fill:#c8e6c9
+    style E fill:#ffe0b2
+    style F fill:#ffcdd2
+```
+
+::: {.callout-note icon=true}
+Each step takes just **one command**! We'll learn them all.
+:::
+
+# Step 1: Search Articles 🔍 {background-color="#e1f5fe"}
+
+## Finding Relevant Research
+
+### The Basic Search Command
+
+```bash
+curalit search -k "cancer" -k "immunotherapy" -d ./data -o results
+```
+
+:::: {.columns}
+::: {.column width="50%"}
+### What This Does
+
+- `-k` = keyword to search
+- `-d` = directory with PubMed XML files
+- `-o` = output name for results
+- Searches: titles, abstracts, MeSH terms, authors
+:::
+
+::: {.column width="50%"}
+### What You Get
+
+✅ CSV file with matching articles
+
+✅ Checkpoint for resuming
+
+✅ Colored progress bar
+
+✅ Summary statistics
+:::
+::::
+
+---
+
+## Keyword Strategies {.smaller}
+
+### AND Logic (Default) - More Specific
+
+```bash
+curalit search -k "diabetes" -k "treatment" -k "insulin" -d ./data
+```
+
+**Finds:** Articles containing **all** keywords
+
+**Best for:** Focused, specific research questions
+
+### OR Logic - Broader Results
+
+```bash
+curalit search -k "diabetes" -k "glucose" --logic OR -d ./data
+```
+
+**Finds:** Articles containing **any** keyword
+
+**Best for:** Exploring a field, comprehensive reviews
+
+---
+
+## Pro Tips for Searching
+
+::: {.incremental}
+1. **Start Specific** - Use 2-4 targeted keywords with AND logic
+2. **Check Results** - Aim for 50-500 articles (not too many, not too few)
+3. **Use a File** - Keep keywords in a text file for complex searches
+   ```bash
+   curalit search -f keywords.txt -d ./data
+   ```
+4. **Resume if Interrupted** - Use `--resume` flag to continue
+5. **Refine** - Too many results? Add more specific keywords
+:::
+
+::: {.callout-tip icon=true}
+## Example Keywords File
+```
+cancer immunotherapy
+checkpoint inhibitors
+PD-1
+PD-L1
+```
+One keyword per line!
+:::
+
+# Step 2: Review Statistics 📊 {background-color="#fff9c4"}
+
+## Understanding Your Corpus
+
+### Generate Statistics
+
+```bash
+curalit stats -c results.csv
+```
+
+### What You Get
+
+:::: {.columns}
+::: {.column width="50%"}
+#### Files Created
+
+- `*_stats.json` - Detailed data
+- `*_stats.log` - Human-readable
+- `*_visualize.py` - For next step!
+:::
+
+::: {.column width="50%"}
+#### Key Information
+
+- Total article count
+- Top MeSH terms
+- Author rankings
+- Journal distribution
+- Publication timeline
+- Threshold warnings
+:::
+::::
+
+---
+
+## Interpreting Results
+
+::: {.callout-warning icon=true}
+## Watch for Warnings!
+
+**Too Many Articles (>1000)**
+
+- ⚠️ Keywords may be too broad
+- 💡 Add more specific terms
+- 💡 Switch to AND logic
+
+**Too Few Articles (<50)**
+
+- ⚠️ Keywords may be too narrow
+- 💡 Use broader terms
+- 💡 Try OR logic
+- 💡 Check spelling
+:::
+
+### The Sweet Spot: **50-500 articles**
+
+Perfect balance for a focused, useful AI model!
+
+# Step 3: Visualize Results 📈 {background-color="#f3e5f5"}
+
+## See Your Research Landscape
+
+### Run the Python Script
+
+```bash
+python results_visualize.py
+```
+
+::: {.callout-note icon=true}
+This creates **interactive HTML plots** you can open in your browser!
+:::
+
+---
+
+## What Visualizations Show
+
+:::: {.columns}
+::: {.column width="50%"}
+### 📅 Year Distribution
+- Publication timeline
+- Research trend analysis
+- Identify peak activity years
+
+### 🏷️ MeSH Terms
+- Top medical subject headings
+- Common themes
+- Related concepts
+:::
+
+::: {.column width="50%"}
+### 👥 Top Authors
+- Leading researchers
+- Collaboration networks
+- Experts in the field
+
+### 📰 Journal Distribution
+- Where research is published
+- Impact and reach
+- Quality indicators
+:::
+::::
+
+---
+
+## Example: Understanding Plots
+
+::: {.callout-tip icon=true appearance="default"}
+## Year Distribution Chart
+
+```
+Publications Per Year
+━━━━━━━━━━━━━━━━━━━━━
+2020 ████████░ 45 articles
+2021 ████████████ 67 articles
+2022 ██████████████ 82 articles
+2023 ████████████████ 98 articles
+2024 ██████████░ 54 articles
+```
+
+**Insight:** Research peaked in 2023 - look for recent breakthroughs!
+:::
+
+::: {.fragment .fade-in}
+### What This Tells You
+
+- Field is actively growing
+- Recent developments in 2023
+- Might need more 2024+ data
+- Good temporal coverage for AI model
+:::
+
+# Step 4: Generate Model 🤖 {background-color="#c8e6c9"}
+
+## Create Your AI Assistant
+
+### The Generate Command
+
+```bash
+curalit generate -c results.csv -m my-research-llm -b llama3
+```
+
+:::: {.columns}
+::: {.column width="50%"}
+### Parameters
+
+- `-c` = checkpoint CSV file
+- `-m` = name for your model
+- `-b` = base model (llama3, mistral, phi3)
+:::
+
+::: {.column width="50%"}
+### What Gets Created
+
+📄 **Modelfile** - Ollama config
+
+📊 **training.jsonl** - Article data
+
+📝 **system_prompt.txt** - AI instructions
+:::
+::::
+
+---
+
+## Understanding the Modelfile
+
+The Modelfile tells Ollama how to configure your AI assistant:
+
+::: {.callout-note icon=true appearance="minimal"}
+## Key Components
+
+1. **Base Model** - Starting point (llama3, mistral, etc.)
+2. **System Prompt** - Instructions for the AI
+   - Act as research assistant
+   - Reference PubMed articles
+   - Cite PMIDs
+   - Explain for novices and experts
+3. **Parameters** - Temperature, context window
+4. **Training Context** - Your articles
+:::
+
+---
+
+## Choosing a Base Model
+
+:::: {.columns}
+::: {.column width="50%"}
+### 🦙 llama3 (Default)
+
+- **Size:** 4-8GB
+- **Best for:** General use
+- **Speed:** Fast
+- **Quality:** Excellent
+- ⭐ **Recommended for beginners**
+:::
+
+::: {.column width="50%"}
+### 🌪️ mistral
+
+- **Size:** 4-7GB
+- **Best for:** Technical content
+- **Speed:** Very fast
+- **Quality:** Great
+
+### 🔬 phi3
+
+- **Size:** 2-4GB
+- **Best for:** Smaller systems
+- **Speed:** Very fast
+- **Quality:** Good
+:::
+::::
+
+::: {.callout-tip icon=true}
+Start with **llama3** - it's reliable and works well for research!
+:::
+
+# Step 5: Package for Sharing 📦 {background-color="#ffe0b2"}
+
+## Share Models with Colleagues
+
+### Create Distributable Package
+
+```bash
+# Package after generating
+curalit package -m my-research-llm
+
+# Or generate and package in one step
+curalit generate -c results.csv -m my-llm -b llama3 --package
+```
+
+:::: {.columns}
+::: {.column width="50%"}
+### What Gets Packaged
+
+- ✅ Modelfile
+- ✅ Training data
+- ✅ System prompt
+- ✅ Installation README
+:::
+
+::: {.column width="50%"}
+### Choose Format
+
+📦 **tar.gz** (default)
+- Universal, works everywhere
+- Smaller size
+
+📦 **zip**
+- Windows-friendly
+```bash
+curalit package -m my-llm -f zip
+```
+:::
+::::
+
+---
+
+## Why Package Models?
+
+::: {.incremental}
+1. **Collaboration** - Share with research team
+2. **Reproducibility** - Others can recreate your analysis
+3. **Version Control** - Archive specific versions
+4. **Offline Sharing** - No internet needed
+5. **Small Files** - Only ~KB-MB (not full model weights)
+:::
+
+::: {.callout-note icon=true}
+## What Recipients Need
+
+Recipients just need:
+- Ollama installed
+- Extract the archive
+- Run one command: `ollama create model-name -f Modelfile_*`
+:::
+
+# NEW in v0.3.0: RAG 🚀 {background-color="#e8f5e9"}
+
+## Retrieval-Augmented Generation
+
+::: {.callout-important icon=true}
+## What is RAG?
+
+RAG is an alternative to fine-tuning that retrieves relevant passages from your articles at query time, providing accurate, citation-backed answers without modifying the model.
+:::
+
+:::: {.columns}
+::: {.column width="50%"}
+### Why RAG?
+
+✅ **No hallucination** - Facts from real articles
+
+✅ **Always accurate** - Direct retrieval
+
+✅ **Auto-citations** - PMIDs included
+
+✅ **No fine-tuning** - Works with any model
+
+✅ **Fast updates** - Add articles anytime
+:::
+
+::: {.column width="50%"}
+### When to Use RAG?
+
+✓ Fact-based research questions
+
+✓ Literature review
+
+✓ Citation-backed answers
+
+✓ Rapid prototyping
+
+✓ Frequently updated research
+:::
+::::
+
+---
+
+## RAG vs Fine-tuning
+
+| Feature | RAG | Fine-tuning |
+|---------|-----|-------------|
+| **Accuracy** | ✅ High (facts retrieved) | ⚠️ Can distort |
+| **Setup** | 🚀 Fast (minutes) | ⏱️ Slow (hours) |
+| **Citations** | ✅ Automatic | ❌ No tracking |
+| **Updates** | ✅ Rebuild index | ⚠️ Retrain model |
+| **Best for** | Facts, Q&A | Style, reasoning |
+
+::: {.callout-tip icon=true}
+**Recommendation**: Start with RAG for fact-based research, use fine-tuning for style adaptation.
+:::
+
+---
+
+## RAG Workflow {.smaller}
+
+### 1. Start Qdrant (Vector Database)
+
+```bash
+# Run once - creates persistent storage
+docker run -d --name curalit-qdrant \
+  -p 6333:6333 -p 6334:6334 \
+  -v $(pwd)/qdrant_storage:/qdrant/storage \
+  qdrant/qdrant
+```
+
+### 2. Install Embedding Model
+
+```bash
+# One-time setup
+ollama pull nomic-embed-text
+```
+
+### 3. Build RAG Index
+
+```bash
+# After running search command
+curalit rag-build -c results.csv
+```
+
+---
+
+## Using Your RAG Model
+
+### Query for Relevant Passages
+
+```bash
+curalit rag-query -q "What are the mechanisms of immunotherapy?"
+```
+
+**Output:** Top relevant article passages with PMIDs
+
+### Generate Complete Answers
+
+```bash
+curalit rag-generate -q "Compare CAR-T vs checkpoint inhibitors" -m llama3
+```
+
+**Output:** Full answer synthesized from retrieved passages with citations
+
+::: {.callout-tip icon=true}
+Use `-k 10` to retrieve more passages for complex questions
+:::
+
+---
+
+## Sharing RAG Models
+
+### Package RAG for Distribution
+
+```bash
+# Creates complete, shareable package with vector database
+curalit rag-package -n curalit_articles -o cancer_research_rag
+```
+
+### What Gets Packaged
+
+- 📊 **Vector database** (all embeddings)
+- ⚙️ **Configuration** (settings and collection info)
+- 📜 **Setup script** (automated installation)
+- 📖 **README** (recipient instructions)
+
+### Recipients Just:
+
+```bash
+# 1. Extract and run setup
+tar -xzf cancer_research_rag.tar.gz
+cd cancer_research_rag/
+./setup_rag.sh
+
+# 2. Start querying!
+curalit rag-query -q "your question" -n curalit_articles
+```
+
+::: {.callout-note icon=true}
+RAG packages are small (~MB) vs fine-tuned models (~GB)
+:::
+
+---
+
+## NEW in v0.3.3: Database for Fact Verification 🗄️ {background-color="#fff3e0"}
+
+## The Hallucination Problem
+
+::: {.callout-warning icon=true}
+## AI Models Make Up Citations!
+Even with RAG, AI models can **fabricate** PMIDs, authors, DOIs, and publication dates when generating answers. This undermines research integrity!
+:::
+
+:::: {.columns}
+::: {.column width="50%"}
+### Common Issues
+
+❌ Invented PMID numbers  
+❌ Wrong author names  
+❌ Incorrect DOIs  
+❌ Made-up publication dates  
+❌ Mismatched titles
+:::
+
+::: {.column width="50%"}
+### CuraLit Solution
+
+✅ Build SQLite database from corpus  
+✅ Verify every cited PMID  
+✅ Display correct information  
+✅ Flag hallucinations instantly  
+✅ Trustworthy research answers
+:::
+::::
+
+---
+
+## Building a Verification Database
+
+### Create Database from Your Corpus
+
+```bash
+# Build database with same keywords as your search
+curalit db-build -k "cancer" -k "immunotherapy" -d ./data -n cancer_db
+```
+
+**What You Get:**
+
+```
+✓ Database created: 0_out/cancer_db_15Jun2026_144744.db
+✓ Inserted 1,247 articles
+Statistics:
+  - Total articles: 1,247
+  - With DOI: 1,150 (92.2%)
+  - With abstract: 1,189 (95.3%)
+  - Avg authors per article: 5.2
+  - Date range: 2018-2026
+```
+
+**Database Features:**
+- FTS5 full-text search on titles & abstracts
+- Indexed PMID lookups (<1ms)
+- Author search with pattern matching
+- Standard SQLite format
+
+---
+
+## Using Database with RAG
+
+### Automatic Citation Verification
+
+```bash
+# Generate answer with verification
+curalit rag-generate \
+  -q "What are CAR-T therapy mechanisms?" \
+  -m llama3 \
+  --use-db 0_out/cancer_db_15Jun2026_144744.db
+```
+
+**What Happens:**
+1. RAG retrieves passages and generates answer
+2. System extracts all PMIDs mentioned (regex pattern matching)
+3. Verifies each PMID against your database
+4. Displays complete, accurate citation information
+5. **Flags any hallucinated or incorrect references**
+
+---
+
+## Example Verification Output {.smaller}
+
+```
+════════════════════════════════════════════════════════════════════════════════
+Answer:
+
+CAR-T cell therapy works through genetic engineering of T-cells to express 
+chimeric antigen receptors. According to PMID 34567890, the therapy targets 
+CD19 antigens on cancer cells. Recent advances in PMID 35123456 show improved 
+persistence, while PMID 99999999 discusses safety protocols...
+
+════════════════════════════════════════════════════════════════════════════════
+Database Verification (PMID/DOI Fact-Checking)
+════════════════════════════════════════════════════════════════════════════════
+
+✓ Verified PMID: 34567890
+✓ Verified PMID: 35123456
+⚠ PMID not found in database: 99999999
+
+Verified Citations:
+────────────────────────────────────────────────────────────────────────────────
+PMID: 34567890
+Title: CAR-T Cell Therapy Mechanisms and Clinical Outcomes
+Authors: Smith, John A.; Johnson, Maria B.; Chen, Wei
+Journal: Nature Medicine
+Date: 2024-03-15
+DOI: 10.1038/nm.2024.123
+Abstract: This study explores the molecular mechanisms of CAR-T cell therapy...
+────────────────────────────────────────────────────────────────────────────────
+```
+
+::: {.callout-important icon=true}
+**PMID 99999999** was hallucinated by the AI! The database caught it instantly.
+:::
+
+---
+
+## Database Benefits & Queries
+
+:::: {.columns}
+::: {.column width="50%"}
+### For Researchers
+
+✅ **Research integrity** - no false citations  
+✅ **Instant verification** - automatic checking  
+✅ **Export citations** - accurate bibliography  
+✅ **No server needed** - portable SQLite file  
+✅ **Standard SQL** - query with any tool  
+✅ **Share easily** - single file to colleagues
+
+### Technical Features
+
+- **Fast:** <1ms indexed PMID lookups
+- **Searchable:** FTS5 full-text index
+- **Portable:** Single .db file (KB-MB)
+- **Compatible:** SQLite 3 standard
+- **Integrated:** Seamless RAG verification
+:::
+
+::: {.column width="50%"}
+### Advanced SQL Queries
+
+```bash
+# Find article by PMID
+sqlite3 cancer_db.db \
+  "SELECT * FROM articles 
+   WHERE pmid='34567890';"
+
+# Full-text search abstracts
+sqlite3 cancer_db.db \
+  "SELECT pmid, title 
+   FROM articles_fts 
+   WHERE articles_fts MATCH 'CAR-T';"
+
+# Find by author
+sqlite3 cancer_db.db \
+  "SELECT pmid, title 
+   FROM articles 
+   WHERE authors LIKE '%Smith%';"
+
+# Get articles by DOI
+sqlite3 cancer_db.db \
+  "SELECT * FROM articles 
+   WHERE doi='10.1038/nm.2024.123';"
+```
+:::
+::::
+
+::: {.callout-tip icon=true}
+See [DATABASE_FEATURE.md](../reading_material/DATABASE_FEATURE.md) for complete documentation
+:::
+
+---
+
+# Step 6: Use Your Model 🚀 {background-color="#ffcdd2"}
+
+## Bring Your AI to Life
+
+### Create the Ollama Model
+
+```bash
+# Navigate to the output directory
+cd 0_out
+
+# Create the model
+ollama create my-research-llm -f Modelfile_my-research-llm_*
+```
+
+::: {.fragment .fade-in}
+### Run Your Assistant
+
+```bash
+ollama run my-research-llm
+```
+
+::: {.callout-tip icon=true}
+Now you can ask questions about your research corpus!
+:::
+:::
+
+---
+
+## Example Conversation
+
+::: {.callout-note icon=true appearance="default"}
+## Chatting with Your Model
+
+**You:** What are the main findings about cancer immunotherapy in your training corpus?
+
+**AI:** Based on the 127 articles in my training corpus, the main findings include:
+
+1. **PD-1/PD-L1 checkpoint inhibitors** show significant efficacy in melanoma and lung cancer (PMIDs: 28374323, 29234532)
+2. **Combination therapies** with traditional chemotherapy improve response rates...
+3. **Biomarkers** like tumor mutational burden help predict treatment success...
+
+Would you like me to elaborate on any of these findings?
+:::
+
+---
+
+## Great Questions to Ask
+
+::: {.incremental}
+1. **Summaries**
+   - "Summarize the key findings about [topic]"
+   - "What are the main themes in these articles?"
+
+2. **Comparisons**
+   - "Compare the methodologies used in studies about [X] vs [Y]"
+   - "What are conflicting findings in the literature?"
+
+3. **Research Gaps**
+   - "What research gaps exist in this field?"
+   - "What hasn't been studied yet?"
+
+4. **Education**
+   - "Explain [concept] in simple terms"
+   - "What do beginners need to know about [topic]?"
+
+5. **Hypothesis**
+   - "What would be interesting research questions to explore?"
+   - "Based on these studies, what should we test next?"
+:::
+
+# Understanding Outputs 📁 {background-color="#e8eaf6"}
+
+## Files CuraLit Creates
+
+### From Search Command
+
+| File | Contents | Use |
+|------|----------|-----|
+| `results_*.csv` | Matched articles | Checkpoint, review |
+| Progress log | Real-time stats | Monitor search |
+
+### From Stats Command
+
+| File | Contents | Use |
+|------|----------|-----|
+| `*_stats.json` | Detailed data | Analysis, code |
+| `*_stats.log` | Human-readable | Quick review |
+| `*_visualize.py` | Python script | Generate plots |
+
+---
+
+## More Outputs
+
+### From Visualize Script
+
+| File | Contents | Use |
+|------|----------|-----|
+| `*_year_distribution.html` | Timeline chart | Trends |
+| `*_mesh_terms.html` | Topic bar chart | Themes |
+| `*_authors.html` | Researcher ranking | Experts |
+| `*_journals.html` | Publication venues | Quality |
+| `*_dashboard.html` | Combined view | Overview |
+
+### From Generate Command
+
+| File | Contents | Use |
+|------|----------|-----|
+| `Modelfile_*` | Ollama config | Create model |
+| `*_training.jsonl` | Article corpus | Reference |
+| `*_system_prompt.txt` | AI instructions | Customize |
+
+---
+
+## Where Files Are Stored
+
+```
+curalit/
+├── data/                    # Your PubMed XML files
+├── 0_out/                   # All generated outputs
+│   ├── results_*.csv
+│   ├── results_*_stats.json
+│   ├── results_*_stats.log
+│   ├── results_*_visualize.py
+│   ├── results_*_dashboard.html
+│   ├── Modelfile_*
+│   ├── *_training.jsonl
+│   └── *_distributable.tar.gz
+└── target/release/          # CuraLit binary
+```
+
+::: {.callout-tip icon=true}
+All outputs go to `0_out/` directory - easy to find!
+:::
+
+# Working with Ollama 🦙 {background-color="#fff3e0"}
+
+## Your AI Model Manager
+
+### What is Ollama?
+
+::: {.callout-note icon=true}
+Ollama is a tool for running AI models **locally on your computer**. Think of it as iTunes for AI models - it manages, runs, and updates them.
+:::
+
+:::: {.columns}
+::: {.column width="50%"}
+### Why Ollama?
+
+- ✅ **Private** - Data never leaves your computer
+- ✅ **Free** - No API costs
+- ✅ **Fast** - No internet latency
+- ✅ **Offline** - Works without connection
+- ✅ **Easy** - Simple commands
+:::
+
+::: {.column width="50%"}
+### Basic Commands
+
+```bash
+# List models
+ollama list
+
+# Run a model
+ollama run model-name
+
+# Delete a model
+ollama rm model-name
+
+# Get info
+ollama show model-name
+```
+:::
+::::
+
+---
+
+## Managing Your Models
+
+### Listing Models
+
+```bash
+ollama list
+```
+
+```
+NAME                    SIZE      MODIFIED
+my-research-llm         4.7GB     2 days ago
+cardiology-expert       4.5GB     1 week ago
+llama3                  4.7GB     1 month ago
+```
+
+### Removing Old Models
+
+```bash
+ollama rm old-model-name
+```
+
+::: {.callout-warning icon=true}
+Models can be large (4-8GB). Clean up old ones to save space!
+:::
+
+---
+
+## Advanced Ollama Usage
+
+### Running with Options
+
+```bash
+# Adjust temperature (creativity)
+ollama run my-research-llm --temperature 0.7
+
+# Load model but don't chat
+ollama run my-research-llm --verbose
+
+# Use different system prompt
+ollama run my-research-llm --system "You are a helpful assistant"
+```
+
+### Model Information
+
+```bash
+ollama show my-research-llm
+```
+
+Shows: model size, parameters, quantization, system prompt
+
+---
+
+## Troubleshooting Ollama
+
+::: {.callout-warning icon=true}
+## Common Issues
+
+**Model won't load**
+- Check available RAM (need 8GB+)
+- Try smaller base model (phi3)
+
+**Slow responses**
+- Normal for large models
+- Consider GPU acceleration
+
+**Can't find model**
+- Check spelling: `ollama list`
+- Verify creation completed
+
+**Out of disk space**
+- Remove unused models
+- Each model is 4-8GB
+:::
+
+# Tips for Success 💡 {background-color="#e8f5e9"}
+
+## Best Practices for Research
+
+:::: {.columns}
+::: {.column width="50%"}
+### 🎯 Planning Your Search
+
+1. **Define scope** clearly
+2. **Start narrow**, expand if needed
+3. **Use specific terms** from your field
+4. **Check MeSH terms** in PubMed
+5. **Iterate** - refine based on results
+:::
+
+::: {.column width="50%"}
+### 📊 Interpreting Results
+
+1. **Review statistics** before generating model
+2. **Examine visualizations** for patterns
+3. **Check date ranges** - recent enough?
+4. **Verify article quality** - reputable journals?
+5. **Look for gaps** - missing key papers?
+:::
+::::
+
+---
+
+## Model Quality Tips
+
+::: {.incremental}
+1. **Optimal Article Count: 50-500**
+   - Too few: Limited knowledge
+   - Too many: Diluted focus, slow training
+
+2. **Quality Over Quantity**
+   - Better to have 100 highly relevant articles
+   - Than 1000 loosely related ones
+
+3. **Update Regularly**
+   - Create new models as field evolves
+   - Archive old versions for reproducibility
+
+4. **Test Your Model**
+   - Ask questions you know the answers to
+   - Verify it cites correct PMIDs
+   - Check if it acknowledges limitations
+
+5. **Document Your Process**
+   - Save keyword files
+   - Note why you chose certain parameters
+   - Keep version history
+:::
+
+---
+
+## Collaboration Tips
+
+:::: {.columns}
+::: {.column width="50%"}
+### Sharing with Team
+
+✅ **Package models** with documentation
+
+✅ **Include keywords file** used
+
+✅ **Share visualizations** for context
+
+✅ **Document use cases** for the model
+
+✅ **Version control** - name with dates
+:::
+
+::: {.column width="50%"}
+### Lab-Wide Models
+
+- Create shared models for common topics
+- Update monthly with new literature
+- Different models for different projects
+- Central repository for packages
+- Training sessions for new members
+:::
+::::
+
+::: {.callout-tip icon=true}
+Consider creating a lab GitHub repo to share models and keywords!
+:::
+
+# Common Challenges & Solutions 🔧 {background-color="#fce4ec"}
+
+## Troubleshooting Guide
+
+### Search Issues
+
+::: {.callout-warning icon=true}
+**Problem:** "No articles found"
+
+**Solutions:**
+- Check XML files are in data directory
+- Verify keyword spelling
+- Try broader terms or OR logic
+- Check file permissions
+:::
+
+::: {.callout-warning icon=true}
+**Problem:** "Too many articles (10,000+)"
+
+**Solutions:**
+- Add more specific keywords
+- Use AND logic instead of OR
+- Include rare technical terms
+- Filter by specific chemicals or procedures
+:::
+
+---
+
+## Generation Issues
+
+::: {.callout-warning icon=true}
+**Problem:** "Model creation fails"
+
+**Solutions:**
+- Verify Ollama is installed: `ollama --version`
+- Check base model exists: `ollama pull llama3`
+- Ensure sufficient disk space (10GB+)
+- Check Modelfile for errors
+:::
+
+::: {.callout-warning icon=true}
+**Problem:** "Model gives generic answers"
+
+**Solutions:**
+- Too many articles - narrow focus
+- Articles not relevant - refine keywords
+- Test with specific questions about corpus
+- Verify training data includes expected content
+:::
+
+---
+
+## Performance Issues
+
+::: {.callout-warning icon=true}
+**Problem:** "CuraLit is slow"
+
+**Solutions:**
+- Normal for large XML files
+- Use `--resume` if interrupted
+- Process files in batches
+- Consider faster storage (SSD)
+:::
+
+::: {.callout-warning icon=true}
+**Problem:** "Model responses are slow"
+
+**Solutions:**
+- Normal for large models on CPU
+- Close other applications
+- Try smaller base model (phi3)
+- Consider GPU acceleration (advanced)
+:::
+
+---
+
+## Getting Help
+
+::: {.callout-note icon=true}
+## Resources
+
+📚 **Documentation:** Check the README.md
+
+💬 **Community:** GitHub Issues page
+
+🐛 **Bug Reports:** Include error messages and steps to reproduce
+
+📖 **Tutorial:** Run `curalit big-help` for detailed examples
+
+🔍 **Ollama Help:** Visit [ollama.ai/docs](https://ollama.ai/docs)
+:::
+
+# Real Example Walkthrough 🎬 {background-color="#e0f7fa"}
+
+## From Start to Finish
+
+Let's create an AI assistant for **diabetes research**!
+
+---
+
+## Step 1: Search {.smaller}
+
+```bash
+# Create keywords file
+echo "diabetes mellitus
+type 2 diabetes
+insulin resistance
+glucose metabolism
+glycemic control" > diabetes_keywords.txt
+
+# Search PubMed data
+curalit search -f diabetes_keywords.txt -d ./data -o diabetes_research
+```
+
+**Output:**
+```
+• Searching for 5 keyword(s) using AND logic:
+  → diabetes mellitus
+  → type 2 diabetes
+  ...
+• Found 2 XML file(s) in ./data
+• Total articles to process: 50,000
+✓ 247 articles matched your keywords!
+📄 Checkpoint saved: 0_out/diabetes_research_20260522_153000.csv
+```
+
+---
+
+## Step 2: Statistics {.smaller}
+
+```bash
+curalit stats -c 0_out/diabetes_research_*.csv
+```
+
+**Output shows:**
+- 247 total articles ✅ (good number!)
+- Top MeSH terms: "Diabetes Mellitus, Type 2", "Insulin", "Blood Glucose"
+- Date range: 2018-2024 (recent!)
+- Top journals: Diabetes Care, Diabetologia
+- No threshold warnings ✅
+
+**Interpretation:** Perfect corpus for a focused model!
+
+---
+
+## Step 3: Visualize {.smaller}
+
+```bash
+python 0_out/diabetes_research_*_visualize.py
+```
+
+**Open in browser:** `diabetes_research_*_dashboard.html`
+
+**What we see:**
+- Research peaked in 2022-2023
+- Strong focus on treatment and prevention
+- Major contributors identified
+- Published in high-impact journals
+
+**Decision:** Proceed with model generation!
+
+---
+
+## Step 4: Generate & Package {.smaller}
+
+```bash
+curalit generate \
+  -c 0_out/diabetes_research_*.csv \
+  -m diabetes-expert \
+  -b llama3 \
+  --package
+```
+
+**Output:**
+```
+• Loaded 247 articles from checkpoint
+  → Modelfile: 0_out/Modelfile_diabetes-expert_20260522_153500
+  → Training data: 0_out/diabetes_research_*_training.jsonl
+  → System prompt: 0_out/diabetes_research_*_system_prompt.txt
+
+✓ Modelfile generation complete!
+✓ Package created successfully!
+  → 0_out/diabetes-expert_distributable.tar.gz
+```
+
+---
+
+## Step 5: Create Model {.smaller}
+
+```bash
+cd 0_out
+ollama create diabetes-expert -f Modelfile_diabetes-expert_*
+```
+
+**Output:**
+```
+transferring model data
+creating model layer
+using existing layer sha256:abc123...
+writing manifest
+success
+```
+
+---
+
+## Step 6: Use It! {.smaller}
+
+```bash
+ollama run diabetes-expert
+```
+
+**Example interaction:**
+```
+>>> What are the latest approaches to managing type 2 diabetes?
+
+Based on the 247 articles in my training corpus (2018-2024), 
+current management approaches emphasize:
+
+1. Lifestyle Interventions (PMID: 32456789)
+   - Mediterranean diet shows 23% improvement in glycemic control
+   - Regular exercise (150 min/week) reduces HbA1c by 0.6%
+
+2. Pharmacotherapy Advances
+   - GLP-1 receptor agonists for weight management
+   - SGLT2 inhibitors for cardiovascular protection
+   
+3. Personalized Medicine
+   - Genetic markers guide drug selection
+   - Continuous glucose monitoring for real-time adjustment
+
+Would you like me to elaborate on any of these approaches?
+```
+
+---
+
+## Success! 🎉
+
+:::: {.columns}
+::: {.column width="50%"}
+### What We Achieved
+
+✅ Filtered 50,000 articles → 247 relevant
+
+✅ Analyzed research landscape
+
+✅ Created AI expert on diabetes
+
+✅ Ready to share with colleagues
+
+✅ Can answer questions instantly
+:::
+
+::: {.column width="50%"}
+### Time Investment
+
+- **Setup:** 30 minutes (one time)
+- **Search:** 5 minutes
+- **Analysis:** 2 minutes
+- **Model creation:** 10 minutes
+- **Total:** ~50 minutes
+
+**Value:** Months of reading compressed into an AI assistant!
+:::
+::::
+
+# Advanced Features 🚀 {background-color="#f1f8e9"}
+
+## Beyond the Basics
+
+### Resume Interrupted Searches
+
+```bash
+# Search gets interrupted? No problem!
+curalit search -k "cancer" -d ./data -o results --resume
+```
+
+Picks up exactly where it left off using the checkpoint file.
+
+### Custom Thresholds
+
+```bash
+# Adjust warning threshold
+curalit search -k "biology" -d ./data -t 2000
+```
+
+Set your own limit before getting warnings.
+
+---
+
+## Multiple Search Strategies
+
+### Strategy 1: Narrow Then Broad
+
+```bash
+# Start specific
+curalit search -k "CRISPR-Cas9" -k "gene editing" -d ./data
+
+# If too few results, broaden
+curalit search -k "CRISPR" -k "gene editing" --logic OR -d ./data
+```
+
+### Strategy 2: Iterative Refinement
+
+```bash
+# Initial search
+curalit search -k "heart disease" -d ./data -o heart_v1
+
+# Review stats, add more keywords
+curalit search -k "heart disease" -k "myocardial" \
+  -k "cardiovascular" -d ./data -o heart_v2
+```
+
+---
+
+## Combining Multiple Models
+
+Create specialized models for different aspects:
+
+```bash
+# Treatment model
+curalit generate -c treatment_articles.csv -m treatment-expert
+
+# Diagnosis model  
+curalit generate -c diagnosis_articles.csv -m diagnosis-expert
+
+# Prevention model
+curalit generate -c prevention_articles.csv -m prevention-expert
+```
+
+Use different models depending on your question!
+
+::: {.callout-tip icon=true}
+Each model becomes an expert in its specific domain.
+:::
+
+# Integration Ideas 💡 {background-color="#fff8e1"}
+
+## How to Use CuraLit in Your Workflow
+
+### 📝 Grant Writing
+
+```bash
+# Create background research assistant
+curalit search -k "your research area" -d ./data
+curalit generate -c results.csv -m grant-helper
+
+# Ask questions like:
+# "What are recent significant findings?"
+# "What gaps exist in current research?"
+# "Who are the leading researchers?"
+```
+
+### 👥 Lab Meetings
+
+- Create shared models for ongoing projects
+- Use AI to summarize recent literature
+- Generate discussion questions
+- Identify contradictory findings
+
+---
+
+## More Integration Ideas
+
+### 🎓 Teaching & Mentoring
+
+- Create educational models for students
+- Different models for different course levels
+- AI explains concepts at appropriate depth
+- Students can explore topics interactively
+
+### 📊 Systematic Reviews
+
+- Initial article screening
+- Extract key findings across studies
+- Identify methodological patterns
+- Support meta-analysis planning
+
+### 🔬 Experiment Design
+
+- Check what methods others used
+- Identify best practices
+- Find protocols and techniques
+- Avoid common pitfalls
+
+---
+
+## Automation Possibilities
+
+::: {.callout-tip icon=true}
+## Advanced Users
+
+Create scripts to:
+
+1. **Auto-update models monthly**
+   - Download new PubMed data
+   - Re-run searches with same keywords
+   - Compare findings over time
+
+2. **Batch process multiple topics**
+   - Loop through keyword sets
+   - Generate multiple models
+   - Create comparative reports
+
+3. **Integration with other tools**
+   - Export to reference managers
+   - Feed into analysis pipelines
+   - Connect to lab notebooks
+:::
+
+# Data Privacy & Ethics 🔒 {background-color="#e8eaf6"}
+
+## Responsible Use
+
+### ✅ What's Private
+
+:::: {.columns}
+::: {.column width="50%"}
+**Your Data:**
+- Search keywords
+- Generated models
+- Conversations with AI
+- Article selections
+
+**All stored locally!**
+- Never sent to external servers
+- Complete control
+- HIPAA/GDPR friendly (for your data)
+:::
+
+::: {.column width="50%"}
+**Ollama:**
+- Runs entirely on your computer
+- No internet connection needed (after download)
+- No data collection
+- Open source
+:::
+::::
+
+---
+
+## Ethical Considerations
+
+::: {.callout-warning icon=true}
+## Remember
+
+1. **Model Limitations**
+   - AI only knows articles in training corpus
+   - Cannot access new research
+   - May miss important studies not in corpus
+
+2. **Citation Required**
+   - Always verify AI claims in original papers
+   - Cite PMIDs, not the AI
+   - Use AI as starting point, not final authority
+
+3. **Clinical Decisions**
+   - Never use AI for medical diagnosis
+   - Not a replacement for clinical judgment
+   - Always consult qualified professionals
+:::
+
+---
+
+## Best Practices
+
+::: {.incremental}
+1. **Transparency**
+   - Document which articles trained your model
+   - Share keywords and methods with collaborators
+   - Note the date range of literature
+
+2. **Verification**
+   - Cross-check important claims
+   - Read key papers yourself
+   - Look for contradictory evidence
+
+3. **Updates**
+   - Refresh models as new research emerges
+   - Note when model knowledge becomes outdated
+   - Don't rely on old models for current practice
+
+4. **Bias Awareness**
+   - Your keyword selection introduces bias
+   - Model reflects literature availability
+   - Consider publication bias in field
+:::
+
+# Getting PubMed Data 📥 {background-color="#e3f2fd"}
+
+## Where to Get XML Files
+
+### Official PubMed Baseline
+
+::: {.callout-note icon=true}
+## Download Location
+
+[ftp://ftp.ncbi.nlm.nih.gov/pubmed/baseline/](ftp://ftp.ncbi.nlm.nih.gov/pubmed/baseline/)
+
+- Complete PubMed dataset
+- Annual baseline releases
+- ~1200+ XML files
+- Each file: ~25-30MB compressed
+:::
+
+### What You Need
+
+You don't need all files! 
+
+```bash
+# Download specific files
+wget ftp://ftp.ncbi.nlm.nih.gov/pubmed/baseline/pubmed26n0001.xml.gz
+gunzip pubmed26n0001.xml.gz
+mv pubmed26n0001.xml ./data/
+```
+
+---
+
+## Recommendations
+
+:::: {.columns}
+::: {.column width="50%"}
+### For Testing
+
+- Download 1-5 files
+- ~100,000-500,000 articles
+- Good for learning CuraLit
+- Quick searches
+
+**Example:**
+```bash
+# Test with provided sample
+data/short_pubmed26n0001.xml
+```
+:::
+
+::: {.column width="50%"}
+### For Research
+
+- Download 10-50 files
+- ~1-5 million articles
+- Better topic coverage
+- More comprehensive models
+
+**Storage needed:**
+- Compressed: ~30GB
+- Uncompressed: ~100GB
+:::
+::::
+
+::: {.callout-warning icon=true}
+Full baseline is ~1TB uncompressed! Start small, expand as needed.
+:::
+
+---
+
+## PubMed Updates
+
+### Baseline vs Updates
+
+**Baseline (Annual)**
+- Complete snapshot
+- Released yearly
+- Use for initial setup
+
+**Update Files (Daily)**
+- New and modified articles
+- Smaller files
+- Keep models current
+
+### Automation Tip
+
+```bash
+#!/bin/bash
+# Download latest 10 update files
+for i in {1..10}; do
+  wget ftp://ftp.ncbi.nlm.nih.gov/pubmed/updatefiles/pubmed26n$(printf %04d $i).xml.gz
+  gunzip pubmed26n$(printf %04d $i).xml.gz
+  mv pubmed26n$(printf %04d $i).xml ./data/
+done
+```
+
+# Testing & Quality Assurance 🧪 {background-color="#f3e5f5"}
+
+## Comprehensive Test Suite
+
+::: {.callout-note icon=true}
+## 71+ Automated Tests
+
+CuraLit includes extensive testing to ensure reliability and correctness of all features.
+:::
+
+:::: {.columns}
+::: {.column width="50%"}
+### Test Coverage
+
+- ✅ **Unit Tests**: 61 tests
+  - Article keyword matching
+  - XML parsing
+  - Modelfile generation
+  - Checkpoint/resume
+  - Database operations
+
+- ✅ **Integration Tests**: 14 workflows
+  - End-to-end searches
+  - Statistics & visualization
+  - Model packaging
+  - Error handling
+:::
+
+::: {.column width="50%"}
+### Quick Test Commands
+
+```bash
+# Run all unit tests
+./run_tests.sh
+
+# Full test suite
+./run_tests.sh --full
+
+# Include RAG tests
+./run_tests.sh --rag
+
+# Specific test suites
+cargo test --test article_test
+cargo test --test parser_test
+```
+:::
+::::
+
+---
+
+## Test Suite Details
+
+### What's Tested
+
+::: {.incremental}
+1. **Keyword Matching** (17 tests)
+   - Single & multiple keywords
+   - AND/OR logic
+   - Case sensitivity
+   - All article fields
+
+2. **XML Parsing** (13 tests)
+   - Complete articles
+   - Missing fields
+   - Special characters
+   - Large files (streaming)
+
+3. **Modelfile Generation** (11 tests)
+   - JSONL format
+   - Different base models
+   - Training data
+:::
+
+---
+
+### Integration & Workflow Tests
+
+**14 End-to-End Scenarios:**
+
+:::: {.columns}
+::: {.column width="50%"}
+- ✓ Basic search
+- ✓ AND/OR logic
+- ✓ Keywords from file
+- ✓ Statistics generation
+- ✓ Modelfile creation
+- ✓ Resume functionality
+- ✓ Database building
+:::
+
+::: {.column width="50%"}
+- ✓ Model packaging (tar.gz)
+- ✓ Model packaging (zip)
+- ✓ BigHelp command
+- ✓ Error handling
+- ✓ CSV validation
+- ✓ RAG workflows
+- ✓ Fact verification
+:::
+::::
+
+### Running Tests
+
+```bash
+# Comprehensive integration tests
+cd tests
+./comprehensive_test.sh
+```
+
+::: {.callout-tip icon=true}
+## Before You Start
+
+Run `./run_tests.sh` after installation to verify everything works correctly!
+:::
+
+# Next Steps 🎯 {background-color="#c8e6c9"}
+
+## Your Journey Starts Now!
+
+### Immediate Actions
+
+::: {.incremental}
+1. **Install CuraLit** - Follow setup slides
+2. **Run tests** - Verify installation: `./run_tests.sh`
+3. **Download sample data** - Or use provided test file
+4. **Run first search** - Pick a topic you're interested in
+5. **Explore visualizations** - Understand your corpus
+6. **Create your first model** - Start simple!
+7. **Share with colleague** - Practice packaging
+:::
+
+---
+
+## Learning Path
+
+### Week 1: Basics
+- Complete installation
+- Run example searches
+- Generate simple model
+- Ask basic questions
+
+### Week 2: Refinement
+- Experiment with keywords
+- Compare AND vs OR logic
+- Create multiple models
+- Test different base models
+
+### Week 3: Integration
+- Incorporate into research workflow
+- Share with research group
+- Create lab-specific models
+- Automate common tasks
+
+---
+
+## Resources & Support
+
+### Documentation
+
+::: {.columns}
+::: {.column width="50%"}
+📚 **CuraLit Resources**
+- [README.md](../README.md) - Comprehensive guide
+- `curalit big-help` - Built-in examples
+- GitHub Issues - Report problems
+- Example workflows - In README
+:::
+
+::: {.column width="50%"}
+🦙 **Ollama Resources**
+- [ollama.ai/docs](https://ollama.ai/docs)
+- Model library
+- Community forum
+- API documentation
+:::
+:::
+
+### Community
+
+- Join discussions on GitHub
+- Share your models and keywords
+- Contribute improvements
+- Help other researchers
+
+---
+
+## Keep Exploring!
+
+::: {.callout-tip icon=true appearance="default"}
+## Remember
+
+- 🚀 **Start small** - Perfect your workflow with simple examples
+- 🔄 **Iterate often** - Refine based on results
+- 📊 **Trust the data** - Let statistics guide you
+- 🤝 **Share knowledge** - Help your research community
+- 💡 **Be creative** - Find new ways to use CuraLit
+:::
+
+### You're Ready!
+
+Time to transform how you interact with scientific literature. Create your first research assistant and discover insights waiting in PubMed!
+
+# Thank You! 🙏 {background-color="#e8f5e9"}
+
+## Questions?
+
+:::: {.columns}
+::: {.column width="50%"}
+### Contact & Links
+
+📧 **Email:** your.email@institution.edu
+
+🔗 **GitHub:** [github.com/yourusername/curalit](https://github.com/yourusername/curalit)
+
+📚 **Documentation:** See README.md
+
+💬 **Discussions:** GitHub Issues
+:::
+
+::: {.column width="50%"}
+### Quick Reference
+
+```bash
+# Essential commands
+curalit search -k "topic" -d ./data
+curalit stats -c results.csv
+python *_visualize.py
+curalit generate -c results.csv -m name
+curalit package -m name
+ollama create name -f Modelfile_*
+ollama run name
+```
+:::
+::::
+
+---
+
+## Happy Researching! 🔬✨
+
+::: {.r-fit-text}
+**Transform literature into knowledge.**
+
+**Transform knowledge into discovery.**
+:::
+
+::: {.fragment .fade-in}
+### Now go create something amazing! 🚀
+:::

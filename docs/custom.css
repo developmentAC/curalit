@@ -1,0 +1,237 @@
+/* Custom CSS for CuraLit Presentation */
+
+/* Enhanced callout boxes */
+.callout {
+  border-radius: 8px;
+  padding: 1em;
+  margin: 1em 0;
+}
+
+.callout-tip {
+  background-color: #e8f5e9;
+  border-left: 5px solid #4caf50;
+}
+
+.callout-note {
+  background-color: #e3f2fd;
+  border-left: 5px solid #2196f3;
+}
+
+.callout-warning {
+  background-color: #fff3e0;
+  border-left: 5px solid #ff9800;
+}
+
+/* Code blocks */
+pre {
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  padding: 1em;
+  border-left: 3px solid #2196f3;
+}
+
+code {
+  background-color: #f0f0f0;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: 'Courier New', monospace;
+}
+
+/* Tables */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
+}
+
+th {
+  background-color: #2196f3;
+  color: white;
+  padding: 12px;
+  text-align: left;
+}
+
+td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+  background-color: #f5f5f5;
+}
+
+/* Emphasis */
+.highlight {
+  background-color: #fff176;
+  padding: 2px 5px;
+  border-radius: 3px;
+}
+
+/* Lists */
+ul {
+  line-height: 1.8;
+}
+
+li {
+  margin: 0.5em 0;
+}
+
+/* Columns */
+.columns {
+  display: flex;
+  gap: 2em;
+}
+
+.column {
+  flex: 1;
+}
+
+/* Custom backgrounds */
+.bg-blue {
+  background-color: #e3f2fd !important;
+}
+
+.bg-green {
+  background-color: #e8f5e9 !important;
+}
+
+.bg-yellow {
+  background-color: #fff9c4 !important;
+}
+
+.bg-orange {
+  background-color: #ffe0b2 !important;
+}
+
+/* Button-like elements */
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #2196f3;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.btn:hover {
+  background-color: #1976d2;
+}
+
+/* Icons and emoji */
+.emoji {
+  font-size: 1.5em;
+  vertical-align: middle;
+}
+
+/* Progress indicators */
+.progress {
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  height: 20px;
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.progress-bar {
+  background-color: #4caf50;
+  height: 100%;
+  text-align: center;
+  color: white;
+  line-height: 20px;
+}
+
+/* Mermaid diagrams */
+.mermaid {
+  background-color: white;
+  padding: 1em;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Section headers */
+h1 {
+  color: #1976d2;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+h2 {
+  color: #424242;
+  border-bottom: 3px solid #2196f3;
+  padding-bottom: 0.3em;
+}
+
+h3 {
+  color: #616161;
+}
+
+/* Incremental reveal styling */
+.fragment.fade-in {
+  opacity: 0;
+}
+
+.fragment.fade-in.visible {
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+/* Custom slide backgrounds */
+[data-background-color] {
+  padding: 2em;
+}
+
+/* Box styling */
+.box {
+  border: 2px solid #2196f3;
+  border-radius: 8px;
+  padding: 1em;
+  margin: 1em 0;
+  background-color: white;
+}
+
+/* Centered content */
+.center {
+  text-align: center;
+}
+
+/* Large text */
+.large {
+  font-size: 1.5em;
+}
+
+.xlarge {
+  font-size: 2em;
+}
+
+/* Status indicators */
+.status-good {
+  color: #4caf50;
+  font-weight: bold;
+}
+
+.status-warning {
+  color: #ff9800;
+  font-weight: bold;
+}
+
+.status-error {
+  color: #f44336;
+  font-weight: bold;
+}
+
+/* Command output styling */
+.output {
+  background-color: #1e1e1e;
+  color: #00ff00;
+  padding: 1em;
+  border-radius: 5px;
+  font-family: 'Courier New', monospace;
+  overflow-x: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .columns {
+    flex-direction: column;
+  }
+}

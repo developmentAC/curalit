@@ -1,0 +1,50 @@
+# Rust
+/target/
+**/*.rs.bk
+*.pdb
+Cargo.lock
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Output files
+0_out/
+*.csv
+*.jsonl
+*.log
+*.html
+*_stats.json
+*_visualize.py
+*_training.jsonl
+*_system_prompt.txt
+Modelfile
+!data/*.xml
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+
+# Testing
+/test_results/
+*.profraw
+*.gcda
+*.gcno
+
+# Documentation
+/target/doc/
+
+# Backup files
+*.bak
+*.backup
