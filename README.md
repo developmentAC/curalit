@@ -2,6 +2,8 @@
 
 **Literature-Driven LLM Generator for Biomedical Research**
 
+![logo](graphics/curaLit_logo.png)
+
 CuraLit is a powerful Rust-based tool that extracts relevant articles from PubMed XML datasets and generates custom Large Language Models (LLMs) tailored for research purposes. Perfect for novice and expert researchers who need specialized AI assistants trained on curated scientific literature.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -78,10 +80,13 @@ CuraLit is a powerful Rust-based tool that extracts relevant articles from PubMe
     - [Keyword Strategy](#keyword-strategy)
   - [🏗️ Project Structure](#️-project-structure)
   - [🧪 Testing](#-testing)
-    - [Quick Test Run](#quick-test-run)
-    - [Integration Tests (RAG Features)](#integration-tests-rag-features)
-    - [Legacy Integration Tests](#legacy-integration-tests)
+    - [Quick Test Run (Recommended)](#quick-test-run-recommended)
+    - [Individual Test Suites](#individual-test-suites)
+    - [Integration Tests](#integration-tests)
+    - [RAG Integration Tests (requires services)](#rag-integration-tests-requires-services)
+    - [Test Coverage](#test-coverage)
     - [Test with Sample Data](#test-with-sample-data)
+    - [Continuous Integration](#continuous-integration)
   - [🔍 Example Workflows](#-example-workflows)
     - [Cancer Immunotherapy Research](#cancer-immunotherapy-research)
     - [Diabetes Research Meta-Analysis](#diabetes-research-meta-analysis)
