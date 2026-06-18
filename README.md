@@ -10,6 +10,8 @@ Date: 18 June 2026
 
 Email: obonhamcarter at allegheny.edu
 
+Github: [https://github.com/developmentAC/curalit](https://github.com/developmentAC/curalit)
+
 CuraLit is a powerful Rust-based tool that extracts relevant articles from PubMed XML datasets and generates custom Large Language Models (LLMs) tailored for research purposes. Perfect for novice and expert researchers who need specialized AI assistants trained on curated scientific literature.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -216,7 +218,7 @@ See [DATABASE_FEATURE.md](DATABASE_FEATURE.md) for comprehensive guide with SQL 
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/curalit.git
+git clone git@github.com:developmentAC/curalit.git
 cd curalit
 ```
 
@@ -1536,9 +1538,8 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 📧 Contact
 
-- **Issues:** [GitHub Issues](https://github.com/yourusername/curalit/issues)
-- **Discussions:** [GitHub Discussions](https://github.com/yourusername/curalit/discussions)
-- **Email:** your.email@example.com
+- **Issues:** [GitHub Issues](https://github.com/developmentAC/curalit/issues)
+- **Email:** obonhamcarter@allegheny.edu
 
 ## 🗺️ Roadmap
 
