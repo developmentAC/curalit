@@ -1225,21 +1225,20 @@ fn print_big_help() {
         "Fast parallel processing with Rayon"
     );
 
-
     //
     println!("\n{}", "═".repeat(80).cyan());
     println!("\n{}\n", "Docker".yellow().bold());
     println!(" CuraLit uses Docker to host its Qdrant database services.");
     println!("  {} {}: {}", "•".green(), "Command".red(), "docker run -p 6333:6333 -p 6334:6334 -v $(pwd)/qdrant_storage:/qdrant/storage qdrant/qdrant".cyan());
 
-
     //
-
 
     println!("\n{}", "═".repeat(80).cyan());
     println!("\n{}\n", "CORPORA".yellow().bold());
 
-    println!(" Corpus files are formatted in XML and are downloaded from NCBI from the following URLs:");
+    println!(
+        " Corpus files are formatted in XML and are downloaded from NCBI from the following URLs:"
+    );
 
     println!(
         "  {} {}: {}",
@@ -1479,7 +1478,12 @@ fn print_big_help() {
     );
 
     println!("\n{}", "═".repeat(80).cyan());
-    println!("\nGitHub Repository: {}", "https://github.com/developmentAC/curalit".blue().underline());
+    println!(
+        "\nGitHub Repository: {}",
+        "https://github.com/developmentAC/curalit"
+            .blue()
+            .underline()
+    );
     println!(
         "{}\n",
         "For more info see README.MD".yellow().bold().underline()
