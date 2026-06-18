@@ -255,7 +255,7 @@ This project extracts results from the Pubmed _Baseline_ body of scientific lite
 
 From the above links, download the `.gz` files from both the _Baseline_ and _Updatefiles_ URLs and save them to the `data/` directory (which you may have to create).
 
-Once all desired `.gz` files (gunzip compression) have been downloaded, they may be opened using the following Unix script which checks for success when opening compressed files.
+Once all desired `.gz` files (gunzip compression) have been downloaded, they may be opened using the following Unix script which checks for a successful extraction of files. The compressed files are conserved in `compressed/` if they are needed later, and the extracted files are placed in `data/`.
 
 ```bash
 #!/bin/bash
