@@ -1225,10 +1225,21 @@ fn print_big_help() {
         "Fast parallel processing with Rayon"
     );
 
+
+    //
+    println!("\n{}", "═".repeat(80).cyan());
+    println!("\n{}\n", "Docker".yellow().bold());
+    println!(" CuraLit uses Docker to host its Qdrant database services.");
+    println!("  {} {}: {}", "•".green(), "Command".red(), "docker run -p 6333:6333 -p 6334:6334 -v $(pwd)/qdrant_storage:/qdrant/storage qdrant/qdrant".cyan());
+
+
+    //
+
+
     println!("\n{}", "═".repeat(80).cyan());
     println!("\n{}\n", "CORPORA".yellow().bold());
 
-    println!("  {} Corpus files are formatted in XML and are downloaded from NCBI from the following URLs:", "•".green());
+    println!(" Corpus files are formatted in XML and are downloaded from NCBI from the following URLs:");
 
     println!(
         "  {} {}: {}",
@@ -1446,7 +1457,6 @@ fn print_big_help() {
             .bold()
     );
 
-    // println!("  {} Create virtual environment: python3 -m venv venv", "•".green());
     println!(
         "  {} Create virtual environment: {}",
         "•".green(),
@@ -1469,7 +1479,7 @@ fn print_big_help() {
     );
 
     println!("\n{}", "═".repeat(80).cyan());
-    // println!("\nFor more info: {}", "https://github.com/yourusername/curalit".blue().underline());
+    println!("\nGitHub Repository: {}", "https://github.com/developmentAC/curalit".blue().underline());
     println!(
         "{}\n",
         "For more info see README.MD".yellow().bold().underline()
