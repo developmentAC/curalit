@@ -255,6 +255,15 @@ This project extracts results from the Pubmed _Baseline_ body of scientific lite
 
 From the above links, download the `.gz` files from both the _Baseline_ and _Updatefiles_ URLs and save them to the `data/` directory (which you may have to create).
 
+Once all desired `.gz` files have been downloaded, they may be opened using the following Unix script.
+
+```bash
+for x in `ls *.tar.gz`
+  do
+  	tar -vxf $x
+  done
+```
+
 ## Documentation & Tutorials
 
 ### Interactive Presentation
