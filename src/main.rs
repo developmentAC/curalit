@@ -1225,13 +1225,10 @@ fn print_big_help() {
         "Fast parallel processing with Rayon"
     );
 
-    //
     println!("\n{}", "═".repeat(80).cyan());
     println!("\n{}\n", "Docker".yellow().bold());
     println!(" CuraLit uses Docker to host its Qdrant database services.");
     println!("  {} {}: {}", "•".green(), "Command".red(), "docker run -p 6333:6333 -p 6334:6334 -v $(pwd)/qdrant_storage:/qdrant/storage qdrant/qdrant".cyan());
-
-    //
 
     println!("\n{}", "═".repeat(80).cyan());
     println!("\n{}\n", "CORPORA".yellow().bold());
