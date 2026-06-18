@@ -255,13 +255,66 @@ This project extracts results from the Pubmed _Baseline_ body of scientific lite
 
 From the above links, download the `.gz` files from both the _Baseline_ and _Updatefiles_ URLs and save them to the `data/` directory (which you may have to create).
 
-Once all desired `.gz` files have been downloaded, they may be opened using the following Unix script.
+Once all desired `.gz` files (gunzip compression) have been downloaded, they may be opened using the following Unix script which checks for success when opening compressed files.
 
 ```bash
-for x in `ls *.tar.gz`
-  do
-  	tar -vxf $x
-  done
+#!/bin/bash
+
+# Script to extract PubMed .xml.gz files and organize them into directories
+# Usage: ./extract_pubmed.sh
+
+# Create directories if they don't exist
+mkdir -p compressed
+mkdir -p data
+
+# Check if there are any .xml.gz files
+if ! ls *.xml.gz 1> /dev/null 2>&1; then
+    echo "No .xml.gz files found in the current directory"
+    exit 1
+fi
+
+# Counter for tracking progress
+count=0
+total=$(ls -1 *.xml.gz 2>/dev/null | wc -l)
+
+echo "Found $total .xml.gz files to process"
+echo "Starting extraction..."
+
+# Loop through all .xml.gz files
+for gzfile in *.xml.gz; do
+    # Skip if file doesn't exist (in case of glob expansion issues)
+    [ -f "$gzfile" ] || continue
+    
+    # Increment counter
+    ((count++))
+    
+    # Get the base filename without .gz extension
+    xmlfile="${gzfile%.gz}"
+    
+    echo "[$count/$total] Processing: $gzfile"
+    
+    # Extract the file (keep original with -k flag)
+    gunzip -k "$gzfile"
+    
+    # Check if extraction was successful
+    if [ -f "$xmlfile" ]; then
+        # Move extracted XML file to extracted directory
+        mv "$xmlfile" extracted/
+        echo "  ✓ Extracted to: extracted/$xmlfile"
+        
+        # Move compressed file to compressed directory
+        mv "$gzfile" compressed/
+        echo "  ✓ Moved to: compressed/$gzfile"
+    else
+        echo "  ✗ Failed to extract: $gzfile"
+    fi
+    
+    echo ""
+done
+
+echo "Extraction complete!"
+echo "Compressed files: compressed/"
+echo "Extracted files: extracted/"
 ```
 
 ## Documentation & Tutorials
