@@ -13,7 +13,9 @@ fn create_test_articles() -> Vec<Article> {
             pmid: "10001".to_string(),
             title: "First Cancer Research Article".to_string(),
             authors: vec!["Smith, J.".to_string(), "Doe, A.".to_string()],
-            abstract_text: "This is the first test article about cancer research and immunotherapy.".to_string(),
+            abstract_text:
+                "This is the first test article about cancer research and immunotherapy."
+                    .to_string(),
             journal: "Nature".to_string(),
             pub_date: "2024-01-01".to_string(),
             mesh_terms: vec!["Neoplasms".to_string(), "Immunotherapy".to_string()],
@@ -25,7 +27,9 @@ fn create_test_articles() -> Vec<Article> {
             pmid: "10002".to_string(),
             title: "Second Cancer Treatment Study".to_string(),
             authors: vec!["Johnson, B.".to_string()],
-            abstract_text: "This is the second test article about novel cancer treatment approaches.".to_string(),
+            abstract_text:
+                "This is the second test article about novel cancer treatment approaches."
+                    .to_string(),
             journal: "Science".to_string(),
             pub_date: "2024-02-01".to_string(),
             mesh_terms: vec!["Neoplasms".to_string(), "Drug Therapy".to_string()],
@@ -36,8 +40,14 @@ fn create_test_articles() -> Vec<Article> {
         Article {
             pmid: "10003".to_string(),
             title: "Third Melanoma Research".to_string(),
-            authors: vec!["Williams, C.".to_string(), "Brown, D.".to_string(), "Davis, E.".to_string()],
-            abstract_text: "This article focuses on melanoma treatment using checkpoint inhibitors.".to_string(),
+            authors: vec![
+                "Williams, C.".to_string(),
+                "Brown, D.".to_string(),
+                "Davis, E.".to_string(),
+            ],
+            abstract_text:
+                "This article focuses on melanoma treatment using checkpoint inhibitors."
+                    .to_string(),
             journal: "Cell".to_string(),
             pub_date: "2024-03-01".to_string(),
             mesh_terms: vec!["Melanoma".to_string(), "Checkpoint Inhibitors".to_string()],
@@ -271,10 +281,8 @@ fn test_different_base_models() -> Result<()> {
     let articles = create_test_articles();
 
     for (idx, base_model) in base_models.iter().enumerate() {
-        let generator = ModelfileGenerator::new(
-            format!("test-model-{}", idx),
-            base_model.to_string(),
-        );
+        let generator =
+            ModelfileGenerator::new(format!("test-model-{}", idx), base_model.to_string());
         let timestamp = format!("15Jun2024_12000{}", idx);
 
         generator.generate(&articles, "results", &temp_dir, &timestamp)?;

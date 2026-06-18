@@ -4,6 +4,12 @@
 
 ![logo](graphics/curaLit_logo.png)
 
+Date: 18 June 2026
+
+[Oliver Bonham-Carter](https://www.oliverbonhamcarter.com/)
+
+Email: obonhamcarter at allegheny.edu
+
 CuraLit is a powerful Rust-based tool that extracts relevant articles from PubMed XML datasets and generates custom Large Language Models (LLMs) tailored for research purposes. Perfect for novice and expert researchers who need specialized AI assistants trained on curated scientific literature.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)

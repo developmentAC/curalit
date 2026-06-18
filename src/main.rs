@@ -84,7 +84,11 @@ async fn main() -> Result<()> {
             println!(
                 "  {} Generate model: {}",
                 "→".cyan(),
-                format!("curalit generate -c 0_out/{}_*.csv -m my-model", output_name).white()
+                format!(
+                    "curalit generate -c 0_out/{}_*.csv -m my-model",
+                    output_name
+                )
+                .white()
             );
             println!("{}", "═".repeat(80).cyan());
 
@@ -112,7 +116,10 @@ async fn main() -> Result<()> {
                 "2.".cyan(),
                 "python 0_out/*_visualize.py".white()
             );
-            println!("\n{}", "RAG Workflow (Recommended for accuracy):".yellow().bold());
+            println!(
+                "\n{}",
+                "RAG Workflow (Recommended for accuracy):".yellow().bold()
+            );
             println!(
                 "  {} Build RAG index: {}",
                 "3.".cyan(),
@@ -1219,6 +1226,25 @@ fn print_big_help() {
     );
 
     println!("\n{}", "═".repeat(80).cyan());
+    println!("\n{}\n", "CORPORA".yellow().bold());
+
+    println!("  {} Corpus files are formatted in XML and are downloaded from NCBI from the following URLs:", "•".green());
+
+    println!(
+        "  {} {}: {}",
+        "•".green(),
+        "Baseline URL".red(),
+        "https://ftp.ncbi.nlm.nih.gov/pubmed/baseline/".cyan()
+    );
+
+    println!(
+        "  {} {}: {}",
+        "•".green(),
+        "Updatefiles URL".red(),
+        "https://ftp.ncbi.nlm.nih.gov/pubmed/updatefiles/".cyan()
+    );
+
+    println!("\n{}", "═".repeat(80).cyan());
     println!("\n{}\n", "FILE FORMATS".yellow().bold());
 
     println!("  {} Input: PubMed XML files (pubmed*.xml)", "•".green());
@@ -1351,10 +1377,7 @@ fn print_big_help() {
         "  {} RAG tests: Vector database and semantic search",
         "•".green()
     );
-    println!(
-        "  {} Database tests: SQLite fact verification",
-        "•".green()
-    );
+    println!("  {} Database tests: SQLite fact verification", "•".green());
 
     println!("\n  {} Quick test run (recommended):", "1.".cyan());
     println!("     {}", "./run_tests.sh".cyan());
@@ -1363,14 +1386,20 @@ fn print_big_help() {
         "# Runs all unit tests (~30 seconds)".bright_black()
     );
 
-    println!("\n  {} Full test suite with integration tests:", "2.".cyan());
+    println!(
+        "\n  {} Full test suite with integration tests:",
+        "2.".cyan()
+    );
     println!("     {}", "./run_tests.sh --full".cyan());
     println!(
         "     {}",
         "# Includes end-to-end workflows (~2-3 minutes)".bright_black()
     );
 
-    println!("\n  {} Include RAG tests (requires Qdrant + Ollama):", "3.".cyan());
+    println!(
+        "\n  {} Include RAG tests (requires Qdrant + Ollama):",
+        "3.".cyan()
+    );
     println!("     {}", "./run_tests.sh --rag".cyan());
 
     println!("\n  {} Run specific test suite:", "4.".cyan());
@@ -1402,7 +1431,10 @@ fn print_big_help() {
         "Run './run_tests.sh' after building to ensure everything works correctly!".cyan()
     );
 
-    println!("\n  {} For complete testing documentation:", "INFO:".yellow());
+    println!(
+        "\n  {} For complete testing documentation:",
+        "INFO:".yellow()
+    );
     println!("     {}", "See tests/README.md".cyan());
     println!("     {}", "See TESTING_SUMMARY.md".cyan());
 

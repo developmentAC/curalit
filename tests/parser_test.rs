@@ -338,8 +338,12 @@ fn test_parse_multiple_mesh_terms() -> Result<()> {
     let article = parser.next_article()?.expect("Should parse article");
 
     assert_eq!(article.mesh_terms.len(), 4);
-    assert!(article.mesh_terms.contains(&"Diabetes Mellitus".to_string()));
-    assert!(article.mesh_terms.contains(&"Cardiovascular Diseases".to_string()));
+    assert!(article
+        .mesh_terms
+        .contains(&"Diabetes Mellitus".to_string()));
+    assert!(article
+        .mesh_terms
+        .contains(&"Cardiovascular Diseases".to_string()));
 
     // Cleanup
     fs::remove_file(&file_path)?;
@@ -491,8 +495,10 @@ fn test_parse_publication_dates() -> Result<()> {
 #[test]
 fn test_streaming_many_articles() -> Result<()> {
     // Create XML with 100 articles
-    let mut xml_content = String::from(r#"<?xml version="1.0" encoding="UTF-8"?>
-<PubmedArticleSet>"#);
+    let mut xml_content = String::from(
+        r#"<?xml version="1.0" encoding="UTF-8"?>
+<PubmedArticleSet>"#,
+    );
 
     for i in 1..=100 {
         xml_content.push_str(&format!(

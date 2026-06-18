@@ -96,10 +96,7 @@ fn test_matches_all_keywords_and_logic() {
     let article = create_sample_article();
 
     // All keywords present
-    assert!(article.matches_all_keywords(&[
-        "cancer".to_string(),
-        "immunotherapy".to_string(),
-    ]));
+    assert!(article.matches_all_keywords(&["cancer".to_string(), "immunotherapy".to_string(),]));
 
     assert!(article.matches_all_keywords(&[
         "cancer".to_string(),
@@ -108,10 +105,7 @@ fn test_matches_all_keywords_and_logic() {
     ]));
 
     // One keyword missing
-    assert!(!article.matches_all_keywords(&[
-        "cancer".to_string(),
-        "diabetes".to_string(),
-    ]));
+    assert!(!article.matches_all_keywords(&["cancer".to_string(), "diabetes".to_string(),]));
 
     assert!(!article.matches_all_keywords(&[
         "immunotherapy".to_string(),
@@ -120,10 +114,7 @@ fn test_matches_all_keywords_and_logic() {
     ]));
 
     // Case insensitive
-    assert!(article.matches_all_keywords(&[
-        "CANCER".to_string(),
-        "IMMUNOTHERAPY".to_string(),
-    ]));
+    assert!(article.matches_all_keywords(&["CANCER".to_string(), "IMMUNOTHERAPY".to_string(),]));
 
     // Empty keywords (should return true - vacuous truth)
     assert!(article.matches_all_keywords(&[]));
@@ -135,10 +126,7 @@ fn test_matches_any_keyword_or_logic() {
     let article = create_sample_article();
 
     // At least one keyword present
-    assert!(article.matches_any_keyword(&[
-        "cancer".to_string(),
-        "diabetes".to_string(),
-    ]));
+    assert!(article.matches_any_keyword(&["cancer".to_string(), "diabetes".to_string(),]));
 
     assert!(article.matches_any_keyword(&[
         "glucose".to_string(),
@@ -147,10 +135,7 @@ fn test_matches_any_keyword_or_logic() {
     ]));
 
     // All keywords present
-    assert!(article.matches_any_keyword(&[
-        "cancer".to_string(),
-        "immunotherapy".to_string(),
-    ]));
+    assert!(article.matches_any_keyword(&["cancer".to_string(), "immunotherapy".to_string(),]));
 
     // No keywords present
     assert!(!article.matches_any_keyword(&[
@@ -160,10 +145,7 @@ fn test_matches_any_keyword_or_logic() {
     ]));
 
     // Case insensitive
-    assert!(article.matches_any_keyword(&[
-        "DIABETES".to_string(),
-        "CANCER".to_string(),
-    ]));
+    assert!(article.matches_any_keyword(&["DIABETES".to_string(), "CANCER".to_string(),]));
 
     // Empty keywords (should return false)
     assert!(!article.matches_any_keyword(&[]));
@@ -177,7 +159,10 @@ fn test_csv_row_conversion() {
 
     assert_eq!(csv_row.len(), 10); // Should have 10 columns
     assert_eq!(csv_row[0], "12345678"); // PMID
-    assert_eq!(csv_row[1], "Cancer Immunotherapy Using Checkpoint Inhibitors"); // Title
+    assert_eq!(
+        csv_row[1],
+        "Cancer Immunotherapy Using Checkpoint Inhibitors"
+    ); // Title
     assert!(csv_row[2].contains("Smith, John")); // Authors
     assert!(csv_row[3].contains("melanoma")); // Abstract
     assert_eq!(csv_row[4], "Nature Medicine"); // Journal
@@ -353,22 +338,13 @@ fn test_complex_keyword_scenarios() {
     ]));
 
     // Scenario 2: PD-1 inhibitor research
-    assert!(article.matches_all_keywords(&[
-        "pd-1".to_string(),
-        "inhibitor".to_string(),
-    ]));
+    assert!(article.matches_all_keywords(&["pd-1".to_string(), "inhibitor".to_string(),]));
 
     // Scenario 3: Clinical trials (should match)
-    assert!(article.matches_all_keywords(&[
-        "trial".to_string(),
-        "patients".to_string(),
-    ]));
+    assert!(article.matches_all_keywords(&["trial".to_string(), "patients".to_string(),]));
 
     // Scenario 4: Diabetes research (should NOT match)
-    assert!(!article.matches_all_keywords(&[
-        "diabetes".to_string(),
-        "glucose".to_string(),
-    ]));
+    assert!(!article.matches_all_keywords(&["diabetes".to_string(), "glucose".to_string(),]));
 
     // Scenario 5: Broad oncology search with OR
     assert!(article.matches_any_keyword(&[
