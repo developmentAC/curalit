@@ -243,7 +243,7 @@ cargo install --path .
 ### 4. Install Python Dependencies
 
 ```bash
-pip install plotly pandas seaborn matplotlib numpy
+pip install plotly pandas seaborn matplotlib numpy pyvis networkx
 ```
 
 ### 5. Download the PubMed Corpus
