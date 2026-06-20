@@ -246,6 +246,16 @@ cargo install --path .
 pip install plotly pandas seaborn matplotlib numpy pyvis networkx
 ```
 
+**Virtual Environment**
+
+Note: A virtual environment may equally be used if installing dependencies system wide is undesirable. After the collecting results, if this virtual environment will not be used again, it can be removed to conserve disk space.
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install plotly pandas seaborn matplotlib numpy pyvis networkx
+```
+
 ### 5. Download the PubMed Corpus
 
 This project extracts results from the Pubmed _Baseline_ body of scientific literature which is made available by the National Library of Medicine. More information may be found about this collection of literature at [https://pubmed.ncbi.nlm.nih.gov/download/](https://pubmed.ncbi.nlm.nih.gov/download/).
