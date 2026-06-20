@@ -14,6 +14,7 @@ tests/
 ├── parser_test.rs            # Unit tests for PubMed XML parser
 ├── modelfile_test.rs         # Unit tests for Modelfile generation
 ├── checkpoint_test.rs        # Unit tests for checkpoint/resume functionality
+├── visualizer_test.rs        # Unit tests for Python visualization script generation
 ├── database_test.rs          # Integration tests for SQLite database
 ├── rag_integration_test.rs   # Integration tests for RAG system (requires services)
 ├── integration_test.sh       # Basic integration tests (deprecated, use comprehensive_test.sh)
@@ -174,7 +175,85 @@ test_multiple_resumes()             // Multiple resume sessions
 test_large_checkpoint()             // Scalability (1000 articles)
 ```
 
-### 5. Database Tests (`database_test.rs`)
+### 5. Visualization Script Generation Tests (`visualizer_test.rs`)
+
+**Purpose**: Verify that Python visualization scripts are generated correctly with valid syntax and complete functionality.
+
+**Test Cases**:
+- ✅ Visualization script file generation
+- ✅ Python syntax validity (using `py_compile`)
+- ✅ All required functions present (year, MeSH, authors, journals, network, main)
+- ✅ Statistics data properly embedded
+- ✅ Search keywords formatted as Python list
+- ✅ Articles data formatted as Python dictionaries
+- ✅ Network function parameters (max_articles, recent_years, show_all, use_mesh)
+- ✅ Special character escaping (apostrophes in author names)
+- ✅ Empty dataset handling
+- ✅ Output directory creation logic
+- ✅ Network graph generation in main function
+
+**Key Tests**:
+```rust
+test_python_syntax_validity()        // Validates generated Python with py_compile
+test_script_contains_required_functions()  // Checks for all visualization functions
+test_network_function_parameters()    // Verifies network filtering logic
+test_articles_data_formatting()       // Checks article data structure
+test_special_character_escaping()     // Tests apostrophe and quote handling
+```
+
+**What Gets Tested**:
+- Generated script is executable and syntactically valid Python 3
+- Contains all visualization functions: `create_year_distribution_plot()`, `create_mesh_terms_plot()`, `create_author_network_plot()`, `create_journal_distribution()`, `create_summary_heatmap()`, `create_comprehensive_dashboard()`, `create_keyword_article_network()`
+- Main function calls all visualization generators
+- Network graph includes proper date filtering logic (no malformed list comprehensions)
+- Article nodes have PubMed URLs for click-to-open functionality
+- Statistics embedded correctly: TOTAL_ARTICLES, ARTICLES_WITH_ABSTRACTS, etc.
+- Data structures properly formatted: year_data, mesh_data, author_data, journal_data, SEARCH_KEYWORDS, ARTICLES_DATA
+
+**Critical Fix (v0.3.5)**:
+These tests caught a critical bug where the network generation had a malformed list comprehension causing `SyntaxError`:
+```python
+# BROKEN (before v0.3.5)
+if not show_all:
+    filtered_articles = [
+        article for article in ARTICLES_DATA
+        if article.get('pub_date', ''):  # Invalid nesting!
+            year_str = article['pub_date'].split('-')[0]
+            if year_str.isdigit() and ...
+    ]
+
+# FIXED (v0.3.5)
+if not show_all:
+    filtered_articles = []
+    for article in ARTICLES_DATA:
+        pub_date = article.get('pub_date', '')
+        if pub_date:
+            year_str = pub_date.split('-')[0]
+            if year_str.isdigit() and (current_year - int(year_str)) <= recent_years:
+                filtered_articles.append(article)
+    
+    # Fallback for historical data
+    if len(filtered_articles) == 0:
+        print(f"  ℹ No articles from last {recent_years} years found. Showing all {len(ARTICLES_DATA)} articles.")
+        filtered_articles = ARTICLES_DATA
+```
+
+**Second Fix (v0.3.5)**: Added fallback logic for historical data. When date filtering excludes all articles (common with PubMed archives from 1970s-1980s), the system automatically shows all articles instead of generating an empty network. The tests verify this fallback behavior exists in the generated code.
+
+**Running Visualizer Tests**:
+```bash
+# Run all visualizer tests
+cargo test --test visualizer_test
+
+# Run with output to see generated script details
+cargo test --test visualizer_test -- --nocapture
+
+# Run specific test
+cargo test test_python_syntax_validity
+cargo test test_network_function_parameters
+```
+
+### 6. Database Tests (`database_test.rs`)
 
 **Purpose**: Verify SQLite database creation and querying for fact verification.
 
@@ -196,7 +275,7 @@ test_batch_insert_performance()     // Bulk operations (1000 articles)
 test_duplicate_pmid_handling()      // Data integrity
 ```
 
-### 6. RAG Integration Tests (`rag_integration_test.rs`)
+### 7. RAG Integration Tests (`rag_integration_test.rs`)
 
 **Purpose**: Test Retrieval-Augmented Generation system with vector database.
 

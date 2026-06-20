@@ -1174,6 +1174,12 @@ Generated Python script creates interactive HTML plots:
 - `*_journals.html` - Journal distribution
 - `*_summary.html` - Corpus overview
 - `*_dashboard.html` - Comprehensive dashboard
+- `*_keyword_network.html` - **NEW:** Interactive keyword-article network graph
+  - Shows connections between search keywords and matched articles
+  - Displays recent articles by default (last 3 years)
+  - Click on article nodes to open PubMed pages
+  - Blue boxes = keywords, green dots = articles
+  - Configurable options: `max_articles`, `recent_years`, `show_all`, `use_mesh`
 
 ## 🎓 Tips for Researchers
 
@@ -1488,7 +1494,7 @@ curalit generate -c cancer_combined.csv -m cancer-comprehensive -b llama3
 
 **Issue:** Python visualization fails
 
-- **Solution:** Install required packages: `pip install plotly pandas seaborn matplotlib numpy`
+- **Solution:** Install required packages: `pip install plotly pandas seaborn matplotlib numpy pyvis networkx`
 
 ### RAG-Specific Issues
 

@@ -53,6 +53,8 @@ impl VisualizationGenerator {
         let mesh_data = self.prepare_mesh_data();
         let author_data = self.prepare_author_data();
         let journal_data = self.prepare_journal_data();
+        let search_keywords = self.prepare_search_keywords();
+        let articles_data = self.prepare_articles_data();
 
         format!(
             r#"#!/usr/bin/env python3
@@ -61,7 +63,7 @@ CuraLit Visualization Script
 Auto-generated interactive visualizations for literature analysis
 
 Requirements:
-    pip install plotly pandas seaborn matplotlib numpy
+    pip install plotly pandas seaborn matplotlib numpy pyvis networkx
 
 Usage:
     python {}_{}_visualize.py
@@ -72,6 +74,9 @@ import plotly.express as px
 from plotly.subplots import make_subplots
 import pandas as pd
 import json
+import os
+import re
+from datetime import datetime
 
 # Statistics data
 TOTAL_ARTICLES = {}
@@ -91,6 +96,12 @@ author_data = {}
 
 # Top journals data (top 20)
 journal_data = {}
+
+# Search keywords
+SEARCH_KEYWORDS = {}
+
+# Article data
+ARTICLES_DATA = {}
 
 
 def create_year_distribution_plot():
@@ -119,6 +130,173 @@ def create_year_distribution_plot():
     )
     
     return fig
+
+
+def create_keyword_article_network(max_articles=None, recent_years=3, show_all=False, use_mesh=False):
+    """Create interactive network graph showing keyword-article relationships.
+    
+    Args:
+        max_articles: Maximum number of articles to display (None for all recent)
+        recent_years: Number of recent years to include by default
+        show_all: If True, show all articles regardless of date
+        use_mesh: If True, also show MeSH term connections
+    """
+    try:
+        import networkx as nx
+        from pyvis.network import Network
+    except ImportError:
+        print("  ⚠ pyvis and networkx required for network visualization")
+        print("    Install with: pip install pyvis networkx")
+        return None
+    
+    # Create network graph
+    G = nx.Graph()
+    
+    # Add keyword nodes
+    for keyword in SEARCH_KEYWORDS:
+        G.add_node(keyword, node_type='keyword', label=keyword)
+    
+    # Filter articles by date if not showing all
+    current_year = datetime.now().year
+    filtered_articles = ARTICLES_DATA
+    
+    if not show_all:
+        filtered_articles = []
+        for article in ARTICLES_DATA:
+            pub_date = article.get('pub_date', '')
+            if pub_date:
+                year_str = pub_date.split('-')[0]
+                if year_str.isdigit() and (current_year - int(year_str)) <= recent_years:
+                    filtered_articles.append(article)
+        
+        # If no recent articles found, show all articles (likely historical data)
+        if len(filtered_articles) == 0:
+            print(f"  ℹ No articles from last {{recent_years}} years found. Showing all {{len(ARTICLES_DATA)}} articles.")
+            filtered_articles = ARTICLES_DATA
+    
+    # Limit number of articles if specified
+    if max_articles and len(filtered_articles) > max_articles:
+        # Randomly sample articles
+        import random
+        filtered_articles = random.sample(filtered_articles, max_articles)
+    
+    # Add article nodes and edges
+    articles_added = 0
+    for article in filtered_articles:
+        pmid = article.get('pmid', 'Unknown')
+        title = article.get('title', 'No Title')[:100]
+        authors = article.get('authors', 'Unknown')
+        journal = article.get('journal', 'Unknown')
+        pub_date = article.get('pub_date', 'Unknown')
+        abstract_text = article.get('abstract', '')
+        mesh_terms = article.get('mesh_terms', '')
+        
+        # Create citation
+        first_author = authors.split(';')[0].strip() if authors != 'Unknown' else 'Unknown'
+        year = pub_date[:4] if len(pub_date) >= 4 else pub_date
+        citation = f"{{first_author}} et al. ({{year}}). {{journal}}"
+        
+        # Create PubMed URL
+        pubmed_url = f"https://pubmed.ncbi.nlm.nih.gov/{{pmid}}/"
+        
+        # Check which keywords match
+        searchable = (title + ' ' + abstract_text + ' ' + mesh_terms).lower()
+        matched_keywords = [kw for kw in SEARCH_KEYWORDS if kw.lower() in searchable]
+        
+        if matched_keywords:
+            # Create tooltip
+            tooltip = f'''
+            <div style="max-width:400px">
+            <b>PMID:</b> {{pmid}}<br>
+            <b>Title:</b> {{title}}<br>
+            <b>Citation:</b> {{citation}}<br>
+            <b>Keywords Found:</b> {{', '.join(matched_keywords)}}<br>
+            <b>Year:</b> {{year}}<br>
+            <b>Click to view on PubMed</b>
+            </div>
+            '''
+            
+            # Add article node
+            article_node = f"PMID:{{pmid}}"
+            G.add_node(
+                article_node,
+                node_type='article',
+                label=f"PMID:{{pmid}}",
+                title=tooltip,
+                pmid=pmid,
+                url=pubmed_url
+            )
+            
+            # Add edges to matched keywords
+            for keyword in matched_keywords:
+                G.add_edge(article_node, keyword)
+            
+            # Optionally add MeSH term connections
+            if use_mesh and mesh_terms:
+                for mesh_term in mesh_terms.split(';')[:3]:  # Limit to top 3 MeSH terms
+                    mesh_term = mesh_term.strip()
+                    if mesh_term:
+                        mesh_node = f"MeSH:{{mesh_term}}"
+                        if not G.has_node(mesh_node):
+                            G.add_node(mesh_node, node_type='mesh', label=mesh_term)
+                        G.add_edge(article_node, mesh_node)
+            
+            articles_added += 1
+    
+    if articles_added == 0:
+        print("  ⚠ No articles matched the criteria for network visualization")
+        return None
+    
+    # Create PyVis network with CDN resources (no local files needed)
+    net = Network(
+        height='800px', 
+        width='95%', 
+        bgcolor='#ffffff', 
+        font_color='black',
+        cdn_resources='remote'  # Use CDN instead of local lib files
+    )
+    
+    # Convert NetworkX to PyVis
+    net.from_nx(G)
+    
+    # Customize node appearance
+    for node in net.nodes:
+        node_id = node['id']
+        node_data = G.nodes.get(node_id, {{}})
+        node_type = node_data.get('node_type', 'unknown')
+        
+        if node_type == 'keyword':
+            node['color'] = '#5DADE2'  # Blue
+            node['shape'] = 'box'
+            node['size'] = 25
+            node['font'] = {{'size': 16, 'face': 'arial', 'color': 'white'}}
+            node['title'] = f"<b>Search Keyword:</b> {{node_id}}"
+        elif node_type == 'article':
+            node['color'] = '#58D68D'  # Green
+            node['shape'] = 'dot'
+            node['size'] = 15
+            node['font'] = {{'size': 10, 'face': 'arial'}}
+            # Add click handler for PubMed URL
+            pmid = node_data.get('pmid', '')
+            if pmid:
+                url = f"https://pubmed.ncbi.nlm.nih.gov/{{pmid}}/"
+                node['title'] = node_data.get('title', '') + f"<br><br><a href='{{url}}' target='_blank'>🔗 Open in PubMed</a>"
+        elif node_type == 'mesh':
+            node['color'] = '#F39C12'  # Orange
+            node['shape'] = 'diamond'
+            node['size'] = 12
+            node['font'] = {{'size': 10, 'face': 'arial'}}
+            node['title'] = f"<b>MeSH Term:</b> {{node_id.replace('MeSH:', '')}}"
+    
+    # Customize edges
+    for edge in net.edges:
+        edge['color'] = '#95A5A6'
+        edge['width'] = 1
+    
+    # Enable interactive physics controls
+    net.show_buttons(filter_=['physics'])
+    
+    return net, articles_added, len(filtered_articles)
 
 
 def create_mesh_terms_plot():
@@ -412,6 +590,33 @@ def main():
     fig_dashboard.write_html(output_path)
     print(f"✓ Dashboard: {{output_path}}")
     
+    # Keyword-Article Network Graph
+    print()
+    print("Generating keyword-article network graph...")
+    network_result = create_keyword_article_network(max_articles=100, recent_years=3, show_all=False)
+    if network_result:
+        net, articles_shown, total_filtered = network_result
+        output_path = os.path.join(html_dir, '{}_{}_keyword_network.html')
+        net.save_graph(output_path)
+        
+        # Fix pyvis bug: remove reference to non-existent lib/bindings/utils.js
+        with open(output_path, 'r', encoding='utf-8') as f:
+            html_content = f.read()
+        
+        # Check if the problematic line exists before replacement
+        if 'lib/bindings/utils.js' in html_content:
+            # Use regex to remove the script tag and following newline
+            html_content = re.sub(r'<script src="lib/bindings/utils\.js"></script>\s*\n', '', html_content)
+            with open(output_path, 'w', encoding='utf-8') as f:
+                f.write(html_content)
+            print("  ℹ Fixed: Removed problematic utils.js reference")
+        
+        print(f"✓ Keyword-Article Network: {{output_path}}")
+        print(f"  → Showing {{articles_shown}} articles (filtered from {{total_filtered}} recent articles)")
+        print(f"  → Keywords: {{', '.join(SEARCH_KEYWORDS)}}")
+        print(f"  → Click on article nodes to open PubMed pages")
+        print(f"  → To show all articles, edit script and set show_all=True")
+    
     print()
     print("=" * 60)
     print("✓ All visualizations generated successfully!")
@@ -434,7 +639,11 @@ if __name__ == '__main__':
             mesh_data,
             author_data,
             journal_data,
+            search_keywords,
+            articles_data,
             self.output_dir,
+            self.output_prefix,
+            self.timestamp,
             self.output_prefix,
             self.timestamp,
             self.output_prefix,
@@ -489,6 +698,39 @@ if __name__ == '__main__':
             .collect();
         format!("{{{}}}", items.join(", "))
     }
+
+    fn prepare_search_keywords(&self) -> String {
+        let items: Vec<String> = self
+            .stats
+            .search_keywords
+            .iter()
+            .map(|k| format!("'{}'", k.replace('\'', "\\'")))
+            .collect();
+        format!("[{}]", items.join(", "))
+    }
+
+    fn prepare_articles_data(&self) -> String {
+        let articles: Vec<String> = self
+            .stats
+            .articles
+            .iter()
+            .map(|article| {
+                let pmid = article.pmid.replace('\'', "\\'");
+                let title = article.title.replace('\'', "\\'").replace('\n', " ");
+                let authors = article.authors.join("; ").replace('\'', "\\'");
+                let journal = article.journal.replace('\'', "\\'");
+                let pub_date = article.pub_date.replace('\'', "\\'");
+                let abstract_text = article.abstract_text.replace('\'', "\\'").replace('\n', " ");
+                let mesh_terms = article.mesh_terms.join("; ").replace('\'', "\\'");
+                
+                format!(
+                    "{{'pmid': '{}', 'title': '{}', 'authors': '{}', 'journal': '{}', 'pub_date': '{}', 'abstract': '{}', 'mesh_terms': '{}'}}",
+                    pmid, title, authors, journal, pub_date, abstract_text, mesh_terms
+                )
+            })
+            .collect();
+        format!("[{}]", articles.join(", "))
+    }
 }
 
 #[cfg(test)]
@@ -515,6 +757,8 @@ mod tests {
             avg_mesh_terms_per_article: 8.2,
             articles_with_abstracts: 95,
             articles_with_doi: 90,
+            search_keywords: vec!["cancer".to_string(), "immunotherapy".to_string()],
+            articles: Vec::new(),
         };
 
         let output_dir = PathBuf::from("0_out");

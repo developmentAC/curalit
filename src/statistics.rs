@@ -8,7 +8,6 @@ use std::fs;
 #[derive(Debug)]
 pub struct StatisticsAnalyzer {
     articles: Vec<Article>,
-    #[allow(dead_code)]
     keywords: Vec<String>,
 }
 
@@ -30,6 +29,9 @@ pub struct Statistics {
     pub avg_mesh_terms_per_article: f64,
     pub articles_with_abstracts: usize,
     pub articles_with_doi: usize,
+    pub search_keywords: Vec<String>,
+    #[serde(skip)]
+    pub articles: Vec<Article>,
 }
 
 impl StatisticsAnalyzer {
@@ -131,6 +133,8 @@ impl StatisticsAnalyzer {
             avg_mesh_terms_per_article: avg_mesh_terms,
             articles_with_abstracts,
             articles_with_doi,
+            search_keywords: self.keywords.clone(),
+            articles: self.articles.clone(),
         })
     }
 

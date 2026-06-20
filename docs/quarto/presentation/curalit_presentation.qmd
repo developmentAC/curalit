@@ -11,7 +11,7 @@ format:
     preview-links: auto
     logo: ""
     css: custom.css
-    footer: "CuraLit v0.3.4 - Literature-Driven LLM Generator with RAG & Database"
+    footer: "CuraLit v0.3.5 - Literature-Driven LLM Generator with RAG & Database"
     incremental: false
     smaller: false
     scrollable: true
@@ -478,6 +478,12 @@ This creates **interactive HTML plots** you can open in your browser!
 - Top medical subject headings
 - Common themes
 - Related concepts
+
+### 🌐 Keyword-Article Network ✨NEW
+- Interactive network graph
+- Keyword-article connections
+- Click nodes to open PubMed
+- Recent articles highlighted
 :::
 
 ::: {.column width="50%"}
@@ -1091,6 +1097,7 @@ Would you like me to elaborate on any of these findings?
 | `*_authors.html` | Researcher ranking | Experts |
 | `*_journals.html` | Publication venues | Quality |
 | `*_dashboard.html` | Combined view | Overview |
+| `*_keyword_network.html` | **NEW** Interactive network | Keyword-article connections |
 
 ### From Generate Command
 
