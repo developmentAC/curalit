@@ -23,6 +23,8 @@ Cargo.lock
 *_training.jsonl
 *_system_prompt.txt
 Modelfile
+!data/*.xml
+/data/
 
 # Python
 __pycache__/
