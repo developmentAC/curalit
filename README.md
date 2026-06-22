@@ -127,6 +127,7 @@ CuraLit helps researchers:
   - Choosing research topics and working with hypotheses
   - Synthesizing literature reviews
 
+
 ![network_logo](graphics/network_01.png)
 Figure: Visualizations are provided to determine keyword usage in results.
 
