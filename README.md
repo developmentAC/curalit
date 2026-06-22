@@ -129,7 +129,17 @@ CuraLit helps researchers:
 
 ![network_logo](graphics/network_01.png)
 
- - Figure: Visualizations are provided to determine keyword usage in results.
+ - Figure 1: Interactive visualizations are provided to determine keyword usage in results.
+
+![MeSH_logo](graphics/mesh_01.png)
+
+ - Figure 2: A quick frequency analysis of commonly used MeSH keywords found in articles containing user-specified keywords.
+
+![Piechart_logo](graphics/piechart_01.png)
+
+ - Figure 3: An illustration of which journals contained relevant articles to the search.
+
+
 
 ## ✨ Key Features
 
