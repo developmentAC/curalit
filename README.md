@@ -16,9 +16,9 @@ CuraLit is a powerful Rust-based tool that extracts relevant articles from PubMe
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Rust](https://img.shields.io/badge/rust-%23000000.svg?style=flat&logo=rust&logoColor=white)](https://www.rust-lang.org/)
-[![Version](https://img.shields.io/badge/version-0.3.4-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-0.4.0-blue.svg)](CHANGELOG.md)
 
-> **Latest Update (v0.3.3)**: SQLite database feature with fact verification! Build searchable databases from PubMed articles and verify RAG responses against ground truth. Prevents AI hallucination of PMIDs, authors, and DOIs. Includes full-text search (FTS5), fast indexed lookups, and automatic citation verification. See [DATABASE_FEATURE.md](DATABASE_FEATURE.md) for details.
+> **Latest Update (v0.4.0)**: Matched Keywords Tracking! The Keywords column now automatically populates with your search terms that matched each article, making it easy to see exactly which keywords triggered each match. Plus all the great features from v0.3.x: SQLite database feature with fact verification! Build searchable databases from PubMed articles and verify RAG responses against ground truth. Prevents AI hallucination of PMIDs, authors, and DOIs. Includes full-text search (FTS5), fast indexed lookups, and automatic citation verification. See [DATABASE_FEATURE.md](DATABASE_FEATURE.md) for details.
 
 ## Table of Contents
 
@@ -140,6 +140,7 @@ CuraLit helps researchers:
 - Search across all fields: titles, abstracts, MeSH terms, chemicals, authors
 - Configurable logic: AND (specific) or OR (broad) matching
 - Load keywords from CLI or text file
+- **NEW in v0.4.0**: Automatic tracking of which search keywords matched each article
 
 ### 💾 **Checkpoint System**
 
@@ -1156,7 +1157,7 @@ Contains all matched articles with columns:
 - MeSH Terms
 - Chemicals
 - DOI
-- Keywords
+- **Keywords** - **NEW in v0.4.0**: Contains your search keywords that matched this article (e.g., if you searched for "cancer" and "immunotherapy", only the keywords found in this specific article will be listed here)
 
 ### Statistics Files
 

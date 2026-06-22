@@ -199,9 +199,15 @@ def create_keyword_article_network(max_articles=None, recent_years=3, show_all=F
         # Create PubMed URL
         pubmed_url = f"https://pubmed.ncbi.nlm.nih.gov/{{pmid}}/"
         
-        # Check which keywords match
-        searchable = (title + ' ' + abstract_text + ' ' + mesh_terms).lower()
-        matched_keywords = [kw for kw in SEARCH_KEYWORDS if kw.lower() in searchable]
+        # Get matched keywords from article data (populated during search)
+        article_keywords = article.get('keywords', '')
+        if article_keywords:
+            # Keywords are stored as semicolon-separated string
+            matched_keywords = [kw.strip() for kw in article_keywords.split(';') if kw.strip()]
+        else:
+            # Fallback: check which keywords match by searching text
+            searchable = (title + ' ' + abstract_text + ' ' + mesh_terms).lower()
+            matched_keywords = [kw for kw in SEARCH_KEYWORDS if kw.lower() in searchable]
         
         if matched_keywords:
             # Create tooltip
@@ -722,10 +728,11 @@ if __name__ == '__main__':
                 let pub_date = article.pub_date.replace('\'', "\\'");
                 let abstract_text = article.abstract_text.replace('\'', "\\'").replace('\n', " ");
                 let mesh_terms = article.mesh_terms.join("; ").replace('\'', "\\'");
+                let keywords = article.keywords.join("; ").replace('\'', "\\'");
                 
                 format!(
-                    "{{'pmid': '{}', 'title': '{}', 'authors': '{}', 'journal': '{}', 'pub_date': '{}', 'abstract': '{}', 'mesh_terms': '{}'}}",
-                    pmid, title, authors, journal, pub_date, abstract_text, mesh_terms
+                    "{{'pmid': '{}', 'title': '{}', 'authors': '{}', 'journal': '{}', 'pub_date': '{}', 'abstract': '{}', 'mesh_terms': '{}', 'keywords': '{}'}}",
+                    pmid, title, authors, journal, pub_date, abstract_text, mesh_terms, keywords
                 )
             })
             .collect();

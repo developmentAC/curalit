@@ -330,7 +330,7 @@ impl CuraLitRunner {
     ) -> Result<()> {
         let mut parser = PubMedParser::new(xml_file)?;
 
-        while let Some(article) = parser.next_article()? {
+        while let Some(mut article) = parser.next_article()? {
             pb.inc(1);
 
             // Check if article matches keywords
@@ -340,6 +340,9 @@ impl CuraLitRunner {
             };
 
             if matches {
+                // Populate the keywords field with the matched search terms
+                article.set_matched_keywords(&self.keywords);
+                
                 matched_count.fetch_add(1, Ordering::SeqCst);
                 let count = matched_count.load(Ordering::SeqCst);
                 pb.set_message(format!("{} matched", count));

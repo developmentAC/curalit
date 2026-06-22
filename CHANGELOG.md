@@ -5,6 +5,49 @@ All notable changes to CuraLit will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0] - 2026-06-22
+
+### Added
+- **Keywords Column Enhancement**: The Keywords column in CSV output now automatically populates with the user's search terms that matched each article
+  - New method `get_matched_keywords()` identifies which search keywords are present in an article
+  - New method `set_matched_keywords()` populates the keywords field with matched search terms
+  - Makes it easy to see exactly which keywords triggered each match
+  - Works with both AND and OR logic search strategies
+  - Updated in both file-based search (`runner.rs`) and database search (`main.rs`)
+
+### Fixed
+- **Network Visualization**: Fixed network graph generation failing due to missing keywords data
+  - Updated `prepare_articles_data()` to include the `keywords` field in embedded article data
+  - Modified network generation to use the keywords field directly instead of re-searching text
+  - Network graphs now properly display keyword-article connections
+  - Includes fallback to text search for backwards compatibility
+
+### Changed
+- Modified article processing to track matched search keywords before saving to CSV
+- Updated Article struct methods to support keyword tracking functionality
+- Enhanced visualization script to leverage populated keywords field for network graphs
+
+### Documentation
+- Updated README.md with explanation of Keywords column behavior
+- Updated Quarto presentation with Keywords column information
+- Added comprehensive test suite for keyword tracking functionality (7 new tests)
+
+### Tests
+- Added `test_get_matched_keywords()` - validates keyword matching logic
+- Added `test_set_matched_keywords()` - verifies keyword population
+- Added `test_matched_keywords_and_logic()` - tests AND logic scenarios
+- Added `test_matched_keywords_or_logic()` - tests OR logic scenarios
+- Added `test_matched_keywords_case_insensitive()` - validates case handling
+- Added `test_csv_with_matched_keywords()` - ensures CSV serialization works
+- All existing tests continue to pass ✓
+
+### Technical Details
+The enhancement involved:
+1. Adding `get_matched_keywords()` and `set_matched_keywords()` methods to Article struct ([src/article.rs](src/article.rs))
+2. Updating search logic to populate keywords before checkpoint saving ([src/runner.rs](src/runner.rs))
+3. Updating database search to populate keywords before insertion ([src/main.rs](src/main.rs))
+4. Comprehensive test coverage in [tests/article_test.rs](tests/article_test.rs)
+
 ## [0.3.5] - 2026-06-20
 
 ### Fixed

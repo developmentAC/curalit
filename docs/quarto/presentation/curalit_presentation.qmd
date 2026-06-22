@@ -11,7 +11,7 @@ format:
     preview-links: auto
     logo: ""
     css: custom.css
-    footer: "CuraLit v0.3.5 - Literature-Driven LLM Generator with RAG & Database"
+    footer: "CuraLit v0.4.0 - Literature-Driven LLM Generator with RAG & Database"
     incremental: false
     smaller: false
     scrollable: true
@@ -332,6 +332,8 @@ curalit search -k "cancer" -k "immunotherapy" -d ./data -o results
 ### What You Get
 
 ✅ CSV file with matching articles
+
+✅ **NEW in v0.4.0**: Keywords column shows which search terms matched each article
 
 ✅ Checkpoint for resuming
 
@@ -1073,8 +1075,13 @@ Would you like me to elaborate on any of these findings?
 
 | File | Contents | Use |
 |------|----------|-----|
-| `results_*.csv` | Matched articles | Checkpoint, review |
+| `results_*.csv` | Matched articles with search keywords | Checkpoint, review |
 | Progress log | Real-time stats | Monitor search |
+
+::: {.callout-note icon=true}
+## CSV Keywords Column (NEW in v0.4.0)
+The CSV now includes a **Keywords** column that shows which of your search terms matched each article. For example, if you searched for "cancer", "immunotherapy", and "melanoma", the Keywords column will list only the terms found in that specific article.
+:::
 
 ### From Stats Command
 

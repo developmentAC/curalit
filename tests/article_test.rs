@@ -387,3 +387,124 @@ fn test_multiple_authors() {
     // Non-existent author
     assert!(!article.matches_keyword("jones"));
 }
+
+/// Test getting matched search keywords
+#[test]
+fn test_get_matched_keywords() {
+    let article = create_sample_article();
+    
+    // Test with keywords that match
+    let search_keywords = vec![
+        "cancer".to_string(),
+        "immunotherapy".to_string(),
+        "diabetes".to_string(), // doesn't match
+        "melanoma".to_string(),
+    ];
+    
+    let matched = article.get_matched_keywords(&search_keywords);
+    assert_eq!(matched.len(), 3);
+    assert!(matched.contains(&"cancer".to_string()));
+    assert!(matched.contains(&"immunotherapy".to_string()));
+    assert!(matched.contains(&"melanoma".to_string()));
+    assert!(!matched.contains(&"diabetes".to_string()));
+}
+
+/// Test setting matched keywords
+#[test]
+fn test_set_matched_keywords() {
+    let mut article = create_sample_article();
+    
+    // Set matched keywords based on search
+    let search_keywords = vec![
+        "cancer".to_string(),
+        "immunotherapy".to_string(),
+        "diabetes".to_string(), // doesn't match
+    ];
+    
+    article.set_matched_keywords(&search_keywords);
+    
+    // Now keywords should contain only matched search terms
+    assert_eq!(article.keywords.len(), 2);
+    assert!(article.keywords.contains(&"cancer".to_string()));
+    assert!(article.keywords.contains(&"immunotherapy".to_string()));
+    assert!(!article.keywords.contains(&"diabetes".to_string()));
+}
+
+/// Test matched keywords with AND logic
+#[test]
+fn test_matched_keywords_and_logic() {
+    let mut article = create_sample_article();
+    
+    let search_keywords = vec![
+        "cancer".to_string(),
+        "immunotherapy".to_string(),
+        "melanoma".to_string(),
+    ];
+    
+    // Verify all keywords match (AND logic would succeed)
+    assert!(article.matches_all_keywords(&search_keywords));
+    
+    // Set matched keywords
+    article.set_matched_keywords(&search_keywords);
+    
+    // All three should be in the keywords field
+    assert_eq!(article.keywords.len(), 3);
+}
+
+/// Test matched keywords with OR logic
+#[test]
+fn test_matched_keywords_or_logic() {
+    let mut article = create_sample_article();
+    
+    let search_keywords = vec![
+        "cancer".to_string(),
+        "diabetes".to_string(), // doesn't match
+        "glucose".to_string(),  // doesn't match
+    ];
+    
+    // Verify at least one matches (OR logic would succeed)
+    assert!(article.matches_any_keyword(&search_keywords));
+    
+    // Set matched keywords
+    article.set_matched_keywords(&search_keywords);
+    
+    // Only "cancer" should be in keywords
+    assert_eq!(article.keywords.len(), 1);
+    assert_eq!(article.keywords[0], "cancer");
+}
+
+/// Test matched keywords case insensitivity
+#[test]
+fn test_matched_keywords_case_insensitive() {
+    let mut article = create_sample_article();
+    
+    let search_keywords = vec![
+        "CANCER".to_string(),
+        "ImMuNoThErApY".to_string(),
+        "MeLaNoMa".to_string(),
+    ];
+    
+    article.set_matched_keywords(&search_keywords);
+    
+    // Should match regardless of case
+    assert_eq!(article.keywords.len(), 3);
+}
+
+/// Test CSV with matched keywords
+#[test]
+fn test_csv_with_matched_keywords() {
+    let mut article = create_sample_article();
+    
+    // Set matched keywords
+    let search_keywords = vec!["cancer".to_string(), "immunotherapy".to_string()];
+    article.set_matched_keywords(&search_keywords);
+    
+    // Convert to CSV
+    let csv_row = article.to_csv_row();
+    
+    // Keywords should be in the last column
+    assert_eq!(csv_row.len(), 10);
+    assert!(csv_row[9].contains("cancer"));
+    assert!(csv_row[9].contains("immunotherapy"));
+}
+

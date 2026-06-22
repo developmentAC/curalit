@@ -4,7 +4,6 @@ use anyhow::Result;
 use curalit::article::Article;
 use curalit::modelfile::ModelfileGenerator;
 use std::fs;
-use std::path::PathBuf;
 
 /// Helper to create test articles
 fn create_test_articles() -> Vec<Article> {

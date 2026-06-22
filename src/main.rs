@@ -743,7 +743,7 @@ async fn main() -> Result<()> {
 
                 let mut parser = PubMedParser::new(xml_file)?;
 
-                while let Some(article) = parser.next_article()? {
+                while let Some(mut article) = parser.next_article()? {
                     total_articles += 1;
 
                     // Check if article matches keywords
@@ -757,6 +757,9 @@ async fn main() -> Result<()> {
                     };
 
                     if matches {
+                        // Populate the keywords field with the matched search terms
+                        article.set_matched_keywords(&all_keywords);
+                        
                         matched_articles.push(article);
 
                         // Insert in batches of 1000 for performance

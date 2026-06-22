@@ -70,6 +70,22 @@ impl Article {
             .any(|kw| searchable.contains(&kw.to_lowercase()))
     }
 
+    /// Get list of search keywords that matched this article
+    /// This populates the keywords field with user search terms that were found
+    pub fn get_matched_keywords(&self, search_keywords: &[String]) -> Vec<String> {
+        let searchable = self.get_searchable_text();
+        search_keywords
+            .iter()
+            .filter(|kw| searchable.contains(&kw.to_lowercase()))
+            .map(|kw| kw.clone())
+            .collect()
+    }
+
+    /// Set the matched search keywords for this article
+    pub fn set_matched_keywords(&mut self, search_keywords: &[String]) {
+        self.keywords = self.get_matched_keywords(search_keywords);
+    }
+
     /// Convert article to CSV row format
     pub fn to_csv_row(&self) -> Vec<String> {
         vec![
