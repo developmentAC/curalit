@@ -1079,7 +1079,7 @@ fn print_banner() {
     );
     println!(
         "{}",
-        "║                     CuraLit v0.3.3                        ║"
+        "║                     CuraLit v0.4.0                        ║"
             .cyan()
             .bold()
     );
