@@ -57,7 +57,9 @@ impl VisualizationGenerator {
         let articles_data = self.prepare_articles_data();
 
         format!(
-            r#"#!/usr/bin/env python3
+r#"#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 """
 CuraLit Visualization Script
 Auto-generated interactive visualizations for literature analysis
