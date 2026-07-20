@@ -17,7 +17,6 @@ Cargo.lock
 *.csv
 *.jsonl
 *.log
-*.html
 *_stats.json
 *_visualize.py
 *_training.jsonl
