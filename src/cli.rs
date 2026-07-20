@@ -7,7 +7,7 @@ use std::path::PathBuf;
 /// for research purposes using Ollama, LMStudio, or similar platforms.
 #[derive(Parser, Debug)]
 #[command(name = "curalit")]
-#[command(version = "0.4.0")]
+#[command(version = "0.4.1")]
 #[command(about = "Generate custom LLMs from PubMed literature", long_about = None)]
 #[command(propagate_version = true)]
 pub struct Cli {
