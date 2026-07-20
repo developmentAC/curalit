@@ -21,6 +21,24 @@ impl VisualizationGenerator {
         }
     }
 
+    /// Sanitize string for embedding in Python code
+    /// Removes/escapes unusual line terminators and other problematic characters
+    fn sanitize_for_python(s: &str) -> String {
+        s.replace('\\', "\\\\")     // Backslash (must be first)
+         .replace('\u{2028}', " ")  // Line Separator
+         .replace('\u{2029}', " ")  // Paragraph Separator
+         .replace('\r', " ")        // Carriage return
+         .replace('\n', " ")        // Newline
+         .replace('\t', " ")        // Tab
+         .replace('\'', "\\'")      // Single quote (must be after backslash)
+         .chars()
+         .filter(|c| !c.is_control() || *c == ' ')  // Remove other control chars
+         .collect::<String>()
+         .split_whitespace()        // Normalize multiple spaces
+         .collect::<Vec<&str>>()
+         .join(" ")
+    }
+
     /// Generate Python visualization script
     pub fn generate(&self) -> Result<()> {
         // Ensure output directory exists
@@ -682,7 +700,7 @@ if __name__ == '__main__':
             .stats
             .top_mesh_terms
             .iter()
-            .map(|(k, v)| format!("'{}': {}", k.replace('\'', "\\'"), v))
+            .map(|(k, v)| format!("'{}': {}", Self::sanitize_for_python(k), v))
             .collect();
         format!("{{{}}}", items.join(", "))
     }
@@ -692,7 +710,7 @@ if __name__ == '__main__':
             .stats
             .top_authors
             .iter()
-            .map(|(k, v)| format!("'{}': {}", k.replace('\'', "\\'"), v))
+            .map(|(k, v)| format!("'{}': {}", Self::sanitize_for_python(k), v))
             .collect();
         format!("{{{}}}", items.join(", "))
     }
@@ -702,7 +720,7 @@ if __name__ == '__main__':
             .stats
             .top_journals
             .iter()
-            .map(|(k, v)| format!("'{}': {}", k.replace('\'', "\\'"), v))
+            .map(|(k, v)| format!("'{}': {}", Self::sanitize_for_python(k), v))
             .collect();
         format!("{{{}}}", items.join(", "))
     }
@@ -712,7 +730,7 @@ if __name__ == '__main__':
             .stats
             .search_keywords
             .iter()
-            .map(|k| format!("'{}'", k.replace('\'', "\\'")))
+            .map(|k| format!("'{}'", Self::sanitize_for_python(k)))
             .collect();
         format!("[{}]", items.join(", "))
     }
@@ -723,14 +741,14 @@ if __name__ == '__main__':
             .articles
             .iter()
             .map(|article| {
-                let pmid = article.pmid.replace('\'', "\\'");
-                let title = article.title.replace('\'', "\\'").replace('\n', " ");
-                let authors = article.authors.join("; ").replace('\'', "\\'");
-                let journal = article.journal.replace('\'', "\\'");
-                let pub_date = article.pub_date.replace('\'', "\\'");
-                let abstract_text = article.abstract_text.replace('\'', "\\'").replace('\n', " ");
-                let mesh_terms = article.mesh_terms.join("; ").replace('\'', "\\'");
-                let keywords = article.keywords.join("; ").replace('\'', "\\'");
+                let pmid = Self::sanitize_for_python(&article.pmid);
+                let title = Self::sanitize_for_python(&article.title);
+                let authors = Self::sanitize_for_python(&article.authors.join("; "));
+                let journal = Self::sanitize_for_python(&article.journal);
+                let pub_date = Self::sanitize_for_python(&article.pub_date);
+                let abstract_text = Self::sanitize_for_python(&article.abstract_text);
+                let mesh_terms = Self::sanitize_for_python(&article.mesh_terms.join("; "));
+                let keywords = Self::sanitize_for_python(&article.keywords.join("; "));
                 
                 format!(
                     "{{'pmid': '{}', 'title': '{}', 'authors': '{}', 'journal': '{}', 'pub_date': '{}', 'abstract': '{}', 'mesh_terms': '{}', 'keywords': '{}'}}",
