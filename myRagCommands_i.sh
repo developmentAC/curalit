@@ -1,12 +1,12 @@
 #cargo clean
 #cargo build --release
 ./target/release/curalit search -k "study" -k "protein" -d ./data --logic or -o results
-./target/release/curalit stats -c 0_out/results_*.csv
+# ./target/release/curalit stats -c 0_out/results_*.csv
 uv run 0_out/results_*_visualize.py
 
 
 echo Build RAG index:
-./target/release/curalit rag-build -c 0_out/results_23Jun2026_214734.csv
+./target/release/curalit rag-build -c 0_out/results_*.csv
 
 echo Build verification database:
 ./target/release/curalit db-build -k "study" -k "protein"  -d ./data
