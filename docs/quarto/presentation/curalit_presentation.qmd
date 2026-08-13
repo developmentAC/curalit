@@ -236,11 +236,17 @@ Visit [ollama.ai/download](https://ollama.ai/download) and install for your syst
 ollama --version
 ```
 
-### 3. Install Python Dependencies
+### 3. Install UV (Python Package Manager)
 
 ```bash
-pip install plotly pandas seaborn matplotlib numpy
+# Install UV (one-time setup)
+curl -LsSf https://astral.sh/uv/install.sh | sh
+# Or: pip install uv
 ```
+
+::: {.callout-note}
+UV automatically manages Python dependencies from pyproject.toml - no manual package installation needed!
+:::
 
 ### 4. Download the Corpus
 
@@ -458,7 +464,7 @@ Perfect balance for a focused, useful AI model!
 ### Run the Python Script
 
 ```bash
-python results_visualize.py
+uv run results_visualize.py
 ```
 
 ::: {.callout-note icon=true}
@@ -1489,7 +1495,7 @@ curalit stats -c 0_out/diabetes_research_*.csv
 ## Step 3: Visualize {.smaller}
 
 ```bash
-python 0_out/diabetes_research_*_visualize.py
+uv run 0_out/diabetes_research_*_visualize.py
 ```
 
 **Open in browser:** `diabetes_research_*_dashboard.html`
@@ -2148,7 +2154,7 @@ Time to transform how you interact with scientific literature. Create your first
 # Essential commands
 curalit search -k "topic" -d ./data
 curalit stats -c results.csv
-python *_visualize.py
+uv run *_visualize.py
 curalit generate -c results.csv -m name
 curalit package -m name
 ollama create name -f Modelfile_*

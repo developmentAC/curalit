@@ -83,10 +83,11 @@ CuraLit Visualization Script
 Auto-generated interactive visualizations for literature analysis
 
 Requirements:
-    pip install plotly pandas seaborn matplotlib numpy pyvis networkx
+    UV package manager (install: curl -LsSf https://astral.sh/uv/install.sh | sh)
+    Dependencies are auto-installed from pyproject.toml
 
 Usage:
-    python {}_{}_visualize.py
+    uv run {}_{}_visualize.py
 """
 
 import plotly.graph_objects as go
@@ -166,7 +167,8 @@ def create_keyword_article_network(max_articles=None, recent_years=3, show_all=F
         from pyvis.network import Network
     except ImportError:
         print("  ⚠ pyvis and networkx required for network visualization")
-        print("    Install with: pip install pyvis networkx")
+        print("    Install UV: curl -LsSf https://astral.sh/uv/install.sh | sh")
+        print("    Then run with: uv run <script>.py")
         return None
     
     # Create network graph

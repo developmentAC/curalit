@@ -334,9 +334,9 @@ curl --proto '=https' --tlsv1.2 \
 # Install Ollama
 # Visit: ollama.ai/download
 
-# Install Python packages
-pip install plotly pandas seaborn \
-  matplotlib numpy
+# Install UV (Python package manager)
+curl -LsSf https://astral.sh/uv/install.sh | sh
+# Or: pip install uv
 ```
 :::
 
@@ -357,6 +357,10 @@ cargo build --release
 ```
 :::
 ::::
+
+::: {.callout-note}
+UV automatically manages all Python dependencies from pyproject.toml - no manual package installation needed!
+:::
 
 ## Complete Workflow Example
 
@@ -382,7 +386,7 @@ curalit stats -c diabetes_study.csv
 **Steps 3-4: Visualize & Generate**
 ```bash
 # Step 3: Visualize
-python diabetes_study_visualize.py
+uv run diabetes_study_visualize.py
 
 # Step 4: Generate model
 curalit generate \

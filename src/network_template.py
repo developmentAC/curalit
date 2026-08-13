@@ -5,10 +5,11 @@ CuraLit Network Graph Generator
 Auto-generated interactive network visualization showing keyword-article relationships
 
 Requirements:
-    pip install pandas networkx pyvis
+    UV package manager (dependencies auto-installed from pyproject.toml)
+    Install UV: curl -LsSf https://astral.sh/uv/install.sh | sh
 
 Usage:
-    python network.py --datafile output.csv --threshold 1 --auto_render yes
+    uv run network.py --datafile output.csv --threshold 1 --auto_render yes
 """
 
 import os

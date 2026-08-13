@@ -221,12 +221,9 @@ See [DATABASE_FEATURE.md](DATABASE_FEATURE.md) for comprehensive guide with SQL 
 - **Qdrant** (for RAG features only)
   - Docker: `docker run -p 6333:6333 -p 6334:6334 -v $(pwd)/qdrant_storage:/qdrant/storage qdrant/qdrant`
   - Or install locally: See [Qdrant installation](https://qdrant.tech/documentation/guides/installation/)
-- **Python 3.8+** (for visualizations)
-  - plotly
-  - pandas
-  - seaborn
-  - matplotlib
-  - numpy
+- **UV** (Python package manager, for visualizations)
+  - Install UV: `curl -LsSf https://astral.sh/uv/install.sh | sh` or `pip install uv`
+  - All Python dependencies are managed via `pyproject.toml`
 
 ## 🔧 Installation
 
@@ -255,21 +252,22 @@ The binary will be available at `target/release/curalit`.
 cargo install --path .
 ```
 
-### 4. Install Python Dependencies
+### 4. Install UV (Python Package Manager)
+
+UV automatically manages Python dependencies defined in `pyproject.toml`:
 
 ```bash
-pip install plotly pandas seaborn matplotlib numpy pyvis networkx
+# Install UV (one-time setup)
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Or via pip
+pip install uv
+
+# Or via Homebrew (macOS/Linux)
+brew install uv
 ```
 
-**Virtual Environment**
-
-Note: A virtual environment may equally be used if installing dependencies system wide is undesirable. After the collecting results, if this virtual environment will not be used again, it can be removed to conserve disk space.
-
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-pip install plotly pandas seaborn matplotlib numpy pyvis networkx
-```
+No need to manually install Python packages or create virtual environments - UV handles everything automatically when you run visualization scripts!
 
 ### 5. Download the PubMed Corpus
 
@@ -388,7 +386,7 @@ curalit search -k "cancer" -k "immunotherapy" -d ./data -o results
 curalit stats -c results.csv
 
 # 3. Visualize the corpus
-python results_visualize.py
+uv run results_visualize.py
 
 # 4. Generate Ollama model (with optional packaging)
 curalit generate -c results.csv -m my-medical-llm -b llama3 --package
@@ -1442,7 +1440,7 @@ curalit search -f keywords.txt -d ./pubmed_data -o ml_healthcare
 
 # 3. Generate visualizations
 curalit stats -c ml_healthcare.csv
-python ml_healthcare_visualize.py
+uv run ml_healthcare_visualize.py
 
 # 4. Review trends and create model
 curalit generate -c ml_healthcare.csv -m ml-healthcare-assistant -b phi3
@@ -1519,7 +1517,7 @@ curalit generate -c cancer_combined.csv -m cancer-comprehensive -b llama3
 
 **Issue:** Python visualization fails
 
-- **Solution:** Install required packages: `pip install plotly pandas seaborn matplotlib numpy pyvis networkx`
+- **Solution:** Install UV: `curl -LsSf https://astral.sh/uv/install.sh | sh` or `pip install uv`. UV will auto-install all dependencies from pyproject.toml.
 
 ### RAG-Specific Issues
 

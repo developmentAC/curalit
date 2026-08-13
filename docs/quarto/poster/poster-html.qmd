@@ -144,8 +144,8 @@ curl --proto '=https' --tlsv1.2 \
 git clone github.com/user/curalit
 cargo build --release
 
-# Install Python deps
-pip install plotly pandas seaborn
+# Install UV (Python package manager)
+curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
 ### Complete Workflow
@@ -158,7 +158,7 @@ curalit search -k "diabetes" \
 curalit stats -c study.csv
 
 # 3. Visualize (30 sec)
-python study_visualize.py
+uv run study_visualize.py
 
 # 4. Generate (5-10 min)
 curalit generate -c study.csv \

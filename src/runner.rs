@@ -256,7 +256,7 @@ impl CuraLitRunner {
         println!(
             "  {} View visualizations: {}",
             "2.".cyan(),
-            "python3 0_out/*_visualize.py".white()
+            "uv run 0_out/*_visualize.py".white()
         );
         println!(
             "  {} Generate model: {}",

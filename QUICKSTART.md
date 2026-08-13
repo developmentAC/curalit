@@ -10,8 +10,9 @@ git clone https://github.com/yourusername/curalit.git
 cd curalit
 cargo build --release
 
-# Install Python dependencies
-pip install plotly pandas seaborn matplotlib numpy
+# Install UV (Python package manager)
+curl -LsSf https://astral.sh/uv/install.sh | sh
+# Or: pip install uv
 ```
 
 ## Basic Usage
@@ -45,7 +46,7 @@ Check:
 ### 3. Visualize Your Corpus
 
 ```bash
-python my_research_visualize.py
+uv run my_research_visualize.py
 ```
 
 Opens interactive HTML plots in your browser showing:
@@ -139,7 +140,7 @@ $ cat alz_stats.log | grep "Total Articles"
 Total Articles: 156
 
 # 3. Visualize
-$ python alz_visualize.py
+$ uv run alz_visualize.py
 ✓ Generated alz_dashboard.html
 
 # 4. Generate model
@@ -173,7 +174,7 @@ $ ollama run alz-expert
 - Install Ollama from https://ollama.ai
 
 **Python visualization fails**
-- Install dependencies: `pip install plotly pandas seaborn matplotlib numpy`
+- Install UV: `curl -LsSf https://astral.sh/uv/install.sh | sh` or `pip install uv`
 
 ---
 

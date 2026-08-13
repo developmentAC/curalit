@@ -83,6 +83,9 @@ Created comprehensive test suite in **[tests/visualizer_test.rs](tests/visualize
 
 # Validated Python syntax
 python3 -m py_compile 0_out/test_network_fix_*_visualize.py
+
+Note: This project now uses UV for Python dependency management. Run visualization scripts with:
+  uv run 0_out/test_network_fix_*_visualize.py
 # Result: ✓ Python syntax is valid
 
 # Built release version successfully
@@ -108,7 +111,7 @@ The network function filters articles by publication date to avoid overwhelming 
 
 **Test Output**:
 ```bash
-$ python3 test_network_logic.py
+$ uv run test_network_logic.py
 Current year: 2026
 Article 1145: year 1976, age 50 years - Excluded (older than 3 years)
 Article 4748: year 1976, age 50 years - Excluded (older than 3 years)
@@ -134,7 +137,7 @@ if len(filtered_articles) == 0:
 
 **Behavior After Fix**:
 ```bash
-$ python3 test_network_logic.py
+$ uv run test_network_logic.py
 Current year: 2026
 Article 1145: year 1976, age 50 years - Excluded (older than 3 years)
 Article 4748: year 1976, age 50 years - Excluded (older than 3 years)
@@ -188,7 +191,7 @@ Added detailed entry for v0.3.5 including:
 - ❌ Generated visualization scripts had Python SyntaxError
 - ❌ Network graphs could not be generated at all
 - ❌ Users could not visualize keyword-article relationships
-- ❌ Running `python3 0_out/*_visualize.py` would fail immediately
+- ❌ Running `uv run 0_out/*_visualize.py` would fail immediately
 
 ### After First Fix (Syntax Error)
 - ✅ Generated scripts are syntactically valid Python
@@ -224,7 +227,7 @@ The new test suite will catch similar issues in the future:
 1. Update to v0.3.5: `git pull` or download latest release
 2. Rebuild: `cargo build --release`
 3. Run a search: `curalit search -k "your keyword" -d ./data -o test`
-4. Generate visualizations: `python3 0_out/test_*_visualize.py`
+4. Generate visualizations: `uv run 0_out/test_*_visualize.py`
 5. Open `0_out/html/test_*_keyword_network.html` in browser
 
 ### For Developers

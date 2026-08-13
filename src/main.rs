@@ -114,7 +114,7 @@ async fn main() -> Result<()> {
             println!(
                 "  {} View visualizations: {}",
                 "2.".cyan(),
-                "python 0_out/*_visualize.py".white()
+                "uv run 0_out/*_visualize.py".white()
             );
             println!(
                 "\n{}",
@@ -1079,7 +1079,7 @@ fn print_banner() {
     );
     println!(
         "{}",
-        "║                     CuraLit v0.4.1                        ║"
+        "║                     CuraLit v0.4.2                        ║"
             .cyan()
             .bold()
     );
@@ -1451,30 +1451,29 @@ fn print_big_help() {
     println!("\n{}", "═".repeat(80).cyan());
     println!(
         "\n{}\n",
-        "Creating a Virtual Environment for Python Code"
+        "Running Python Visualizations with UV"
             .yellow()
             .bold()
     );
 
     println!(
-        "  {} Create virtual environment: {}",
+        "  {} Install UV (one-time setup): {}",
         "•".green(),
-        "python3 -m venv venv".cyan()
+        "curl -LsSf https://astral.sh/uv/install.sh | sh".cyan()
     );
     println!(
-        "  {} Activate virtual environment: {}",
+        "  {} Or via pip: {}",
         "•".green(),
-        "source venv/bin/activate (Linux/macOS) or venv\\Scripts\\activate (Windows)".cyan()
+        "pip install uv".cyan()
     );
     println!(
-        "  {} Install dependencies: {}",
+        "  {} Run visualizations: {}",
         "•".green(),
-        "pip install plotly pandas".cyan()
+        "uv run 0_out/*_visualize.py".cyan()
     );
     println!(
-        "  {} Deactivate virtual environment (after running visualization code): {}",
-        "•".green(),
-        "deactivate".cyan()
+        "  {} (UV automatically manages dependencies from pyproject.toml)",
+        "ℹ".blue()
     );
 
     println!("\n{}", "═".repeat(80).cyan());

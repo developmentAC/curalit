@@ -32,7 +32,7 @@ When you run a keyword search with CuraLit, two Python visualization scripts are
 After running a CuraLit search, generate the network graph with:
 
 ```bash
-python3 0_out/<name>_<timestamp>_network.py --datafile 0_out/<name>_<timestamp>.csv
+uv run 0_out/<name>_<timestamp>_network.py --datafile 0_out/<name>_<timestamp>.csv
 ```
 
 This will create an interactive HTML file in `0_out/` that you can open in your web browser.
@@ -40,7 +40,7 @@ This will create an interactive HTML file in `0_out/` that you can open in your 
 ### Advanced Options
 
 ```bash
-python3 0_out/network.py --datafile output.csv \
+uv run 0_out/network.py --datafile output.csv \
     --threshold 2 \
     --layout forceAtlas2 \
     --keyword_color purple \
@@ -60,10 +60,14 @@ python3 0_out/network.py --datafile output.csv \
 
 ## Requirements
 
-The network visualization requires Python packages:
+The network visualization uses UV for dependency management:
 
 ```bash
-pip install pandas networkx pyvis
+# Install UV (one-time setup)
+curl -LsSf https://astral.sh/uv/install.sh | sh
+# Or: pip install uv
+
+# Dependencies (pandas, networkx, pyvis) are auto-installed when you run the script
 ```
 
 ## Output
@@ -95,7 +99,7 @@ Open this file in any modern web browser to explore the interactive visualizatio
 
 3. Run the network visualization:
    ```bash
-   python3 0_out/diabetes_results_*_network.py --datafile 0_out/diabetes_results_*.csv
+   uv run 0_out/diabetes_results_*_network.py --datafile 0_out/diabetes_results_*.csv
    ```
 
 4. Open the generated HTML file in your browser to explore the keyword-article network
@@ -111,7 +115,7 @@ Open this file in any modern web browser to explore the interactive visualizatio
 
 If you encounter issues:
 
-1. Ensure all required Python packages are installed: `pip install pandas networkx pyvis`
+1. Ensure UV is installed: `curl -LsSf https://astral.sh/uv/install.sh | sh`
 2. Verify the CSV file path is correct
 3. Check that the CSV file contains the expected columns (PMID, Title, Authors, etc.)
 4. For large datasets, try increasing the threshold to reduce memory usage
