@@ -1,5 +1,5 @@
 # Rust
-/target/
+./target/
 **/*.rs.bk
 *.pdb
 Cargo.lock
@@ -23,7 +23,7 @@ Cargo.lock
 *_system_prompt.txt
 Modelfile
 !data/*.xml
-/data/
+./data/
 /data_small/
 
 # Python

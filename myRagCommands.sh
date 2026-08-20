@@ -8,6 +8,14 @@ uv run 0_out/results_*_visualize.py
 echo Build RAG index:
 ./target/release/curalit rag-build -c 0_out/results_*.csv
 
+
+echo create a new Docker contains for QDrant
+docker stop curalit-qdrant
+docker rm curalit-qdrant
+docker run -d --name curalit-qdrant -p 6333:6333 -p 6334:6334 -v $(pwd)/qdrant_storage:/qdrant/storage qdrant/qdrant
+
+
+
 echo Build verification database:
 ./target/release/curalit db-build -k "study" -k "protein" -k "alpha" -d ./data
 
