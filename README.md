@@ -7,6 +7,8 @@
 Date: 18 June 2026
 
 [Oliver Bonham-Carter](https://www.oliverbonhamcarter.com/)
+with extensive development testing by Vincent Mametjanov.
+
 
 Email: obonhamcarter at allegheny.edu
 
