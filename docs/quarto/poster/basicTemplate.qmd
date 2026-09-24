@@ -1,0 +1,149 @@
+---
+format:
+  typst:
+    keep-typ: true
+---
+
+```{=typst}
+// Print canvas: 46.78 in wide by 33.06 in high (landscape).
+// Adjust the page margins here if a printing vendor requests a different safe area.
+#set page(width: 46.78in, height: 33.06in, margin: (x: 0.52in, y: 0.12in), fill: rgb("#f8fafb"))
+// Arial is used for readable, familiar large-format typography.
+#set text(font: "Arial", size: 18pt, fill: rgb("#142b4a"))
+#set par(leading: 0.36em)
+
+// Poster palette: update these named colors to retheme section accents consistently.
+#let navy = rgb("#063574")
+#let cyan = rgb("#12b9d5")
+#let lime = rgb("#75df34")
+#let yellow = rgb("#f3df3f")
+#let pink = rgb("#ec5ab5")
+#let ink = rgb("#142b4a")
+#let muted = rgb("#e8f1f4")
+// Banner palette: adjust the two stops and angle to change the sky-blue-to-yellow transition.
+#let banner-sky = rgb("#75cbed")
+#let banner-yellow = rgb("#f6de54")
+#let banner-gradient = gradient.linear(banner-sky, banner-yellow, angle: 0deg)
+
+#let section(title, accent, body) = box(
+  width: 100%,
+  inset: 15pt,
+  radius: 7pt,
+  fill: white,
+  stroke: (paint: rgb("#b9cad5"), thickness: 1.2pt),
+)[
+  #block(width: 100%, inset: (x: 12pt, y: 7pt), fill: accent, radius: 4pt)[
+    #text(size: 25pt, weight: "bold", fill: navy)[#title]
+  ]
+  #v(7pt)
+  #body
+]
+
+#let figure(path, caption) = [
+  #align(center)[#image(path, width: 94%)]
+  #v(4pt)
+  #align(center)[#text(size: 12pt, fill: rgb("#38516b"), style: "italic")[#caption]]
+]
+
+#let term(name, definition) = [
+  #text(weight: "bold", fill: navy)[#name:] #definition
+]
+// heigh was 4.1in
+// Header controls: alter `height`, `dx`, `dy`, and image widths to reposition the logo or QR code.
+#block(width: 100%, height: 6.1in, inset: 0pt, fill: banner-gradient, radius: 8pt)[
+  #place(top + left, dx: 30pt, dy: 28pt)[
+    #box(fill: white, inset: 10pt, radius: 4pt, stroke: (paint: navy, thickness: 1.5pt))[
+      #image("assets/logo_right.png", width: 7.1in) //width was 5.1in
+    ]
+  ]
+  #align(center + horizon)[
+  // Title position: lower this `v()` value to move the title farther upward.
+//  #v(0.18in)
+  #v(1.0in)
+  #text(size: 86pt, weight: "bold", fill: navy)[CuraLit]
+//  #v(2pt)
+  #v(.03pt) //text size was 35pt
+  #text(size: 45pt, weight: "bold", fill: navy)[An Open-Source Hybrid System Integrating PubMed Filtering, RAG, and LLM Models for Visualized Research Guidance]
+//  #v(12pt)
+  #v(0.1pt)
+  #text(size:30pt, fill: navy)[Oliver Bonham-Carter, PhD; Allegheny College, Meadville, PA]
+  #v(0.1pt)
+  #text(size:30pt, fill: navy)[Vincent Mametjanov; Meadville Area High School, Meadville, PA]
+
+//  #text(size:30pt, fill: navy)[Oliver Bonham-Carter, PhD #h(16pt) & #h(25pt) Vincent Mametjanov]
+///    #v(5pt)
+//    #v(1pt) //text size was 17pt
+//  #text(size: 27pt, fill: navy)[Allegheny College, Meadville, PA #h(20pt) ~~~~ &  ~~~ #h(5pt) Meadville Area High School, Meadville, PA]
+
+
+
+
+  ]
+  // QR code is isolated in a white panel for reliable scanning on the colored banner.
+  #place(top + right, dx: -34pt, dy: 36pt)[
+    #align(right)[
+      #box(fill: white, inset: 10pt, radius: 4pt, stroke: (paint: navy, thickness: 1.5pt))[
+        #image("assets/curalit_QR.png", width: 4.2in) //width was 2.2in
+      ]
+//      #v(0.2pt) //was 5pt
+//      #text(size: 14pt, fill: navy)[Great Plains Bioinformatics Conference]
+//      #text(size: 13pt, fill: navy)[September 28-30, 2026 | Omaha, Nebraska]
+    ]
+  ]
+]
+
+// END OF BANNER
+
+
+#v(0.16in)
+
+#grid(
+  columns: (1fr, 1fr, 1fr),
+  gutter: 0.20in,
+  [
+    #section("The Research Need", cyan, [
+      #text(size: 22pt, weight: "bold", fill: navy)[Help early-career researchers move from a broad curiosity to an evidence-grounded project.]
+      #v(10pt)
+      #list(marker: [#text(fill: cyan)[●]], spacing: 8pt)[
+        PubMed contains a vast, rapidly growing biomedical literature.
+        Novice researchers can struggle to choose search terms, judge relevance, and connect findings into a tractable question.
+        General-purpose AI systems may answer without using the researcher’s selected literature or may generate inaccurate citations.
+      ]
+      #v(8pt)
+      #term("CuraLit", "a local, open-source workflow that turns a keyword-filtered PubMed collection into an explorable research knowledge base.")
+    ]),
+
+
+  ],
+  [
+    #section("CuraLit Workflow", yellow, [
+      #list(marker: [#text(fill: pink)[●]], spacing: 8pt)[
+        #text(weight: "bold")[1. Curate:] choose terms that express a research interest; CuraLit filters PubMed XML files into a focused article collection.
+        #text(weight: "bold")[2. Characterize:] calculate article, journal, and MeSH-term summaries; generate editable visualizations.
+        #text(weight: "bold")[3. Ground:] build a searchable local knowledge base from the selected articles.
+        #text(weight: "bold")[4. Question:] retrieve relevant passages before an LLM drafts a response; display supporting PMIDs.
+        #text(weight: "bold")[5. Verify:] check cited PMIDs and article metadata against a local SQLite database.
+      ]
+    ])
+  ],
+
+ [
+    #section("Visual Guidance for Project Development", lime, [
+      #list(marker: [#text(fill: lime)[●]], spacing: 8pt)[
+        #text(weight: "bold")[MeSH frequency:] identifies the clinical, population, and methodological concepts most represented in the corpus.
+        #text(weight: "bold")[Journal distribution:] provides a quick view of publication venues relevant to the topic.
+        #text(weight: "bold")[Knowledge network:] links terms and articles to expose clusters, connections, and potential avenues for reading.
+        #text(weight: "bold")[Editable outputs:] visualization scripts and data summaries can be adapted for a project, poster, or literature review.
+      ]
+    ])
+ ]
+
+)
+
+#v(0.22in)
+#block(width: 100%, inset: (x: 18pt, y: 12pt), fill: navy, radius: 6pt)[
+  #align(center)[
+    #text(size: 13pt, fill: white)[CuraLit is a research-support tool. Generated text should be evaluated against the cited literature and should not be used as medical advice.]
+  ]
+]
+```
