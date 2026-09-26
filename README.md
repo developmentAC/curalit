@@ -9,7 +9,7 @@ Email: obonhamcarter at allegheny.edu · [GitHub](https://github.com/development
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Rust](https://img.shields.io/badge/rust-%23000000.svg?style=flat&logo=rust&logoColor=white)](https://www.rust-lang.org/)
-[![Version](https://img.shields.io/badge/version-0.4.2-blue.svg)](docs/CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-0.4.4-blue.svg)](docs/CHANGELOG.md)
 
 CuraLit extracts relevant articles from PubMed XML datasets and turns them into custom, literature-grounded AI assistants (via Ollama), a searchable statistics/visualization report, and a fact-verification database — so you can ask research questions and get answers backed by real, citable articles.
 
