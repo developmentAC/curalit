@@ -34,7 +34,6 @@ async fn main() -> Result<()> {
             resume,
             threshold,
         } => {
-            let output_name = output.clone(); // Clone before move
             let runner = CuraLitRunner::new(
                 keywords,
                 keywords_file,
@@ -45,52 +44,6 @@ async fn main() -> Result<()> {
                 threshold,
             )?;
             runner.run()?;
-
-            // Print next steps after search completes
-            println!("\n{}", "═".repeat(80).cyan());
-            println!(
-                "{} {}",
-                "✓".green().bold(),
-                "Search complete!".green().bold()
-            );
-            println!("\n{}", "Next steps:".yellow().bold());
-            println!(
-                "  {} Review statistics: {}",
-                "1.".cyan(),
-                format!("curalit stats -c 0_out/{}_*.csv", output_name).white()
-            );
-            println!(
-                "  {} Build RAG index (recommended): {}",
-                "2.".cyan(),
-                format!("curalit rag-build -c 0_out/{}_*.csv", output_name).white()
-            );
-            println!(
-                "  {} Build verification database: {}",
-                "3.".cyan(),
-                "curalit db-build -k \"keyword1\" -k \"keyword2\" -d ./data".white()
-            );
-            println!("\n{}", "RAG Workflow (Recommended):".yellow().bold());
-            println!(
-                "  {} Query with citations: {}",
-                "→".cyan(),
-                "curalit rag-generate -q \"your question\" -m llama3".white()
-            );
-            println!(
-                "  {} Verify citations: {}",
-                "→".cyan(),
-                "curalit rag-generate -q \"question\" -m llama3 --use-db 0_out/database.db".white()
-            );
-            println!("\n{}", "Traditional Workflow:".yellow().bold());
-            println!(
-                "  {} Generate model: {}",
-                "→".cyan(),
-                format!(
-                    "curalit generate -c 0_out/{}_*.csv -m my-model",
-                    output_name
-                )
-                .white()
-            );
-            println!("{}", "═".repeat(80).cyan());
 
             Ok(())
         }
@@ -106,15 +59,16 @@ async fn main() -> Result<()> {
                 "Statistics generated successfully!".green().bold()
             );
             println!("\n{}", "Next steps:".yellow().bold());
+            let stats_dir = checkpoint_file.parent().unwrap_or_else(|| std::path::Path::new("0_out"));
             println!(
                 "  {} Review statistics: {}",
                 "1.".cyan(),
-                "0_out/*_stats.log".white()
+                format!("{}/stats.log", stats_dir.display()).white()
             );
             println!(
                 "  {} View visualizations: {}",
                 "2.".cyan(),
-                "uv run 0_out/*_visualize.py".white()
+                format!("uv run {}/visualize.py", stats_dir.display()).white()
             );
             println!(
                 "\n{}",
@@ -264,7 +218,7 @@ async fn main() -> Result<()> {
             let config = RagConfig {
                 ollama_url: "http://localhost:11434".to_string(),
                 embedding_model,
-                collection_name,
+                collection_name: collection_name.clone(),
                 qdrant_path: storage_path,
                 chunk_size: 500,
                 chunk_overlap: 50,
@@ -324,6 +278,21 @@ async fn main() -> Result<()> {
             );
             println!("{}", "═".repeat(80).cyan());
 
+            let mut report_body = format!("**Question:** {}\n\n**Passages found:** {}\n", query, chunks.len());
+            for (idx, chunk) in chunks.iter().enumerate() {
+                report_body.push_str(&format!(
+                    "\n{}. PMID: {} — *{}*\n",
+                    idx + 1,
+                    chunk.pmid,
+                    chunk.title
+                ));
+            }
+            curalit::report::append_report_file(
+                &PathBuf::from("0_out").join(format!("{}_report.md", collection_name)),
+                "RAG Query",
+                &report_body,
+            )?;
+
             Ok(())
         }
         Commands::RagGenerate {
@@ -339,7 +308,7 @@ async fn main() -> Result<()> {
             let config = RagConfig {
                 ollama_url: "http://localhost:11434".to_string(),
                 embedding_model,
-                collection_name,
+                collection_name: collection_name.clone(),
                 qdrant_path: storage_path,
                 chunk_size: 500,
                 chunk_overlap: 50,
@@ -364,6 +333,11 @@ async fn main() -> Result<()> {
             println!("\n{}", "═".repeat(80).cyan());
             println!("{}\n", "Answer:".yellow().bold());
             println!("{}\n", answer);
+
+            let mut report_body = format!(
+                "**Question:** {}\n\n**Model:** {}\n\n**Answer:**\n\n{}\n",
+                query, model, answer
+            );
 
             // If database verification is enabled, extract and verify factual information
             if let Some(ref db_path) = use_db {
@@ -399,9 +373,11 @@ async fn main() -> Result<()> {
 
                 if !verified_info.is_empty() {
                     println!("\n{}", "Verified Citations:".cyan().bold());
+                    report_body.push_str("\n**Verified Citations:**\n");
                     for info in verified_info {
                         println!("\n{}", "─".repeat(80).dimmed());
                         println!("{}", info.format_citation());
+                        report_body.push_str(&format!("\n{}\n", info.format_citation()));
                     }
                     println!("\n{}", "─".repeat(80).dimmed());
                 } else {
@@ -431,6 +407,12 @@ async fn main() -> Result<()> {
                 "Save answer to file for documentation".white()
             );
             println!("{}", "═".repeat(80).cyan());
+
+            curalit::report::append_report_file(
+                &PathBuf::from("0_out").join(format!("{}_report.md", collection_name)),
+                "RAG Generate",
+                &report_body,
+            )?;
 
             Ok(())
         }
@@ -694,9 +676,9 @@ async fn main() -> Result<()> {
             // Create output directory
             fs::create_dir_all(&output_dir)?;
 
-            // Generate human-readable timestamp
-            let timestamp = chrono::Local::now().format("%d%b%Y_%H%M%S");
-            let db_path = output_dir.join(format!("{}_{}.db", db_name, timestamp));
+            // Simple run directory: <output_dir>/<db_name>/database.db (no timestamp)
+            let run_dir = curalit::report::resolve_run_dir(&output_dir, &db_name, false)?;
+            let db_path = run_dir.join("database.db");
 
             println!("{} Database: {}\n", "•".cyan(), db_path.display());
 
@@ -824,6 +806,22 @@ async fn main() -> Result<()> {
                 )
                 .cyan()
             );
+
+            curalit::report::append_report(
+                &run_dir,
+                "Database Build",
+                &format!(
+                    "- Keywords ({} logic): {}\n- Data directory: {}\n- Total articles processed: {}\n- Matched articles in database: {}\n- Articles with DOI: {}\n- Articles with abstract: {}\n- Database file: {}",
+                    logic,
+                    all_keywords.join(", "),
+                    data_dir.display(),
+                    total_articles,
+                    stats.total_articles,
+                    stats.with_doi,
+                    stats.with_abstract,
+                    db_path.display()
+                ),
+            )?;
 
             Ok(())
         }

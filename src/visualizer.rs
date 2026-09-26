@@ -45,10 +45,14 @@ impl VisualizationGenerator {
         fs::create_dir_all(&self.output_dir)
             .with_context(|| format!("Failed to create output directory: {}", self.output_dir))?;
 
-        let script_path = format!(
-            "{}/{}_{}_visualize.py",
-            self.output_dir, self.output_prefix, self.timestamp
-        );
+        let script_path = if self.timestamp.is_empty() {
+            format!("{}/visualize.py", self.output_dir)
+        } else {
+            format!(
+                "{}/{}_{}_visualize.py",
+                self.output_dir, self.output_prefix, self.timestamp
+            )
+        };
         let script_content = self.create_visualization_script();
         fs::write(&script_path, script_content)?;
 

@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CuraLit Web UI</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <h1>🔬 CuraLit</h1>
+    <p>Literature-Driven LLM Generator — browser interface</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>1. Search PubMed Articles</h2>
+      <form action="/run/search" method="post" enctype="multipart/form-data">
+        <label>Keywords (comma or newline separated)</label>
+        <textarea name="keywords" rows="2" placeholder="cancer, immunotherapy"></textarea>
+
+        <label>...or upload a keywords file</label>
+        <input type="file" name="keywords_file">
+
+        <div class="row">
+          <div>
+            <label>Data directory</label>
+            <input type="text" name="data_dir" value="./data">
+          </div>
+          <div>
+            <label>Output name</label>
+            <input type="text" name="output" value="results">
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label>Logic</label>
+            <select name="logic">
+              <option value="and">AND (all keywords must match)</option>
+              <option value="or">OR (any keyword matches)</option>
+            </select>
+          </div>
+          <div>
+            <label>Warning threshold</label>
+            <input type="number" name="threshold" value="1000">
+          </div>
+          <div>
+            <label><input type="checkbox" name="resume" value="1"> Resume existing run</label>
+          </div>
+        </div>
+
+        <button type="submit">Run Search + Stats</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>2. Statistics (existing results)</h2>
+      <form action="/run/stats" method="post">
+        <label>Checkpoint CSV file</label>
+        <input type="text" name="checkpoint_file" placeholder="0_out/results/results.csv" required>
+        <button type="submit">Generate Statistics</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>3. Generate Ollama Model</h2>
+      <form action="/run/generate" method="post">
+        <label>Checkpoint CSV file</label>
+        <input type="text" name="checkpoint_file" placeholder="0_out/results/results.csv" required>
+        <div class="row">
+          <div>
+            <label>Model name</label>
+            <input type="text" name="model_name" required>
+          </div>
+          <div>
+            <label>Base model</label>
+            <input type="text" name="base_model" value="llama3">
+          </div>
+        </div>
+        <label><input type="checkbox" name="package" value="1"> Also create distributable package</label>
+        <button type="submit">Generate Modelfile</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>4. Build Verification Database</h2>
+      <form action="/run/db-build" method="post" enctype="multipart/form-data">
+        <label>Keywords (comma or newline separated)</label>
+        <textarea name="keywords" rows="2"></textarea>
+        <label>...or upload a keywords file</label>
+        <input type="file" name="keywords_file">
+        <div class="row">
+          <div>
+            <label>Data directory</label>
+            <input type="text" name="data_dir" value="./data">
+          </div>
+          <div>
+            <label>Database name</label>
+            <input type="text" name="db_name" value="curalit">
+          </div>
+          <div>
+            <label>Logic</label>
+            <select name="logic">
+              <option value="and">AND</option>
+              <option value="or">OR</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit">Build Database</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>5. Build RAG Index</h2>
+      <form action="/run/rag-build" method="post">
+        <label>Checkpoint CSV file</label>
+        <input type="text" name="checkpoint_file" placeholder="0_out/results/results.csv" required>
+        <div class="row">
+          <div>
+            <label>Embedding model</label>
+            <input type="text" name="embedding_model" value="nomic-embed-text">
+          </div>
+          <div>
+            <label>Collection name</label>
+            <input type="text" name="collection_name" value="curalit_articles">
+          </div>
+        </div>
+        <button type="submit">Build RAG Index</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>6. Ask a Question</h2>
+      <form action="/run/rag-generate" method="post">
+        <label>Question</label>
+        <textarea name="query" rows="3" placeholder="Describe a research project concerning..." required></textarea>
+        <div class="row">
+          <div>
+            <label>Ollama model</label>
+            <input type="text" name="model" value="llama3">
+          </div>
+          <div>
+            <label>Collection name</label>
+            <input type="text" name="collection_name" value="curalit_articles">
+          </div>
+          <div>
+            <label>Embedding model</label>
+            <input type="text" name="embedding_model" value="nomic-embed-text">
+          </div>
+          <div>
+            <label>Passages (top-k)</label>
+            <input type="number" name="top_k" value="5">
+          </div>
+        </div>
+        <label>Verification database (optional)</label>
+        <input type="text" name="use_db" placeholder="0_out/curalit/database.db">
+        <button type="submit">Ask Question</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Run Reports</h2>
+      {% if reports %}
+      <ul>
+        {% for r in reports %}
+        <li><a href="/report?path={{ r.path }}">{{ r.name }}</a></li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p>No reports yet. Run a command above to generate one.</p>
+      {% endif %}
+    </section>
+  </main>
+
+  <footer>
+    <p>Using binary: <code>{{ curalit_bin }}</code></p>
+  </footer>
+</body>
+</html>

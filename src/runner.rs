@@ -2,10 +2,10 @@ use crate::checkpoint::CheckpointManager;
 use crate::cli::KeywordLogic;
 use crate::modelfile::ModelfileGenerator;
 use crate::parser::{count_articles, PubMedParser};
+use crate::report;
 use crate::statistics::StatisticsAnalyzer;
 use crate::visualizer::VisualizationGenerator;
 use anyhow::{Context, Result};
-use chrono::Local;
 use colored::*;
 use indicatif::{MultiProgress, ProgressBar, ProgressStyle};
 use log::{info, warn};
@@ -73,21 +73,15 @@ impl CuraLitRunner {
         }
         println!();
 
-        // Create output directory
-        let output_dir = PathBuf::from("0_out");
-        if !output_dir.exists() {
-            fs::create_dir_all(&output_dir)
-                .with_context(|| format!("Failed to create output directory: {:?}", output_dir))?;
-            println!(
-                "{} Created output directory: {}",
-                "•".cyan(),
-                output_dir.display()
-            );
-        }
+        // Create a simply-named run directory: 0_out/<output_name>/
+        let output_dir = report::resolve_run_dir(&PathBuf::from("0_out"), &output_name, resume)?;
+        println!(
+            "{} Run directory: {}",
+            "•".cyan(),
+            output_dir.display()
+        );
 
-        // Add timestamp to filename (human-readable format)
-        let timestamp = Local::now().format("%d%b%Y_%H%M%S");
-        let checkpoint_file = output_dir.join(format!("{}_{}.csv", output_name, timestamp));
+        let checkpoint_file = output_dir.join("results.csv");
         let checkpoint_manager = CheckpointManager::new(&checkpoint_file, resume)?;
 
         Ok(Self {
@@ -241,6 +235,19 @@ impl CuraLitRunner {
         println!("{} Generating statistics...", "•".cyan());
         self.generate_statistics()?;
 
+        let report_path = report::append_report(
+            &self.output_dir,
+            "Search",
+            &format!(
+                "- Keywords ({} logic): {}\n- Data directory: {}\n- Articles matched: {}\n- Results: {}",
+                self.logic,
+                self.keywords.join(", "),
+                self.data_dir.display(),
+                final_matched,
+                self.checkpoint_manager.file_path().display()
+            ),
+        )?;
+
         println!(
             "\n{} {}",
             "✓".green().bold(),
@@ -256,7 +263,12 @@ impl CuraLitRunner {
         println!(
             "  {} View visualizations: {}",
             "2.".cyan(),
-            "uv run 0_out/*_visualize.py".white()
+            format!("uv run {}/visualize.py", self.output_dir.display()).white()
+        );
+        println!(
+            "  {} Full report: {}",
+            "•".cyan(),
+            report_path.display().to_string().white()
         );
         println!(
             "  {} Generate model: {}",
@@ -359,22 +371,16 @@ impl CuraLitRunner {
 
         let analyzer = StatisticsAnalyzer::new(articles, self.keywords.clone());
         let stats = analyzer.analyze()?;
-
-        // Create timestamped filenames (human-readable format)
-        let timestamp = Local::now().format("%d%b%Y_%H%M%S");
+        let total_articles = stats.total_articles;
 
         // Save statistics to JSON
-        let stats_file = self
-            .output_dir
-            .join(format!("{}_{}_stats.json", self.output_name, timestamp));
+        let stats_file = self.output_dir.join("stats.json");
         let stats_json = serde_json::to_string_pretty(&stats)?;
         fs::write(&stats_file, stats_json)?;
         info!("Statistics saved to {}", stats_file.display());
 
         // Generate log file
-        let log_file = self
-            .output_dir
-            .join(format!("{}_{}_stats.log", self.output_name, timestamp));
+        let log_file = self.output_dir.join("stats.log");
         stats.write_log(log_file.to_str().unwrap())?;
         println!(
             "  {} Statistics log: {}",
@@ -382,22 +388,27 @@ impl CuraLitRunner {
             log_file.display().to_string().white()
         );
 
-        // Generate Python visualization script
-        let viz_generator = VisualizationGenerator::new(
-            stats,
-            &self.output_name,
-            &self.output_dir,
-            &timestamp.to_string(),
-        );
+        // Generate Python visualization script (no timestamp = clean filename)
+        let viz_generator = VisualizationGenerator::new(stats, &self.output_name, &self.output_dir, "");
         viz_generator.generate()?;
-        let viz_file = self
-            .output_dir
-            .join(format!("{}_{}_visualize.py", self.output_name, timestamp));
+        let viz_file = self.output_dir.join("visualize.py");
         println!(
             "  {} Visualization script: {}",
             "→".cyan(),
             viz_file.display().to_string().white()
         );
+
+        report::append_report(
+            &self.output_dir,
+            "Statistics",
+            &format!(
+                "- Total articles: {}\n- Stats file: {}\n- Log file: {}\n- Visualization script: {}",
+                total_articles,
+                stats_file.display(),
+                log_file.display(),
+                viz_file.display()
+            ),
+        )?;
 
         Ok(())
     }
@@ -419,18 +430,11 @@ impl CuraLitRunner {
             articles.len()
         );
 
-        let timestamp = Local::now().format("%d%b%Y_%H%M%S");
+        // No timestamp = clean, simple filenames (Modelfile_<model>, etc.)
         let generator = ModelfileGenerator::new(model_name.to_string(), base_model.to_string());
-        generator.generate(
-            &articles,
-            &self.output_name,
-            &self.output_dir,
-            &timestamp.to_string(),
-        )?;
+        generator.generate(&articles, &self.output_name, &self.output_dir, "")?;
 
-        let modelfile_path = self
-            .output_dir
-            .join(format!("Modelfile_{}_{}", model_name, timestamp));
+        let modelfile_path = self.output_dir.join(format!("Modelfile_{}", model_name));
         println!(
             "\n{} {}",
             "✓".green().bold(),
@@ -453,8 +457,23 @@ impl CuraLitRunner {
             format!("ollama run {}", model_name).white()
         );
 
+        report::append_report(
+            &self.output_dir,
+            "Model Generation",
+            &format!(
+                "- Model name: {}\n- Base model: {}\n- Articles used: {}\n- Modelfile: {}\n- Create with: `ollama create {} -f {}`",
+                model_name,
+                base_model,
+                articles.len(),
+                modelfile_path.display(),
+                model_name,
+                modelfile_path.display()
+            ),
+        )?;
+
         Ok(())
     }
+
 
     /// Create runner from output directory (for packaging command)
     pub fn from_output_dir(output_dir: &PathBuf) -> Result<Self> {
@@ -629,7 +648,8 @@ impl CuraLitRunner {
     fn find_model_files_in_dir(&self, model_name: &str, dir: &PathBuf) -> Result<Vec<PathBuf>> {
         let mut files = Vec::new();
 
-        // Look for Modelfile, training data, and system prompt
+        // Look for Modelfile, training data, and system prompt (simple or legacy
+        // timestamped names) belonging to this specific model
         for entry in WalkDir::new(dir)
             .max_depth(1)
             .into_iter()
@@ -642,51 +662,26 @@ impl CuraLitRunner {
 
             let filename = path.file_name().unwrap_or_default().to_string_lossy();
 
-            // Match files containing the model name
-            if filename.contains(&format!("Modelfile_{}", model_name))
-                || filename.contains("_training.jsonl")
-                || filename.contains("_system_prompt.txt")
-            {
+            let is_modelfile = filename == format!("Modelfile_{}", model_name)
+                || filename.starts_with(&format!("Modelfile_{}_", model_name));
+            let is_training = filename == format!("training_{}.jsonl", model_name)
+                || filename.contains("_training.jsonl");
+            let is_prompt = filename == format!("system_prompt_{}.txt", model_name)
+                || filename.contains("_system_prompt.txt");
+
+            if is_modelfile || is_training || is_prompt {
                 files.push(path.to_path_buf());
             }
         }
 
-        // Sort by modification time (most recent first) and take the most recent set
+        // Sort by modification time (most recent first) so legacy timestamped
+        // duplicates don't get mixed with the current run's files
         files.sort_by(|a, b| {
             let time_a = fs::metadata(a).and_then(|m| m.modified()).ok();
             let time_b = fs::metadata(b).and_then(|m| m.modified()).ok();
             time_b.cmp(&time_a)
         });
 
-        // Take the most recent Modelfile and associated files
-        if let Some(modelfile) = files.iter().find(|f| {
-            f.file_name()
-                .unwrap_or_default()
-                .to_string_lossy()
-                .starts_with("Modelfile_")
-        }) {
-            // Extract timestamp from Modelfile
-            let modelfile_name = modelfile.file_name().unwrap_or_default().to_string_lossy();
-            if let Some(timestamp) = modelfile_name.split('_').last() {
-                // Filter files with matching timestamp
-                let matching_files: Vec<PathBuf> = files
-                    .iter()
-                    .filter(|f| {
-                        f.file_name()
-                            .unwrap_or_default()
-                            .to_string_lossy()
-                            .contains(timestamp)
-                    })
-                    .cloned()
-                    .collect();
-
-                if !matching_files.is_empty() {
-                    return Ok(matching_files);
-                }
-            }
-        }
-
-        // Fallback: return first 3 files (Modelfile, training, prompt)
         Ok(files.into_iter().take(3).collect())
     }
 

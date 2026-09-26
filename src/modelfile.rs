@@ -26,8 +26,11 @@ impl ModelfileGenerator {
         timestamp: &str,
     ) -> Result<()> {
         // Generate training data in JSONL format
-        let training_file =
-            output_dir.join(format!("{}_{}_training.jsonl", output_prefix, timestamp));
+        let training_file = if timestamp.is_empty() {
+            output_dir.join(format!("training_{}.jsonl", self.model_name))
+        } else {
+            output_dir.join(format!("{}_{}_training.jsonl", output_prefix, timestamp))
+        };
         self.generate_training_data(articles, training_file.to_str().unwrap())?;
         println!(
             "  {} Training data: {}",
@@ -36,8 +39,11 @@ impl ModelfileGenerator {
         );
 
         // Generate Modelfile
-        let modelfile_path =
-            output_dir.join(format!("Modelfile_{}_{}", self.model_name, timestamp));
+        let modelfile_path = if timestamp.is_empty() {
+            output_dir.join(format!("Modelfile_{}", self.model_name))
+        } else {
+            output_dir.join(format!("Modelfile_{}_{}", self.model_name, timestamp))
+        };
         self.generate_modelfile(
             training_file.to_str().unwrap(),
             modelfile_path.to_str().unwrap(),
@@ -50,8 +56,11 @@ impl ModelfileGenerator {
 
         // Generate system prompt
         let system_prompt = self.create_system_prompt(articles);
-        let prompt_file =
-            output_dir.join(format!("{}_{}_system_prompt.txt", output_prefix, timestamp));
+        let prompt_file = if timestamp.is_empty() {
+            output_dir.join(format!("system_prompt_{}.txt", self.model_name))
+        } else {
+            output_dir.join(format!("{}_{}_system_prompt.txt", output_prefix, timestamp))
+        };
         fs::write(&prompt_file, system_prompt)?;
         println!(
             "  {} System prompt: {}",

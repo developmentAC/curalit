@@ -33,6 +33,7 @@ pub mod database;
 pub mod modelfile;
 pub mod parser;
 pub mod rag;
+pub mod report;
 pub mod runner;
 pub mod statistics;
 pub mod visualizer;

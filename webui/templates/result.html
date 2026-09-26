@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CuraLit — {{ title }}</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <h1>🔬 CuraLit</h1>
+    <p>{{ title }} result</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <p><strong>Command:</strong> <code>{{ result.command }}</code></p>
+      <p><strong>Exit code:</strong>
+        <span class="{{ 'ok' if result.returncode == 0 else 'fail' }}">{{ result.returncode }}</span>
+      </p>
+
+      {% if result.stdout %}
+      <h3>Output</h3>
+      <pre>{{ result.stdout }}</pre>
+      {% endif %}
+
+      {% if result.stderr %}
+      <h3>Errors / Log</h3>
+      <pre class="stderr">{{ result.stderr }}</pre>
+      {% endif %}
+    </section>
+
+    <section class="card">
+      <h2>Run Reports</h2>
+      {% if reports %}
+      <ul>
+        {% for r in reports %}
+        <li><a href="/report?path={{ r.path }}">{{ r.name }}</a></li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p>No reports yet.</p>
+      {% endif %}
+    </section>
+
+    <p><a href="/">&larr; Back to CuraLit</a></p>
+  </main>
+</body>
+</html>
