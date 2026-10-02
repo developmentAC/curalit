@@ -26,6 +26,7 @@ Modelfile
 data/
 !sample_data/
 /data_small/
+./qdrant_storage/
 
 # Python
 __pycache__/
