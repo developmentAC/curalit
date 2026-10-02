@@ -20,11 +20,27 @@ format:
 
 # Welcome {background-color="#e7f3ff"}
 
+
+::: {.columns}
+
+::: {.column}
+
+
 **Project:** [github.com/developmentAC/curalit](https://github.com/developmentAC/curalit)
 
 Oliver Bonham-Carter
 
 email: obonhamcarter at allegheny.edu
+
+:::
+
+::: {.column}
+
+![](../../../graphics/curalit_QR.png){fig-alt="QR code"}
+
+:::
+
+:::
 
 ## What We'll Cover
 
@@ -41,12 +57,13 @@ email: obonhamcarter at allegheny.edu
 ::: {.column width="40%"}
 ![](../../../graphics/curaLit_logo.png){fig-alt="CuraLit logo"}
 
-::: {.callout-tip}
-No programming experience needed. Every step is copy-and-paste.
-:::
+
 :::
 ::::
 
+::: {.callout-tip}
+No programming experience needed. Every step is copy-and-paste.
+:::
 # What is CuraLit? {background-color="#e8f5e9"}
 
 ## In One Sentence
