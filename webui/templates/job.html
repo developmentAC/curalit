@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CuraLit — {{ title }} running</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <h1>🔬 CuraLit</h1>
+    <p>{{ title }} in progress</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <div class="progress" id="progress"><div class="progress-bar indeterminate" id="bar"></div></div>
+      <p id="status">Starting…</p>
+      <p class="hint">Leave this page open; results appear automatically when the task completes.</p>
+    </section>
+    <p><a href="/">&larr; Back to CuraLit</a></p>
+  </main>
+
+  <script>
+    const fmt = s => {
+      s = Math.round(s);
+      const m = Math.floor(s / 60);
+      return m ? `${m}m ${s % 60}s` : `${s}s`;
+    };
+    const bar = document.getElementById('bar');
+    const status = document.getElementById('status');
+    async function poll() {
+      try {
+        const r = await fetch('/api/job/{{ job_id }}');
+        const j = await r.json();
+        if (j.done) { location.reload(); return; }
+        if (j.percent === null) {
+          status.textContent = `Running… elapsed ${fmt(j.elapsed)} (no previous runs to estimate completion time)`;
+        } else {
+          bar.classList.remove('indeterminate');
+          bar.style.width = j.percent.toFixed(0) + '%';
+          status.textContent = j.remaining > 0
+            ? `${j.percent.toFixed(0)}% — elapsed ${fmt(j.elapsed)}, about ${fmt(j.remaining)} remaining (estimated from previous runs)`
+            : `Taking longer than usual — elapsed ${fmt(j.elapsed)}`;
+        }
+      } catch (e) {
+        status.textContent = 'Lost contact with server, retrying…';
+      }
+      setTimeout(poll, 1000);
+    }
+    poll();
+  </script>
+</body>
+</html>

@@ -13,11 +13,16 @@ or:
 
 from __future__ import annotations
 
+import json
 import os
+import statistics
 import subprocess
+import threading
+import time
+import uuid
 from pathlib import Path
 
-from flask import Flask, render_template, request
+from flask import Flask, abort, jsonify, redirect, render_template, request, url_for
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 OUT_DIR = REPO_ROOT / "0_out"
@@ -79,6 +84,90 @@ def run_command(args: list[str]) -> dict:
         }
 
 
+JOBS: dict[str, dict] = {}
+JOBS_LOCK = threading.Lock()
+DURATIONS_FILE = OUT_DIR / ".webui_durations.json"
+
+
+def load_durations() -> dict[str, list[float]]:
+    try:
+        return json.loads(DURATIONS_FILE.read_text())
+    except (OSError, ValueError):
+        return {}
+
+
+def record_duration(title: str, seconds: float) -> None:
+    with JOBS_LOCK:
+        data = load_durations()
+        data[title] = (data.get(title, []) + [seconds])[-10:]
+        try:
+            DURATIONS_FILE.parent.mkdir(parents=True, exist_ok=True)
+            DURATIONS_FILE.write_text(json.dumps(data))
+        except OSError:
+            pass
+
+
+def _job_worker(job_id: str, args: list[str]) -> None:
+    result = run_command(args)
+    with JOBS_LOCK:
+        job = JOBS[job_id]
+        job["result"] = result
+        job["finished"] = time.time()
+        elapsed = job["finished"] - job["started"]
+    if result["returncode"] == 0:
+        record_duration(job["title"], elapsed)
+
+
+def start_job(title: str, args: list[str]):
+    """Run a command in the background and redirect to its progress page."""
+    job_id = uuid.uuid4().hex
+    history = load_durations().get(title, [])
+    with JOBS_LOCK:
+        JOBS[job_id] = {
+            "title": title,
+            "started": time.time(),
+            "finished": None,
+            "result": None,
+            "estimate": statistics.median(history) if history else None,
+        }
+    threading.Thread(target=_job_worker, args=(job_id, args), daemon=True).start()
+    return redirect(url_for("job_page", job_id=job_id))
+
+
+def job_status(job_id: str) -> dict:
+    with JOBS_LOCK:
+        job = JOBS.get(job_id)
+        if job is None:
+            abort(404)
+        job = dict(job)
+    done = job["result"] is not None
+    elapsed = (job["finished"] or time.time()) - job["started"]
+    estimate = job["estimate"]
+    if done:
+        percent, remaining = 100.0, 0.0
+    elif estimate:
+        # Cap below 100% until the process actually exits.
+        percent = min(elapsed / estimate * 100, 95.0)
+        remaining = max(estimate - elapsed, 0.0)
+    else:
+        percent, remaining = None, None
+    return {
+        "done": done,
+        "title": job["title"],
+        "elapsed": elapsed,
+        "percent": percent,
+        "remaining": remaining,
+        "estimated": estimate is not None,
+    }
+
+
+BROWSE_ROOTS = [Path.home().resolve(), REPO_ROOT.resolve()]
+
+
+def _browse_allowed(path: Path) -> bool:
+    return any(path.is_relative_to(root) for root in BROWSE_ROOTS)
+
+
 def keywords_from_form(form, files) -> list[str]:
     """Collect keywords typed in a text field (comma/newline separated)."""
     raw = form.get("keywords", "")
@@ -131,15 +220,13 @@ def run_search():
     if request.form.get("resume"):
         args += ["-r"]
 
-    result = run_command(args)
-    return render_template("result.html", title="Search", result=result, reports=list_run_reports())
+    return start_job("Search", args)
 
 
 @app.route("/run/stats", methods=["POST"])
 def run_stats():
     checkpoint = request.form.get("checkpoint_file", "")
-    result = run_command(["stats", "-c", checkpoint])
-    return render_template("result.html", title="Stats", result=result, reports=list_run_reports())
+    return start_job("Stats", ["stats", "-c", checkpoint])
 
 
 @app.route("/run/generate", methods=["POST"])
@@ -152,8 +239,7 @@ def run_generate():
     ]
     if request.form.get("package"):
         args += ["-p"]
-    result = run_command(args)
-    return render_template("result.html", title="Generate Model", result=result, reports=list_run_reports())
+    return start_job("Generate Model", args)
 
 
 @app.route("/run/db-build", methods=["POST"])
@@ -170,8 +256,7 @@ def run_db_build():
     args += ["-n", request.form.get("db_name", "curalit")]
     args += ["-l", request.form.get("logic", "and")]
 
-    result = run_command(args)
-    return render_template("result.html", title="Database Build", result=result, reports=list_run_reports())
+    return start_job("Database Build", args)
 
 
 @app.route("/run/rag-build", methods=["POST"])
@@ -182,8 +267,7 @@ def run_rag_build():
         "-e", request.form.get("embedding_model", "nomic-embed-text"),
         "-n", request.form.get("collection_name", "curalit_articles"),
     ]
-    result = run_command(args)
-    return render_template("result.html", title="RAG Build", result=result, reports=list_run_reports())
+    return start_job("RAG Build", args)
 
 
 @app.route("/run/rag-generate", methods=["POST"])
@@ -200,8 +284,46 @@ def run_rag_generate():
     if use_db:
         args += ["--use-db", use_db]
 
-    result = run_command(args)
-    return render_template("result.html", title="Ask a Question (RAG Generate)", result=result, reports=list_run_reports())
+    return start_job("Ask a Question (RAG Generate)", args)
+
+
+@app.route("/job/<job_id>")
+def job_page(job_id):
+    status = job_status(job_id)
+    if status["done"]:
+        with JOBS_LOCK:
+            result = JOBS[job_id]["result"]
+        return render_template("result.html", title=status["title"], result=result, reports=list_run_reports())
+    return render_template("job.html", job_id=job_id, title=status["title"])
+
+
+@app.route("/api/job/<job_id>")
+def job_api(job_id):
+    return jsonify(job_status(job_id))
+
+
+@app.route("/api/browse")
+def browse():
+    raw = request.args.get("path", "")
+    base = Path(raw).expanduser() if raw else REPO_ROOT
+    if not base.is_absolute():
+        base = REPO_ROOT / base
+    path = base.resolve()
+    if path.is_file():
+        path = path.parent
+    if not path.is_dir() or not _browse_allowed(path):
+        return jsonify({"error": "Path not available"}), 400
+
+    entries = []
+    try:
+        for child in sorted(path.iterdir(), key=lambda p: (not p.is_dir(), p.name.lower())):
+            if child.name.startswith("."):
+                continue
+            entries.append({"name": child.name, "is_dir": child.is_dir(), "path": str(child)})
+    except PermissionError:
+        return jsonify({"error": "Permission denied"}), 403
+    parent = path.parent if path.parent != path and _browse_allowed(path.parent) else None
+    return jsonify({"path": str(path), "parent": str(parent) if parent else None, "entries": entries})
 
 
 @app.route("/report")

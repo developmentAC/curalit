@@ -24,7 +24,10 @@
         <div class="row">
           <div>
             <label>Data directory</label>
-            <input type="text" name="data_dir" value="./data">
+            <div class="path-field">
+          <input type="text" id="data_dir_1" name="data_dir" value="./data">
+          <button type="button" data-browse="dir" data-target="data_dir_1">Browse…</button>
+        </div>
           </div>
           <div>
             <label>Output name</label>
@@ -57,7 +60,10 @@
       <h2>2. Statistics (existing results)</h2>
       <form action="/run/stats" method="post">
         <label>Checkpoint CSV file</label>
-        <input type="text" name="checkpoint_file" placeholder="0_out/results/results.csv" required>
+        <div class="path-field">
+          <input type="text" id="checkpoint_1" name="checkpoint_file" placeholder="0_out/results/results.csv" required>
+          <button type="button" data-browse="file" data-target="checkpoint_1">Browse…</button>
+        </div>
         <button type="submit">Generate Statistics</button>
       </form>
     </section>
@@ -66,7 +72,10 @@
       <h2>3. Generate Ollama Model</h2>
       <form action="/run/generate" method="post">
         <label>Checkpoint CSV file</label>
-        <input type="text" name="checkpoint_file" placeholder="0_out/results/results.csv" required>
+        <div class="path-field">
+          <input type="text" id="checkpoint_2" name="checkpoint_file" placeholder="0_out/results/results.csv" required>
+          <button type="button" data-browse="file" data-target="checkpoint_2">Browse…</button>
+        </div>
         <div class="row">
           <div>
             <label>Model name</label>
@@ -92,7 +101,10 @@
         <div class="row">
           <div>
             <label>Data directory</label>
-            <input type="text" name="data_dir" value="./data">
+            <div class="path-field">
+          <input type="text" id="data_dir_2" name="data_dir" value="./data">
+          <button type="button" data-browse="dir" data-target="data_dir_2">Browse…</button>
+        </div>
           </div>
           <div>
             <label>Database name</label>
@@ -114,7 +126,10 @@
       <h2>5. Build RAG Index</h2>
       <form action="/run/rag-build" method="post">
         <label>Checkpoint CSV file</label>
-        <input type="text" name="checkpoint_file" placeholder="0_out/results/results.csv" required>
+        <div class="path-field">
+          <input type="text" id="checkpoint_3" name="checkpoint_file" placeholder="0_out/results/results.csv" required>
+          <button type="button" data-browse="file" data-target="checkpoint_3">Browse…</button>
+        </div>
         <div class="row">
           <div>
             <label>Embedding model</label>
@@ -153,7 +168,10 @@
           </div>
         </div>
         <label>Verification database (optional)</label>
-        <input type="text" name="use_db" placeholder="0_out/curalit/database.db">
+        <div class="path-field">
+          <input type="text" id="use_db" name="use_db" placeholder="0_out/curalit/database.db">
+          <button type="button" data-browse="file" data-target="use_db">Browse…</button>
+        </div>
         <button type="submit">Ask Question</button>
       </form>
     </section>
@@ -175,5 +193,19 @@
   <footer>
     <p>Using binary: <code>{{ curalit_bin }}</code></p>
   </footer>
+
+  <div id="fb-modal" hidden>
+    <div class="fb-box">
+      <h2>Choose a path</h2>
+      <div id="fb-path"></div>
+      <ul id="fb-list"></ul>
+      <div id="fb-error"></div>
+      <div class="fb-actions">
+        <button type="button" id="fb-cancel">Cancel</button>
+        <button type="button" id="fb-select" disabled>Select</button>
+      </div>
+    </div>
+  </div>
+  <script src="/static/browser.js"></script>
 </body>
 </html>

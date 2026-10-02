@@ -93,3 +93,29 @@ pre.stderr { border-left: 3px solid var(--fail); }
 a { color: var(--accent); }
 
 ul { padding-left: 1.2rem; }
+
+.path-field { display: flex; gap: 0.5rem; }
+.path-field button { margin-top: 0; white-space: nowrap; }
+
+.progress { background: #0b1220; border-radius: 6px; height: 1.25rem; overflow: hidden; }
+.progress-bar { height: 100%; width: 0; background: var(--accent); transition: width 0.8s linear; }
+.progress-bar.indeterminate {
+  width: 30%;
+  animation: slide 1.2s ease-in-out infinite alternate;
+}
+@keyframes slide { from { margin-left: 0; } to { margin-left: 70%; } }
+.hint { color: var(--muted); font-size: 0.85rem; }
+
+#fb-modal[hidden] { display: none; }
+#fb-modal {
+  position: fixed; inset: 0; background: rgba(0, 0, 0, 0.6);
+  display: flex; align-items: center; justify-content: center; z-index: 10;
+}
+.fb-box { background: var(--card); border-radius: 8px; padding: 1rem 1.25rem; width: min(600px, 92vw); }
+#fb-path { font-family: monospace; font-size: 0.85rem; color: var(--muted); word-break: break-all; }
+#fb-list { list-style: none; padding: 0; margin: 0.5rem 0; max-height: 340px; overflow-y: auto; background: #0b1220; border-radius: 6px; }
+#fb-list li { padding: 0.35rem 0.6rem; cursor: pointer; }
+#fb-list li:hover { background: #1e293b; }
+#fb-list li.sel { background: #075985; }
+#fb-error { color: var(--fail); }
+.fb-actions { display: flex; gap: 0.5rem; justify-content: flex-end; }
