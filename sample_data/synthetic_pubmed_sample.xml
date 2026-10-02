@@ -1,0 +1,813 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PubmedArticleSet>
+  <PubmedArticle>
+    <MedlineCitation Status="MEDLINE" Owner="NLM">
+      <PMID Version="1">9000001</PMID>
+      <Article>
+        <Journal>
+          <JournalIssue><PubDate><Year>2015</Year><Month>Jan</Month></PubDate></JournalIssue>
+          <Title>Journal of Synthetic Biomechanics</Title>
+        </Journal>
+        <ArticleTitle>Comparative analysis of prosthetic joint infection approaches for knee replacement.</ArticleTitle>
+        <Abstract>
+          <AbstractText>SYNTHETIC DEMO TEXT, NOT A REAL ARTICLE. This invented abstract discusses prosthetic joint, knee replacement and prosthetic joint infection. We describe an analysis of 314 fictional participants and report that arthroplasty, replacement, knee was associated with improved outcomes.</AbstractText>
+        </Abstract>
+        <AuthorList>
+          <Author><LastName>Lindqvist</LastName><ForeName>Sara</ForeName><Initials>S</Initials></Author>
+          <Author><LastName>Tanaka</LastName><ForeName>Hiro</ForeName><Initials>H</Initials></Author>
+          <Author><LastName>Patel</LastName><ForeName>Anika</ForeName><Initials>A</Initials></Author>
+        </AuthorList>
+      </Article>
+      <MeshHeadingList>
+        <MeshHeading><DescriptorName>Prosthetic Joint Infection</DescriptorName></MeshHeading>
+        <MeshHeading><DescriptorName>Arthroplasty, Replacement, Knee</DescriptorName></MeshHeading>
+      </MeshHeadingList>
+    </MedlineCitation>
+    <PubmedData>
+      <ArticleIdList><ArticleId IdType="pubmed">9000001</ArticleId><ArticleId IdType="doi">10.0000/synthetic.9000001</ArticleId></ArticleIdList>
+    </PubmedData>
+  </PubmedArticle>
+  <PubmedArticle>
+    <MedlineCitation Status="MEDLINE" Owner="NLM">
+      <PMID Version="1">9000002</PMID>
+      <Article>
+        <Journal>
+          <JournalIssue><PubDate><Year>2023</Year><Month>Jan</Month></PubDate></JournalIssue>
+          <Title>Example Orthopaedic Reports</Title>
+        </Journal>
+        <ArticleTitle>Analysis of titanium alloy implant outcomes in a synthetic cohort.</ArticleTitle>
+        <Abstract>
+          <AbstractText>SYNTHETIC DEMO TEXT, NOT A REAL ARTICLE. This invented abstract discusses prosthetic joint, titanium alloy implant and prosthesis design. We describe an analysis of 59 fictional participants and report that biocompatible materials was associated with improved outcomes.</AbstractText>
+        </Abstract>
+        <AuthorList>
+          <Author><LastName>Patel</LastName><ForeName>Anika</ForeName><Initials>A</Initials></Author>
+          <Author><LastName>Mendes</LastName><ForeName>Luis</ForeName><Initials>L</Initials></Author>
+          <Author><LastName>Rivera</LastName><ForeName>Ana</ForeName><Initials>A</Initials></Author>
+        </AuthorList>
+      </Article>
+      <MeshHeadingList>
+        <MeshHeading><DescriptorName>Prosthesis Design</DescriptorName></MeshHeading>
+        <MeshHeading><DescriptorName>Biocompatible Materials</DescriptorName></MeshHeading>
+      </MeshHeadingList>
+    </MedlineCitation>
+    <PubmedData>
+      <ArticleIdList><ArticleId IdType="pubmed">9000002</ArticleId><ArticleId IdType="doi">10.0000/synthetic.9000002</ArticleId></ArticleIdList>
+    </PubmedData>
+  </PubmedArticle>
+  <PubmedArticle>
+    <MedlineCitation Status="MEDLINE" Owner="NLM">
+      <PMID Version="1">9000003</PMID>
+      <Article>
+        <Journal>
+          <JournalIssue><PubDate><Year>2018</Year><Month>Jan</Month></PubDate></JournalIssue>
+          <Title>Journal of Synthetic Biomechanics</Title>
+        </Journal>
+        <ArticleTitle>Analysis of myoelectric control outcomes in a synthetic cohort.</ArticleTitle>
+        <Abstract>
+          <AbstractText>SYNTHETIC DEMO TEXT, NOT A REAL ARTICLE. This invented abstract discusses prosthetic limb, myoelectric control and artificial limbs. We describe an analysis of 322 fictional participants and report that amputees was associated with improved outcomes.</AbstractText>
+        </Abstract>
+        <AuthorList>
+          <Author><LastName>Novak</LastName><ForeName>Jan</ForeName><Initials>J</Initials></Author>
+          <Author><LastName>Tanaka</LastName><ForeName>Hiro</ForeName><Initials>H</Initials></Author>
+          <Author><LastName>Rivera</LastName><ForeName>Ana</ForeName><Initials>A</Initials></Author>
+        </AuthorList>
+      </Article>
+      <MeshHeadingList>
+        <MeshHeading><DescriptorName>Artificial Limbs</DescriptorName></MeshHeading>
+        <MeshHeading><DescriptorName>Amputees</DescriptorName></MeshHeading>
+      </MeshHeadingList>
+    </MedlineCitation>
+    <PubmedData>
+      <ArticleIdList><ArticleId IdType="pubmed">9000003</ArticleId><ArticleId IdType="doi">10.0000/synthetic.9000003</ArticleId></ArticleIdList>
+    </PubmedData>
+  </PubmedArticle>
+  <PubmedArticle>
+    <MedlineCitation Status="MEDLINE" Owner="NLM">
+      <PMID Version="1">9000004</PMID>
+      <Article>
+        <Journal>
+          <JournalIssue><PubDate><Year>2016</Year><Month>Jan</Month></PubDate></JournalIssue>
+          <Title>Example Orthopaedic Reports</Title>
+        </Journal>
+        <ArticleTitle>Long-term follow-up of glucose monitoring patients: a demonstration dataset.</ArticleTitle>
+        <Abstract>
+          <AbstractText>SYNTHETIC DEMO TEXT, NOT A REAL ARTICLE. This invented abstract discusses diabetes, glucose monitoring and diabetes mellitus, type 2. We describe an analysis of 362 fictional participants and report that insulin was associated with improved outcomes.</AbstractText>
+        </Abstract>
+        <AuthorList>
+          <Author><LastName>Rivera</LastName><ForeName>Ana</ForeName><Initials>A</Initials></Author>
+          <Author><LastName>Novak</LastName><ForeName>Jan</ForeName><Initials>J</Initials></Author>
+          <Author><LastName>Mendes</LastName><ForeName>Luis</ForeName><Initials>L</Initials></Author>
+        </AuthorList>
+      </Article>
+      <MeshHeadingList>
+        <MeshHeading><DescriptorName>Diabetes Mellitus, Type 2</DescriptorName></MeshHeading>
+        <MeshHeading><DescriptorName>Insulin</DescriptorName></MeshHeading>
+      </MeshHeadingList>
+    </MedlineCitation>
+    <PubmedData>
+      <ArticleIdList><ArticleId IdType="pubmed">9000004</ArticleId><ArticleId IdType="doi">10.0000/synthetic.9000004</ArticleId></ArticleIdList>
+    </PubmedData>
+  </PubmedArticle>
+  <PubmedArticle>
+    <MedlineCitation Status="MEDLINE" Owner="NLM">
+      <PMID Version="1">9000005</PMID>
+      <Article>
+        <Journal>
+          <JournalIssue><PubDate><Year>2021</Year><Month>Jan</Month></PubDate></JournalIssue>
+          <Title>Journal of Synthetic Biomechanics</Title>
+        </Journal>
+        <ArticleTitle>Design considerations for checkpoint inhibitors in clinical practice.</ArticleTitle>
+        <Abstract>
+          <AbstractText>SYNTHETIC DEMO TEXT, NOT A REAL ARTICLE. This invented abstract discusses cancer, checkpoint inhibitors and immunotherapy. We describe an analysis of 153 fictional participants and report that neoplasms was associated with improved outcomes.</AbstractText>
+        </Abstract>
+        <AuthorList>
+          <Author><LastName>Rivera</LastName><ForeName>Ana</ForeName><Initials>A</Initials></Author>
+          <Author><LastName>Mendes</LastName><ForeName>Luis</ForeName><Initials>L</Initials></Author>
+          <Author><LastName>Novak</LastName><ForeName>Jan</ForeName><Initials>J</Initials></Author>
+        </AuthorList>
+      </Article>
+      <MeshHeadingList>
+        <MeshHeading><DescriptorName>Immunotherapy</DescriptorName></MeshHeading>
+        <MeshHeading><DescriptorName>Neoplasms</DescriptorName></MeshHeading>
+      </MeshHeadingList>
+    </MedlineCitation>
+    <PubmedData>
+      <ArticleIdList><ArticleId IdType="pubmed">9000005</ArticleId><ArticleId IdType="doi">10.0000/synthetic.9000005</ArticleId></ArticleIdList>
+    </PubmedData>
+  </PubmedArticle>
+  <PubmedArticle>
+    <MedlineCitation Status="MEDLINE" Owner="NLM">
+      <PMID Version="1">9000006</PMID>
+      <Article>
+        <Journal>
+          <JournalIssue><PubDate><Year>2017</Year><Month>Jan</Month></PubDate></JournalIssue>
+          <Title>Journal of Synthetic Biomechanics</Title>
+        </Journal>
+        <ArticleTitle>Analysis of knee replacement outcomes in a synthetic cohort.</ArticleTitle>
+        <Abstract>
+          <AbstractText>SYNTHETIC DEMO TEXT, NOT A REAL ARTICLE. This invented abstract discusses prosthetic joint, knee replacement and prosthetic joint infection. We describe an analysis of 332 fictional participants and report that arthroplasty, replacement, knee was associated with improved outcomes.</AbstractText>
+        </Abstract>
+        <AuthorList>
+          <Author><LastName>Lindqvist</LastName><ForeName>Sara</ForeName><Initials>S</Initials></Author>
+          <Author><LastName>Haddad</LastName><ForeName>Layla</ForeName><Initials>L</Initials></Author>
+          <Author><LastName>Tanaka</LastName><ForeName>Hiro</ForeName><Initials>H</Initials></Author>
+        </AuthorList>
+      </Article>
+      <MeshHeadingList>
+        <MeshHeading><DescriptorName>Prosthetic Joint Infection</DescriptorName></MeshHeading>
+        <MeshHeading><DescriptorName>Arthroplasty, Replacement, Knee</DescriptorName></MeshHeading>
+      </MeshHeadingList>
+    </MedlineCitation>
+    <PubmedData>
+      <ArticleIdList><ArticleId IdType="pubmed">9000006</ArticleId><ArticleId IdType="doi">10.0000/synthetic.9000006</ArticleId></ArticleIdList>
+    </PubmedData>
+  </PubmedArticle>
+  <PubmedArticle>
+    <MedlineCitation Status="MEDLINE" Owner="NLM">
+      <PMID Version="1">9000007</PMID>
+      <Article>
+        <Journal>
+          <JournalIssue><PubDate><Year>2024</Year><Month>Jan</Month></PubDate></JournalIssue>
+          <Title>Example Orthopaedic Reports</Title>
+        </Journal>
+        <ArticleTitle>Comparative analysis of prosthesis design approaches for titanium alloy implant.</ArticleTitle>
+        <Abstract>
+          <AbstractText>SYNTHETIC DEMO TEXT, NOT A REAL ARTICLE. This invented abstract discusses prosthetic joint, titanium alloy implant and prosthesis design. We describe an analysis of 230 fictional participants and report that biocompatible materials was associated with improved outcomes.</AbstractText>
+        </Abstract>
+        <AuthorList>
+          <Author><LastName>Lindqvist</LastName><ForeName>Sara</ForeName><Initials>S</Initials></Author>
+          <Author><LastName>Rivera</LastName><ForeName>Ana</ForeName><Initials>A</Initials></Author>
+          <Author><LastName>Mendes</LastName><ForeName>Luis</ForeName><Initials>L</Initials></Author>
+        </AuthorList>
+      </Article>
+      <MeshHeadingList>
+        <MeshHeading><DescriptorName>Prosthesis Design</DescriptorName></MeshHeading>
+        <MeshHeading><DescriptorName>Biocompatible Materials</DescriptorName></MeshHeading>
+      </MeshHeadingList>
+    </MedlineCitation>
+    <PubmedData>
+      <ArticleIdList><ArticleId IdType="pubmed">9000007</ArticleId><ArticleId IdType="doi">10.0000/synthetic.9000007</ArticleId></ArticleIdList>
+    </PubmedData>
+  </PubmedArticle>
+  <PubmedArticle>
+    <MedlineCitation Status="MEDLINE" Owner="NLM">
+      <PMID Version="1">9000008</PMID>
+      <Article>
+        <Journal>
+          <JournalIssue><PubDate><Year>2024</Year><Month>Jan</Month></PubDate></JournalIssue>
+          <Title>Example Orthopaedic Reports</Title>
+        </Journal>
+        <ArticleTitle>Analysis of myoelectric control outcomes in a synthetic cohort.</ArticleTitle>
+        <Abstract>
+          <AbstractText>SYNTHETIC DEMO TEXT, NOT A REAL ARTICLE. This invented abstract discusses prosthetic limb, myoelectric control and artificial limbs. We describe an analysis of 294 fictional participants and report that amputees was associated with improved outcomes.</AbstractText>
+        </Abstract>
+        <AuthorList>
+          <Author><LastName>Okafor</LastName><ForeName>Chidi</ForeName><Initials>C</Initials></Author>
+          <Author><LastName>Mendes</LastName><ForeName>Luis</ForeName><Initials>L</Initials></Author>
+          <Author><LastName>Rivera</LastName><ForeName>Ana</ForeName><Initials>A</Initials></Author>
+        </AuthorList>
+      </Article>
+      <MeshHeadingList>
+        <MeshHeading><DescriptorName>Artificial Limbs</DescriptorName></MeshHeading>
+        <MeshHeading><DescriptorName>Amputees</DescriptorName></MeshHeading>
+      </MeshHeadingList>
+    </MedlineCitation>
+    <PubmedData>
+      <ArticleIdList><ArticleId IdType="pubmed">9000008</ArticleId><ArticleId IdType="doi">10.0000/synthetic.9000008</ArticleId></ArticleIdList>
+    </PubmedData>
+  </PubmedArticle>
+  <PubmedArticle>
+    <MedlineCitation Status="MEDLINE" Owner="NLM">
+      <PMID Version="1">9000009</PMID>
+      <Article>
+        <Journal>
+          <JournalIssue><PubDate><Year>2022</Year><Month>Jan</Month></PubDate></JournalIssue>
+          <Title>Sample Journal of Rehabilitation</Title>
+        </Journal>
+        <ArticleTitle>Design considerations for glucose monitoring in clinical practice.</ArticleTitle>
+        <Abstract>
+          <AbstractText>SYNTHETIC DEMO TEXT, NOT A REAL ARTICLE. This invented abstract discusses diabetes, glucose monitoring and diabetes mellitus, type 2. We describe an analysis of 225 fictional participants and report that insulin was associated with improved outcomes.</AbstractText>
+        </Abstract>
+        <AuthorList>
+          <Author><LastName>Novak</LastName><ForeName>Jan</ForeName><Initials>J</Initials></Author>
+          <Author><LastName>Haddad</LastName><ForeName>Layla</ForeName><Initials>L</Initials></Author>
+          <Author><LastName>Lindqvist</LastName><ForeName>Sara</ForeName><Initials>S</Initials></Author>
+        </AuthorList>
+      </Article>
+      <MeshHeadingList>
+        <MeshHeading><DescriptorName>Diabetes Mellitus, Type 2</DescriptorName></MeshHeading>
+        <MeshHeading><DescriptorName>Insulin</DescriptorName></MeshHeading>
+      </MeshHeadingList>
+    </MedlineCitation>
+    <PubmedData>
+      <ArticleIdList><ArticleId IdType="pubmed">9000009</ArticleId><ArticleId IdType="doi">10.0000/synthetic.9000009</ArticleId></ArticleIdList>
+    </PubmedData>
+  </PubmedArticle>
+  <PubmedArticle>
+    <MedlineCitation Status="MEDLINE" Owner="NLM">
+      <PMID Version="1">9000010</PMID>
+      <Article>
+        <Journal>
+          <JournalIssue><PubDate><Year>2018</Year><Month>Jan</Month></PubDate></JournalIssue>
+          <Title>Journal of Synthetic Biomechanics</Title>
+        </Journal>
+        <ArticleTitle>Comparative analysis of immunotherapy approaches for checkpoint inhibitors.</ArticleTitle>
+        <Abstract>
+          <AbstractText>SYNTHETIC DEMO TEXT, NOT A REAL ARTICLE. This invented abstract discusses cancer, checkpoint inhibitors and immunotherapy. We describe an analysis of 334 fictional participants and report that neoplasms was associated with improved outcomes.</AbstractText>
+        </Abstract>
+        <AuthorList>
+          <Author><LastName>Tanaka</LastName><ForeName>Hiro</ForeName><Initials>H</Initials></Author>
+          <Author><LastName>Novak</LastName><ForeName>Jan</ForeName><Initials>J</Initials></Author>
+          <Author><LastName>Okafor</LastName><ForeName>Chidi</ForeName><Initials>C</Initials></Author>
+        </AuthorList>
+      </Article>
+      <MeshHeadingList>
+        <MeshHeading><DescriptorName>Immunotherapy</DescriptorName></MeshHeading>
+        <MeshHeading><DescriptorName>Neoplasms</DescriptorName></MeshHeading>
+      </MeshHeadingList>
+    </MedlineCitation>
+    <PubmedData>
+      <ArticleIdList><ArticleId IdType="pubmed">9000010</ArticleId><ArticleId IdType="doi">10.0000/synthetic.9000010</ArticleId></ArticleIdList>
+    </PubmedData>
+  </PubmedArticle>
+  <PubmedArticle>
+    <MedlineCitation Status="MEDLINE" Owner="NLM">
+      <PMID Version="1">9000011</PMID>
+      <Article>
+        <Journal>
+          <JournalIssue><PubDate><Year>2022</Year><Month>Jan</Month></PubDate></JournalIssue>
+          <Title>Demo Clinical Medicine</Title>
+        </Journal>
+        <ArticleTitle>Comparative analysis of prosthetic joint infection approaches for knee replacement.</ArticleTitle>
+        <Abstract>
+          <AbstractText>SYNTHETIC DEMO TEXT, NOT A REAL ARTICLE. This invented abstract discusses prosthetic joint, knee replacement and prosthetic joint infection. We describe an analysis of 351 fictional participants and report that arthroplasty, replacement, knee was associated with improved outcomes.</AbstractText>
+        </Abstract>
+        <AuthorList>
+          <Author><LastName>Haddad</LastName><ForeName>Layla</ForeName><Initials>L</Initials></Author>
+          <Author><LastName>Lindqvist</LastName><ForeName>Sara</ForeName><Initials>S</Initials></Author>
+          <Author><LastName>Patel</LastName><ForeName>Anika</ForeName><Initials>A</Initials></Author>
+        </AuthorList>
+      </Article>
+      <MeshHeadingList>
+        <MeshHeading><DescriptorName>Prosthetic Joint Infection</DescriptorName></MeshHeading>
+        <MeshHeading><DescriptorName>Arthroplasty, Replacement, Knee</DescriptorName></MeshHeading>
+      </MeshHeadingList>
+    </MedlineCitation>
+    <PubmedData>
+      <ArticleIdList><ArticleId IdType="pubmed">9000011</ArticleId><ArticleId IdType="doi">10.0000/synthetic.9000011</ArticleId></ArticleIdList>
+    </PubmedData>
+  </PubmedArticle>
+  <PubmedArticle>
+    <MedlineCitation Status="MEDLINE" Owner="NLM">
+      <PMID Version="1">9000012</PMID>
+      <Article>
+        <Journal>
+          <JournalIssue><PubDate><Year>2017</Year><Month>Jan</Month></PubDate></JournalIssue>
+          <Title>Demo Clinical Medicine</Title>
+        </Journal>
+        <ArticleTitle>Analysis of titanium alloy implant outcomes in a synthetic cohort.</ArticleTitle>
+        <Abstract>
+          <AbstractText>SYNTHETIC DEMO TEXT, NOT A REAL ARTICLE. This invented abstract discusses prosthetic joint, titanium alloy implant and prosthesis design. We describe an analysis of 117 fictional participants and report that biocompatible materials was associated with improved outcomes.</AbstractText>
+        </Abstract>
+        <AuthorList>
+          <Author><LastName>Okafor</LastName><ForeName>Chidi</ForeName><Initials>C</Initials></Author>
+          <Author><LastName>Mendes</LastName><ForeName>Luis</ForeName><Initials>L</Initials></Author>
+          <Author><LastName>Tanaka</LastName><ForeName>Hiro</ForeName><Initials>H</Initials></Author>
+        </AuthorList>
+      </Article>
+      <MeshHeadingList>
+        <MeshHeading><DescriptorName>Prosthesis Design</DescriptorName></MeshHeading>
+        <MeshHeading><DescriptorName>Biocompatible Materials</DescriptorName></MeshHeading>
+      </MeshHeadingList>
+    </MedlineCitation>
+    <PubmedData>
+      <ArticleIdList><ArticleId IdType="pubmed">9000012</ArticleId><ArticleId IdType="doi">10.0000/synthetic.9000012</ArticleId></ArticleIdList>
+    </PubmedData>
+  </PubmedArticle>
+  <PubmedArticle>
+    <MedlineCitation Status="MEDLINE" Owner="NLM">
+      <PMID Version="1">9000013</PMID>
+      <Article>
+        <Journal>
+          <JournalIssue><PubDate><Year>2016</Year><Month>Jan</Month></PubDate></JournalIssue>
+          <Title>Demo Clinical Medicine</Title>
+        </Journal>
+        <ArticleTitle>Long-term follow-up of myoelectric control patients: a demonstration dataset.</ArticleTitle>
+        <Abstract>
+          <AbstractText>SYNTHETIC DEMO TEXT, NOT A REAL ARTICLE. This invented abstract discusses prosthetic limb, myoelectric control and artificial limbs. We describe an analysis of 214 fictional participants and report that amputees was associated with improved outcomes.</AbstractText>
+        </Abstract>
+        <AuthorList>
+          <Author><LastName>Novak</LastName><ForeName>Jan</ForeName><Initials>J</Initials></Author>
+          <Author><LastName>Rivera</LastName><ForeName>Ana</ForeName><Initials>A</Initials></Author>
+          <Author><LastName>Patel</LastName><ForeName>Anika</ForeName><Initials>A</Initials></Author>
+        </AuthorList>
+      </Article>
+      <MeshHeadingList>
+        <MeshHeading><DescriptorName>Artificial Limbs</DescriptorName></MeshHeading>
+        <MeshHeading><DescriptorName>Amputees</DescriptorName></MeshHeading>
+      </MeshHeadingList>
+    </MedlineCitation>
+    <PubmedData>
+      <ArticleIdList><ArticleId IdType="pubmed">9000013</ArticleId><ArticleId IdType="doi">10.0000/synthetic.9000013</ArticleId></ArticleIdList>
+    </PubmedData>
+  </PubmedArticle>
+  <PubmedArticle>
+    <MedlineCitation Status="MEDLINE" Owner="NLM">
+      <PMID Version="1">9000014</PMID>
+      <Article>
+        <Journal>
+          <JournalIssue><PubDate><Year>2016</Year><Month>Jan</Month></PubDate></JournalIssue>
+          <Title>Journal of Synthetic Biomechanics</Title>
+        </Journal>
+        <ArticleTitle>Comparative analysis of diabetes mellitus, type 2 approaches for glucose monitoring.</ArticleTitle>
+        <Abstract>
+          <AbstractText>SYNTHETIC DEMO TEXT, NOT A REAL ARTICLE. This invented abstract discusses diabetes, glucose monitoring and diabetes mellitus, type 2. We describe an analysis of 178 fictional participants and report that insulin was associated with improved outcomes.</AbstractText>
+        </Abstract>
+        <AuthorList>
+          <Author><LastName>Haddad</LastName><ForeName>Layla</ForeName><Initials>L</Initials></Author>
+          <Author><LastName>Mendes</LastName><ForeName>Luis</ForeName><Initials>L</Initials></Author>
+          <Author><LastName>Tanaka</LastName><ForeName>Hiro</ForeName><Initials>H</Initials></Author>
+        </AuthorList>
+      </Article>
+      <MeshHeadingList>
+        <MeshHeading><DescriptorName>Diabetes Mellitus, Type 2</DescriptorName></MeshHeading>
+        <MeshHeading><DescriptorName>Insulin</DescriptorName></MeshHeading>
+      </MeshHeadingList>
+    </MedlineCitation>
+    <PubmedData>
+      <ArticleIdList><ArticleId IdType="pubmed">9000014</ArticleId><ArticleId IdType="doi">10.0000/synthetic.9000014</ArticleId></ArticleIdList>
+    </PubmedData>
+  </PubmedArticle>
+  <PubmedArticle>
+    <MedlineCitation Status="MEDLINE" Owner="NLM">
+      <PMID Version="1">9000015</PMID>
+      <Article>
+        <Journal>
+          <JournalIssue><PubDate><Year>2019</Year><Month>Jan</Month></PubDate></JournalIssue>
+          <Title>Sample Journal of Rehabilitation</Title>
+        </Journal>
+        <ArticleTitle>Long-term follow-up of checkpoint inhibitors patients: a demonstration dataset.</ArticleTitle>
+        <Abstract>
+          <AbstractText>SYNTHETIC DEMO TEXT, NOT A REAL ARTICLE. This invented abstract discusses cancer, checkpoint inhibitors and immunotherapy. We describe an analysis of 185 fictional participants and report that neoplasms was associated with improved outcomes.</AbstractText>
+        </Abstract>
+        <AuthorList>
+          <Author><LastName>Okafor</LastName><ForeName>Chidi</ForeName><Initials>C</Initials></Author>
+          <Author><LastName>Rivera</LastName><ForeName>Ana</ForeName><Initials>A</Initials></Author>
+          <Author><LastName>Patel</LastName><ForeName>Anika</ForeName><Initials>A</Initials></Author>
+        </AuthorList>
+      </Article>
+      <MeshHeadingList>
+        <MeshHeading><DescriptorName>Immunotherapy</DescriptorName></MeshHeading>
+        <MeshHeading><DescriptorName>Neoplasms</DescriptorName></MeshHeading>
+      </MeshHeadingList>
+    </MedlineCitation>
+    <PubmedData>
+      <ArticleIdList><ArticleId IdType="pubmed">9000015</ArticleId><ArticleId IdType="doi">10.0000/synthetic.9000015</ArticleId></ArticleIdList>
+    </PubmedData>
+  </PubmedArticle>
+  <PubmedArticle>
+    <MedlineCitation Status="MEDLINE" Owner="NLM">
+      <PMID Version="1">9000016</PMID>
+      <Article>
+        <Journal>
+          <JournalIssue><PubDate><Year>2020</Year><Month>Jan</Month></PubDate></JournalIssue>
+          <Title>Example Orthopaedic Reports</Title>
+        </Journal>
+        <ArticleTitle>Long-term follow-up of knee replacement patients: a demonstration dataset.</ArticleTitle>
+        <Abstract>
+          <AbstractText>SYNTHETIC DEMO TEXT, NOT A REAL ARTICLE. This invented abstract discusses prosthetic joint, knee replacement and prosthetic joint infection. We describe an analysis of 352 fictional participants and report that arthroplasty, replacement, knee was associated with improved outcomes.</AbstractText>
+        </Abstract>
+        <AuthorList>
+          <Author><LastName>Patel</LastName><ForeName>Anika</ForeName><Initials>A</Initials></Author>
+          <Author><LastName>Rivera</LastName><ForeName>Ana</ForeName><Initials>A</Initials></Author>
+          <Author><LastName>Tanaka</LastName><ForeName>Hiro</ForeName><Initials>H</Initials></Author>
+        </AuthorList>
+      </Article>
+      <MeshHeadingList>
+        <MeshHeading><DescriptorName>Prosthetic Joint Infection</DescriptorName></MeshHeading>
+        <MeshHeading><DescriptorName>Arthroplasty, Replacement, Knee</DescriptorName></MeshHeading>
+      </MeshHeadingList>
+    </MedlineCitation>
+    <PubmedData>
+      <ArticleIdList><ArticleId IdType="pubmed">9000016</ArticleId><ArticleId IdType="doi">10.0000/synthetic.9000016</ArticleId></ArticleIdList>
+    </PubmedData>
+  </PubmedArticle>
+  <PubmedArticle>
+    <MedlineCitation Status="MEDLINE" Owner="NLM">
+      <PMID Version="1">9000017</PMID>
+      <Article>
+        <Journal>
+          <JournalIssue><PubDate><Year>2019</Year><Month>Jan</Month></PubDate></JournalIssue>
+          <Title>Example Orthopaedic Reports</Title>
+        </Journal>
+        <ArticleTitle>Analysis of titanium alloy implant outcomes in a synthetic cohort.</ArticleTitle>
+        <Abstract>
+          <AbstractText>SYNTHETIC DEMO TEXT, NOT A REAL ARTICLE. This invented abstract discusses prosthetic joint, titanium alloy implant and prosthesis design. We describe an analysis of 166 fictional participants and report that biocompatible materials was associated with improved outcomes.</AbstractText>
+        </Abstract>
+        <AuthorList>
+          <Author><LastName>Haddad</LastName><ForeName>Layla</ForeName><Initials>L</Initials></Author>
+          <Author><LastName>Rivera</LastName><ForeName>Ana</ForeName><Initials>A</Initials></Author>
+          <Author><LastName>Okafor</LastName><ForeName>Chidi</ForeName><Initials>C</Initials></Author>
+        </AuthorList>
+      </Article>
+      <MeshHeadingList>
+        <MeshHeading><DescriptorName>Prosthesis Design</DescriptorName></MeshHeading>
+        <MeshHeading><DescriptorName>Biocompatible Materials</DescriptorName></MeshHeading>
+      </MeshHeadingList>
+    </MedlineCitation>
+    <PubmedData>
+      <ArticleIdList><ArticleId IdType="pubmed">9000017</ArticleId><ArticleId IdType="doi">10.0000/synthetic.9000017</ArticleId></ArticleIdList>
+    </PubmedData>
+  </PubmedArticle>
+  <PubmedArticle>
+    <MedlineCitation Status="MEDLINE" Owner="NLM">
+      <PMID Version="1">9000018</PMID>
+      <Article>
+        <Journal>
+          <JournalIssue><PubDate><Year>2016</Year><Month>Jan</Month></PubDate></JournalIssue>
+          <Title>Example Orthopaedic Reports</Title>
+        </Journal>
+        <ArticleTitle>Long-term follow-up of myoelectric control patients: a demonstration dataset.</ArticleTitle>
+        <Abstract>
+          <AbstractText>SYNTHETIC DEMO TEXT, NOT A REAL ARTICLE. This invented abstract discusses prosthetic limb, myoelectric control and artificial limbs. We describe an analysis of 269 fictional participants and report that amputees was associated with improved outcomes.</AbstractText>
+        </Abstract>
+        <AuthorList>
+          <Author><LastName>Novak</LastName><ForeName>Jan</ForeName><Initials>J</Initials></Author>
+          <Author><LastName>Haddad</LastName><ForeName>Layla</ForeName><Initials>L</Initials></Author>
+          <Author><LastName>Tanaka</LastName><ForeName>Hiro</ForeName><Initials>H</Initials></Author>
+        </AuthorList>
+      </Article>
+      <MeshHeadingList>
+        <MeshHeading><DescriptorName>Artificial Limbs</DescriptorName></MeshHeading>
+        <MeshHeading><DescriptorName>Amputees</DescriptorName></MeshHeading>
+      </MeshHeadingList>
+    </MedlineCitation>
+    <PubmedData>
+      <ArticleIdList><ArticleId IdType="pubmed">9000018</ArticleId><ArticleId IdType="doi">10.0000/synthetic.9000018</ArticleId></ArticleIdList>
+    </PubmedData>
+  </PubmedArticle>
+  <PubmedArticle>
+    <MedlineCitation Status="MEDLINE" Owner="NLM">
+      <PMID Version="1">9000019</PMID>
+      <Article>
+        <Journal>
+          <JournalIssue><PubDate><Year>2023</Year><Month>Jan</Month></PubDate></JournalIssue>
+          <Title>Demo Clinical Medicine</Title>
+        </Journal>
+        <ArticleTitle>Long-term follow-up of glucose monitoring patients: a demonstration dataset.</ArticleTitle>
+        <Abstract>
+          <AbstractText>SYNTHETIC DEMO TEXT, NOT A REAL ARTICLE. This invented abstract discusses diabetes, glucose monitoring and diabetes mellitus, type 2. We describe an analysis of 252 fictional participants and report that insulin was associated with improved outcomes.</AbstractText>
+        </Abstract>
+        <AuthorList>
+          <Author><LastName>Mendes</LastName><ForeName>Luis</ForeName><Initials>L</Initials></Author>
+          <Author><LastName>Okafor</LastName><ForeName>Chidi</ForeName><Initials>C</Initials></Author>
+          <Author><LastName>Tanaka</LastName><ForeName>Hiro</ForeName><Initials>H</Initials></Author>
+        </AuthorList>
+      </Article>
+      <MeshHeadingList>
+        <MeshHeading><DescriptorName>Diabetes Mellitus, Type 2</DescriptorName></MeshHeading>
+        <MeshHeading><DescriptorName>Insulin</DescriptorName></MeshHeading>
+      </MeshHeadingList>
+    </MedlineCitation>
+    <PubmedData>
+      <ArticleIdList><ArticleId IdType="pubmed">9000019</ArticleId><ArticleId IdType="doi">10.0000/synthetic.9000019</ArticleId></ArticleIdList>
+    </PubmedData>
+  </PubmedArticle>
+  <PubmedArticle>
+    <MedlineCitation Status="MEDLINE" Owner="NLM">
+      <PMID Version="1">9000020</PMID>
+      <Article>
+        <Journal>
+          <JournalIssue><PubDate><Year>2016</Year><Month>Jan</Month></PubDate></JournalIssue>
+          <Title>Example Orthopaedic Reports</Title>
+        </Journal>
+        <ArticleTitle>Comparative analysis of immunotherapy approaches for checkpoint inhibitors.</ArticleTitle>
+        <Abstract>
+          <AbstractText>SYNTHETIC DEMO TEXT, NOT A REAL ARTICLE. This invented abstract discusses cancer, checkpoint inhibitors and immunotherapy. We describe an analysis of 117 fictional participants and report that neoplasms was associated with improved outcomes.</AbstractText>
+        </Abstract>
+        <AuthorList>
+          <Author><LastName>Novak</LastName><ForeName>Jan</ForeName><Initials>J</Initials></Author>
+          <Author><LastName>Okafor</LastName><ForeName>Chidi</ForeName><Initials>C</Initials></Author>
+          <Author><LastName>Haddad</LastName><ForeName>Layla</ForeName><Initials>L</Initials></Author>
+        </AuthorList>
+      </Article>
+      <MeshHeadingList>
+        <MeshHeading><DescriptorName>Immunotherapy</DescriptorName></MeshHeading>
+        <MeshHeading><DescriptorName>Neoplasms</DescriptorName></MeshHeading>
+      </MeshHeadingList>
+    </MedlineCitation>
+    <PubmedData>
+      <ArticleIdList><ArticleId IdType="pubmed">9000020</ArticleId><ArticleId IdType="doi">10.0000/synthetic.9000020</ArticleId></ArticleIdList>
+    </PubmedData>
+  </PubmedArticle>
+  <PubmedArticle>
+    <MedlineCitation Status="MEDLINE" Owner="NLM">
+      <PMID Version="1">9000021</PMID>
+      <Article>
+        <Journal>
+          <JournalIssue><PubDate><Year>2024</Year><Month>Jan</Month></PubDate></JournalIssue>
+          <Title>Example Orthopaedic Reports</Title>
+        </Journal>
+        <ArticleTitle>A review of knee replacement and prosthetic joint infection: an illustrative study.</ArticleTitle>
+        <Abstract>
+          <AbstractText>SYNTHETIC DEMO TEXT, NOT A REAL ARTICLE. This invented abstract discusses prosthetic joint, knee replacement and prosthetic joint infection. We describe an analysis of 174 fictional participants and report that arthroplasty, replacement, knee was associated with improved outcomes.</AbstractText>
+        </Abstract>
+        <AuthorList>
+          <Author><LastName>Tanaka</LastName><ForeName>Hiro</ForeName><Initials>H</Initials></Author>
+          <Author><LastName>Rivera</LastName><ForeName>Ana</ForeName><Initials>A</Initials></Author>
+          <Author><LastName>Haddad</LastName><ForeName>Layla</ForeName><Initials>L</Initials></Author>
+        </AuthorList>
+      </Article>
+      <MeshHeadingList>
+        <MeshHeading><DescriptorName>Prosthetic Joint Infection</DescriptorName></MeshHeading>
+        <MeshHeading><DescriptorName>Arthroplasty, Replacement, Knee</DescriptorName></MeshHeading>
+      </MeshHeadingList>
+    </MedlineCitation>
+    <PubmedData>
+      <ArticleIdList><ArticleId IdType="pubmed">9000021</ArticleId><ArticleId IdType="doi">10.0000/synthetic.9000021</ArticleId></ArticleIdList>
+    </PubmedData>
+  </PubmedArticle>
+  <PubmedArticle>
+    <MedlineCitation Status="MEDLINE" Owner="NLM">
+      <PMID Version="1">9000022</PMID>
+      <Article>
+        <Journal>
+          <JournalIssue><PubDate><Year>2023</Year><Month>Jan</Month></PubDate></JournalIssue>
+          <Title>Demo Clinical Medicine</Title>
+        </Journal>
+        <ArticleTitle>Comparative analysis of prosthesis design approaches for titanium alloy implant.</ArticleTitle>
+        <Abstract>
+          <AbstractText>SYNTHETIC DEMO TEXT, NOT A REAL ARTICLE. This invented abstract discusses prosthetic joint, titanium alloy implant and prosthesis design. We describe an analysis of 352 fictional participants and report that biocompatible materials was associated with improved outcomes.</AbstractText>
+        </Abstract>
+        <AuthorList>
+          <Author><LastName>Rivera</LastName><ForeName>Ana</ForeName><Initials>A</Initials></Author>
+          <Author><LastName>Okafor</LastName><ForeName>Chidi</ForeName><Initials>C</Initials></Author>
+          <Author><LastName>Tanaka</LastName><ForeName>Hiro</ForeName><Initials>H</Initials></Author>
+        </AuthorList>
+      </Article>
+      <MeshHeadingList>
+        <MeshHeading><DescriptorName>Prosthesis Design</DescriptorName></MeshHeading>
+        <MeshHeading><DescriptorName>Biocompatible Materials</DescriptorName></MeshHeading>
+      </MeshHeadingList>
+    </MedlineCitation>
+    <PubmedData>
+      <ArticleIdList><ArticleId IdType="pubmed">9000022</ArticleId><ArticleId IdType="doi">10.0000/synthetic.9000022</ArticleId></ArticleIdList>
+    </PubmedData>
+  </PubmedArticle>
+  <PubmedArticle>
+    <MedlineCitation Status="MEDLINE" Owner="NLM">
+      <PMID Version="1">9000023</PMID>
+      <Article>
+        <Journal>
+          <JournalIssue><PubDate><Year>2023</Year><Month>Jan</Month></PubDate></JournalIssue>
+          <Title>Journal of Synthetic Biomechanics</Title>
+        </Journal>
+        <ArticleTitle>Design considerations for myoelectric control in clinical practice.</ArticleTitle>
+        <Abstract>
+          <AbstractText>SYNTHETIC DEMO TEXT, NOT A REAL ARTICLE. This invented abstract discusses prosthetic limb, myoelectric control and artificial limbs. We describe an analysis of 273 fictional participants and report that amputees was associated with improved outcomes.</AbstractText>
+        </Abstract>
+        <AuthorList>
+          <Author><LastName>Patel</LastName><ForeName>Anika</ForeName><Initials>A</Initials></Author>
+          <Author><LastName>Okafor</LastName><ForeName>Chidi</ForeName><Initials>C</Initials></Author>
+          <Author><LastName>Haddad</LastName><ForeName>Layla</ForeName><Initials>L</Initials></Author>
+        </AuthorList>
+      </Article>
+      <MeshHeadingList>
+        <MeshHeading><DescriptorName>Artificial Limbs</DescriptorName></MeshHeading>
+        <MeshHeading><DescriptorName>Amputees</DescriptorName></MeshHeading>
+      </MeshHeadingList>
+    </MedlineCitation>
+    <PubmedData>
+      <ArticleIdList><ArticleId IdType="pubmed">9000023</ArticleId><ArticleId IdType="doi">10.0000/synthetic.9000023</ArticleId></ArticleIdList>
+    </PubmedData>
+  </PubmedArticle>
+  <PubmedArticle>
+    <MedlineCitation Status="MEDLINE" Owner="NLM">
+      <PMID Version="1">9000024</PMID>
+      <Article>
+        <Journal>
+          <JournalIssue><PubDate><Year>2021</Year><Month>Jan</Month></PubDate></JournalIssue>
+          <Title>Journal of Synthetic Biomechanics</Title>
+        </Journal>
+        <ArticleTitle>Design considerations for glucose monitoring in clinical practice.</ArticleTitle>
+        <Abstract>
+          <AbstractText>SYNTHETIC DEMO TEXT, NOT A REAL ARTICLE. This invented abstract discusses diabetes, glucose monitoring and diabetes mellitus, type 2. We describe an analysis of 286 fictional participants and report that insulin was associated with improved outcomes.</AbstractText>
+        </Abstract>
+        <AuthorList>
+          <Author><LastName>Novak</LastName><ForeName>Jan</ForeName><Initials>J</Initials></Author>
+          <Author><LastName>Tanaka</LastName><ForeName>Hiro</ForeName><Initials>H</Initials></Author>
+          <Author><LastName>Haddad</LastName><ForeName>Layla</ForeName><Initials>L</Initials></Author>
+        </AuthorList>
+      </Article>
+      <MeshHeadingList>
+        <MeshHeading><DescriptorName>Diabetes Mellitus, Type 2</DescriptorName></MeshHeading>
+        <MeshHeading><DescriptorName>Insulin</DescriptorName></MeshHeading>
+      </MeshHeadingList>
+    </MedlineCitation>
+    <PubmedData>
+      <ArticleIdList><ArticleId IdType="pubmed">9000024</ArticleId><ArticleId IdType="doi">10.0000/synthetic.9000024</ArticleId></ArticleIdList>
+    </PubmedData>
+  </PubmedArticle>
+  <PubmedArticle>
+    <MedlineCitation Status="MEDLINE" Owner="NLM">
+      <PMID Version="1">9000025</PMID>
+      <Article>
+        <Journal>
+          <JournalIssue><PubDate><Year>2018</Year><Month>Jan</Month></PubDate></JournalIssue>
+          <Title>Sample Journal of Rehabilitation</Title>
+        </Journal>
+        <ArticleTitle>Long-term follow-up of checkpoint inhibitors patients: a demonstration dataset.</ArticleTitle>
+        <Abstract>
+          <AbstractText>SYNTHETIC DEMO TEXT, NOT A REAL ARTICLE. This invented abstract discusses cancer, checkpoint inhibitors and immunotherapy. We describe an analysis of 123 fictional participants and report that neoplasms was associated with improved outcomes.</AbstractText>
+        </Abstract>
+        <AuthorList>
+          <Author><LastName>Rivera</LastName><ForeName>Ana</ForeName><Initials>A</Initials></Author>
+          <Author><LastName>Okafor</LastName><ForeName>Chidi</ForeName><Initials>C</Initials></Author>
+          <Author><LastName>Haddad</LastName><ForeName>Layla</ForeName><Initials>L</Initials></Author>
+        </AuthorList>
+      </Article>
+      <MeshHeadingList>
+        <MeshHeading><DescriptorName>Immunotherapy</DescriptorName></MeshHeading>
+        <MeshHeading><DescriptorName>Neoplasms</DescriptorName></MeshHeading>
+      </MeshHeadingList>
+    </MedlineCitation>
+    <PubmedData>
+      <ArticleIdList><ArticleId IdType="pubmed">9000025</ArticleId><ArticleId IdType="doi">10.0000/synthetic.9000025</ArticleId></ArticleIdList>
+    </PubmedData>
+  </PubmedArticle>
+  <PubmedArticle>
+    <MedlineCitation Status="MEDLINE" Owner="NLM">
+      <PMID Version="1">9000026</PMID>
+      <Article>
+        <Journal>
+          <JournalIssue><PubDate><Year>2016</Year><Month>Jan</Month></PubDate></JournalIssue>
+          <Title>Journal of Synthetic Biomechanics</Title>
+        </Journal>
+        <ArticleTitle>Analysis of knee replacement outcomes in a synthetic cohort.</ArticleTitle>
+        <Abstract>
+          <AbstractText>SYNTHETIC DEMO TEXT, NOT A REAL ARTICLE. This invented abstract discusses prosthetic joint, knee replacement and prosthetic joint infection. We describe an analysis of 330 fictional participants and report that arthroplasty, replacement, knee was associated with improved outcomes.</AbstractText>
+        </Abstract>
+        <AuthorList>
+          <Author><LastName>Patel</LastName><ForeName>Anika</ForeName><Initials>A</Initials></Author>
+          <Author><LastName>Mendes</LastName><ForeName>Luis</ForeName><Initials>L</Initials></Author>
+          <Author><LastName>Rivera</LastName><ForeName>Ana</ForeName><Initials>A</Initials></Author>
+        </AuthorList>
+      </Article>
+      <MeshHeadingList>
+        <MeshHeading><DescriptorName>Prosthetic Joint Infection</DescriptorName></MeshHeading>
+        <MeshHeading><DescriptorName>Arthroplasty, Replacement, Knee</DescriptorName></MeshHeading>
+      </MeshHeadingList>
+    </MedlineCitation>
+    <PubmedData>
+      <ArticleIdList><ArticleId IdType="pubmed">9000026</ArticleId><ArticleId IdType="doi">10.0000/synthetic.9000026</ArticleId></ArticleIdList>
+    </PubmedData>
+  </PubmedArticle>
+  <PubmedArticle>
+    <MedlineCitation Status="MEDLINE" Owner="NLM">
+      <PMID Version="1">9000027</PMID>
+      <Article>
+        <Journal>
+          <JournalIssue><PubDate><Year>2015</Year><Month>Jan</Month></PubDate></JournalIssue>
+          <Title>Journal of Synthetic Biomechanics</Title>
+        </Journal>
+        <ArticleTitle>A review of titanium alloy implant and prosthesis design: an illustrative study.</ArticleTitle>
+        <Abstract>
+          <AbstractText>SYNTHETIC DEMO TEXT, NOT A REAL ARTICLE. This invented abstract discusses prosthetic joint, titanium alloy implant and prosthesis design. We describe an analysis of 146 fictional participants and report that biocompatible materials was associated with improved outcomes.</AbstractText>
+        </Abstract>
+        <AuthorList>
+          <Author><LastName>Okafor</LastName><ForeName>Chidi</ForeName><Initials>C</Initials></Author>
+          <Author><LastName>Lindqvist</LastName><ForeName>Sara</ForeName><Initials>S</Initials></Author>
+          <Author><LastName>Mendes</LastName><ForeName>Luis</ForeName><Initials>L</Initials></Author>
+        </AuthorList>
+      </Article>
+      <MeshHeadingList>
+        <MeshHeading><DescriptorName>Prosthesis Design</DescriptorName></MeshHeading>
+        <MeshHeading><DescriptorName>Biocompatible Materials</DescriptorName></MeshHeading>
+      </MeshHeadingList>
+    </MedlineCitation>
+    <PubmedData>
+      <ArticleIdList><ArticleId IdType="pubmed">9000027</ArticleId><ArticleId IdType="doi">10.0000/synthetic.9000027</ArticleId></ArticleIdList>
+    </PubmedData>
+  </PubmedArticle>
+  <PubmedArticle>
+    <MedlineCitation Status="MEDLINE" Owner="NLM">
+      <PMID Version="1">9000028</PMID>
+      <Article>
+        <Journal>
+          <JournalIssue><PubDate><Year>2019</Year><Month>Jan</Month></PubDate></JournalIssue>
+          <Title>Demo Clinical Medicine</Title>
+        </Journal>
+        <ArticleTitle>Design considerations for myoelectric control in clinical practice.</ArticleTitle>
+        <Abstract>
+          <AbstractText>SYNTHETIC DEMO TEXT, NOT A REAL ARTICLE. This invented abstract discusses prosthetic limb, myoelectric control and artificial limbs. We describe an analysis of 348 fictional participants and report that amputees was associated with improved outcomes.</AbstractText>
+        </Abstract>
+        <AuthorList>
+          <Author><LastName>Novak</LastName><ForeName>Jan</ForeName><Initials>J</Initials></Author>
+          <Author><LastName>Okafor</LastName><ForeName>Chidi</ForeName><Initials>C</Initials></Author>
+          <Author><LastName>Patel</LastName><ForeName>Anika</ForeName><Initials>A</Initials></Author>
+        </AuthorList>
+      </Article>
+      <MeshHeadingList>
+        <MeshHeading><DescriptorName>Artificial Limbs</DescriptorName></MeshHeading>
+        <MeshHeading><DescriptorName>Amputees</DescriptorName></MeshHeading>
+      </MeshHeadingList>
+    </MedlineCitation>
+    <PubmedData>
+      <ArticleIdList><ArticleId IdType="pubmed">9000028</ArticleId><ArticleId IdType="doi">10.0000/synthetic.9000028</ArticleId></ArticleIdList>
+    </PubmedData>
+  </PubmedArticle>
+  <PubmedArticle>
+    <MedlineCitation Status="MEDLINE" Owner="NLM">
+      <PMID Version="1">9000029</PMID>
+      <Article>
+        <Journal>
+          <JournalIssue><PubDate><Year>2022</Year><Month>Jan</Month></PubDate></JournalIssue>
+          <Title>Sample Journal of Rehabilitation</Title>
+        </Journal>
+        <ArticleTitle>Comparative analysis of diabetes mellitus, type 2 approaches for glucose monitoring.</ArticleTitle>
+        <Abstract>
+          <AbstractText>SYNTHETIC DEMO TEXT, NOT A REAL ARTICLE. This invented abstract discusses diabetes, glucose monitoring and diabetes mellitus, type 2. We describe an analysis of 285 fictional participants and report that insulin was associated with improved outcomes.</AbstractText>
+        </Abstract>
+        <AuthorList>
+          <Author><LastName>Haddad</LastName><ForeName>Layla</ForeName><Initials>L</Initials></Author>
+          <Author><LastName>Rivera</LastName><ForeName>Ana</ForeName><Initials>A</Initials></Author>
+          <Author><LastName>Novak</LastName><ForeName>Jan</ForeName><Initials>J</Initials></Author>
+        </AuthorList>
+      </Article>
+      <MeshHeadingList>
+        <MeshHeading><DescriptorName>Diabetes Mellitus, Type 2</DescriptorName></MeshHeading>
+        <MeshHeading><DescriptorName>Insulin</DescriptorName></MeshHeading>
+      </MeshHeadingList>
+    </MedlineCitation>
+    <PubmedData>
+      <ArticleIdList><ArticleId IdType="pubmed">9000029</ArticleId><ArticleId IdType="doi">10.0000/synthetic.9000029</ArticleId></ArticleIdList>
+    </PubmedData>
+  </PubmedArticle>
+  <PubmedArticle>
+    <MedlineCitation Status="MEDLINE" Owner="NLM">
+      <PMID Version="1">9000030</PMID>
+      <Article>
+        <Journal>
+          <JournalIssue><PubDate><Year>2016</Year><Month>Jan</Month></PubDate></JournalIssue>
+          <Title>Demo Clinical Medicine</Title>
+        </Journal>
+        <ArticleTitle>Long-term follow-up of checkpoint inhibitors patients: a demonstration dataset.</ArticleTitle>
+        <Abstract>
+          <AbstractText>SYNTHETIC DEMO TEXT, NOT A REAL ARTICLE. This invented abstract discusses cancer, checkpoint inhibitors and immunotherapy. We describe an analysis of 175 fictional participants and report that neoplasms was associated with improved outcomes.</AbstractText>
+        </Abstract>
+        <AuthorList>
+          <Author><LastName>Mendes</LastName><ForeName>Luis</ForeName><Initials>L</Initials></Author>
+          <Author><LastName>Rivera</LastName><ForeName>Ana</ForeName><Initials>A</Initials></Author>
+          <Author><LastName>Okafor</LastName><ForeName>Chidi</ForeName><Initials>C</Initials></Author>
+        </AuthorList>
+      </Article>
+      <MeshHeadingList>
+        <MeshHeading><DescriptorName>Immunotherapy</DescriptorName></MeshHeading>
+        <MeshHeading><DescriptorName>Neoplasms</DescriptorName></MeshHeading>
+      </MeshHeadingList>
+    </MedlineCitation>
+    <PubmedData>
+      <ArticleIdList><ArticleId IdType="pubmed">9000030</ArticleId><ArticleId IdType="doi">10.0000/synthetic.9000030</ArticleId></ArticleIdList>
+    </PubmedData>
+  </PubmedArticle>
+</PubmedArticleSet>

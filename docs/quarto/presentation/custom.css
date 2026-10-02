@@ -1,10 +1,112 @@
 /* Custom CSS for CuraLit Presentation */
 
-/* Enhanced callout boxes */
-.callout {
+/* ==========================================================
+   TEXT SIZE KNOBS - edit the values below to resize text.
+   Sizes with "em" are relative to the base size (.reveal).
+   ========================================================== */
+
+/* BASE TEXT SIZE: main body text. Everything with "em" scales from this.
+   Try 22px (small) to 32px (large). */
+.reveal {
+  font-size: 26px;
+}
+
+/* Slide title (the "##" heading on each slide) */
+.reveal h2 {
+  font-size: 1.5em;
+  color: #424242;
+  border-bottom: 3px solid #2196f3;
+  padding-bottom: 0.2em;
+  margin-bottom: 0.4em;
+}
+
+/* Section divider title (the "#" heading) */
+.reveal h1 {
+  font-size: 2em;
+  color: #1976d2;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Sub-headings inside a slide ("###") */
+.reveal h3 {
+  font-size: 1.1em;
+  color: #616161;
+}
+
+/* Bullet and numbered lists: size and spacing */
+.reveal ul,
+.reveal ol {
+  font-size: 1em;       /* text size of list items */
+  line-height: 1.35;    /* space between lines */
+}
+
+.reveal li {
+  margin: 0.25em 0;     /* space between list items */
+}
+
+/* Paragraphs and block quotes */
+.reveal p,
+.reveal blockquote {
+  font-size: 1em;
+  line-height: 1.35;
+  margin: 0.4em 0;
+}
+
+/* Code blocks (commands) */
+.reveal pre {
+  font-size: 0.65em;    /* size of command text */
+  width: 100%;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  padding: 0.4em;
+  margin: 0.4em 0;
+  border-left: 3px solid #2196f3;
+  box-shadow: none;
+}
+
+.reveal pre code {
+  max-height: none;     /* keep long commands from scrolling inside the box */
+  padding: 0.2em 0.4em;
+}
+
+/* Inline code, like `curalit` */
+.reveal code {
+  font-family: 'Courier New', monospace;
+}
+
+.reveal :not(pre) > code {
+  font-size: 0.85em;
+  background-color: #f0f0f0;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+/* Tables */
+.reveal table {
+  font-size: 0.7em;     /* table text size */
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0.4em 0;
+}
+
+.reveal th {
+  background-color: #2196f3;
+  color: white;
+  padding: 6px 10px;
+  text-align: left;
+}
+
+.reveal td {
+  padding: 5px 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Callout boxes (tip / note / warning) */
+.reveal .callout {
+  font-size: 0.8em;     /* callout text size */
   border-radius: 8px;
-  padding: 1em;
-  margin: 1em 0;
+  padding: 0.3em 0.6em;
+  margin: 0.6em 0;
 }
 
 .callout-tip {
@@ -22,216 +124,45 @@
   border-left: 5px solid #ff9800;
 }
 
-/* Code blocks */
-pre {
-  background-color: #f5f5f5;
-  border-radius: 5px;
-  padding: 1em;
-  border-left: 3px solid #2196f3;
+/* Screenshots and charts: MAXIMUM IMAGE HEIGHT.
+   Lower this value if a picture pushes content off the slide. */
+.reveal .slides section img {
+  max-height: 420px;
+  max-width: 100%;
+  margin: 0.3em auto;
 }
 
-code {
-  background-color: #f0f0f0;
-  padding: 2px 6px;
-  border-radius: 3px;
-  font-family: 'Courier New', monospace;
-}
+/* Title slide */
+.reveal .title-slide h1.title { font-size: 2em; }     /* main title */
+.reveal .title-slide .subtitle { font-size: 1em; }    /* subtitle */
+.reveal .title-slide .author,
+.reveal .title-slide .date { font-size: 0.7em; }
 
-/* Tables */
-table {
-  border-collapse: collapse;
-  width: 100%;
-  margin: 1em 0;
-}
+/* Footer and slide number (bottom of slide) */
+.reveal .footer { font-size: 0.45em; }
+.reveal .slide-number { font-size: 0.6em; }
 
-th {
-  background-color: #2196f3;
-  color: white;
-  padding: 12px;
-  text-align: left;
-}
-
-td {
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-}
-
-tr:hover {
-  background-color: #f5f5f5;
-}
-
-/* Emphasis */
-.highlight {
-  background-color: #fff176;
-  padding: 2px 5px;
-  border-radius: 3px;
-}
-
-/* Lists */
-ul {
-  line-height: 1.8;
-}
-
-li {
-  margin: 0.5em 0;
-}
+/* ========================================================== */
 
 /* Columns */
 .columns {
   display: flex;
-  gap: 2em;
+  gap: 1.5em;
 }
 
 .column {
   flex: 1;
 }
 
-/* Custom backgrounds */
-.bg-blue {
-  background-color: #e3f2fd !important;
-}
-
-.bg-green {
-  background-color: #e8f5e9 !important;
-}
-
-.bg-yellow {
-  background-color: #fff9c4 !important;
-}
-
-.bg-orange {
-  background-color: #ffe0b2 !important;
-}
-
-/* Button-like elements */
-.btn {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #2196f3;
-  color: white;
-  border-radius: 5px;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.btn:hover {
-  background-color: #1976d2;
-}
-
-/* Icons and emoji */
-.emoji {
-  font-size: 1.5em;
-  vertical-align: middle;
-}
-
-/* Progress indicators */
-.progress {
-  background-color: #e0e0e0;
-  border-radius: 10px;
-  height: 20px;
-  overflow: hidden;
-  margin: 10px 0;
-}
-
-.progress-bar {
-  background-color: #4caf50;
-  height: 100%;
-  text-align: center;
-  color: white;
-  line-height: 20px;
-}
-
 /* Mermaid diagrams */
 .mermaid {
   background-color: white;
-  padding: 1em;
+  padding: 0.5em;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* Section headers */
-h1 {
-  color: #1976d2;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-}
-
-h2 {
-  color: #424242;
-  border-bottom: 3px solid #2196f3;
-  padding-bottom: 0.3em;
-}
-
-h3 {
-  color: #616161;
-}
-
-/* Incremental reveal styling */
-.fragment.fade-in {
-  opacity: 0;
-}
-
-.fragment.fade-in.visible {
-  opacity: 1;
-  transition: opacity 0.5s ease;
-}
-
-/* Custom slide backgrounds */
+/* Section divider slides */
 [data-background-color] {
-  padding: 2em;
-}
-
-/* Box styling */
-.box {
-  border: 2px solid #2196f3;
-  border-radius: 8px;
   padding: 1em;
-  margin: 1em 0;
-  background-color: white;
-}
-
-/* Centered content */
-.center {
-  text-align: center;
-}
-
-/* Large text */
-.large {
-  font-size: 1.5em;
-}
-
-.xlarge {
-  font-size: 2em;
-}
-
-/* Status indicators */
-.status-good {
-  color: #4caf50;
-  font-weight: bold;
-}
-
-.status-warning {
-  color: #ff9800;
-  font-weight: bold;
-}
-
-.status-error {
-  color: #f44336;
-  font-weight: bold;
-}
-
-/* Command output styling */
-.output {
-  background-color: #1e1e1e;
-  color: #00ff00;
-  padding: 1em;
-  border-radius: 5px;
-  font-family: 'Courier New', monospace;
-  overflow-x: auto;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .columns {
-    flex-direction: column;
-  }
 }

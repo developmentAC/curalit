@@ -24,6 +24,7 @@ Cargo.lock
 Modelfile
 !data/*.xml
 data/
+!sample_data/
 /data_small/
 
 # Python
