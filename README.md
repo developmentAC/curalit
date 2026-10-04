@@ -7,7 +7,7 @@
 [Oliver Bonham-Carter](https://www.oliverbonhamcarter.com/) · with development testing by Vincent Mametjanov
 
 * Email: obonhamcarter at allegheny.edu · [GitHub](https://github.com/developmentAC/curalit)
-* Email: vincent.mametjanov at gmail.com [GitHub](https://github.com/vincentmametjanov)
+* Email: vincent.mametjanov at gmail.com · [GitHub](https://github.com/vincentmametjanov)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Rust](https://img.shields.io/badge/rust-%23000000.svg?style=flat&logo=rust&logoColor=white)](https://www.rust-lang.org/)
