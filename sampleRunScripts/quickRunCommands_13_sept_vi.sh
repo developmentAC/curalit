@@ -37,10 +37,10 @@ echo -e "${BLUE}INFO:${NC} Command to launch CuraLit"
 ./curalit search -k "$kw1" -k "$kw2" -k "$kw3" -d ./data -o "$results_dir"
 
 echo -e "${BLUE}INFO:${NC} Command to build statistics report"
-./curalit stats -c 0_out/"$results_dir"_*.csv
+./curalit stats -c 0_out/"$results_dir"results.csv
 
 echo -e "${BLUE}INFO:${NC} Command to build RAG database"
-./curalit rag-build -c 0_out/"$results_dir"_*.csv
+./curalit rag-build -c 0_out/"$results_dir"results.csv
 
 
 echo -e "${BLUE}INFO:${NC} Command to build database"

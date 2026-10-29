@@ -53,6 +53,9 @@ impl Default for RagConfig {
 }
 
 /// Qdrant connection URL (local server - gRPC port)
+/// Max characters per chunk, to stay within the embedding model's context window
+const MAX_CHUNK_CHARS: usize = 1800;
+
 pub const QDRANT_URL: &str = "http://localhost:6334";
 
 /// A chunked passage from an article
@@ -317,14 +320,24 @@ impl RagSystem {
         let words: Vec<&str> = text.split_whitespace().collect();
         let mut chunks = Vec::new();
 
-        if words.len() <= self.config.chunk_size {
+        if words.len() <= self.config.chunk_size && text.len() <= MAX_CHUNK_CHARS {
             chunks.push(text.to_string());
             return chunks;
         }
 
         let mut start = 0;
         while start < words.len() {
-            let end = (start + self.config.chunk_size).min(words.len());
+            let mut end = (start + self.config.chunk_size).min(words.len());
+            // Dense/non-English text can exceed the embedding model's token limit
+            // well before chunk_size words, so also cap by characters.
+            let mut chars = 0;
+            for (i, w) in words[start..end].iter().enumerate() {
+                chars += w.len() + 1;
+                if chars > MAX_CHUNK_CHARS && i > 0 {
+                    end = start + i;
+                    break;
+                }
+            }
             let chunk = words[start..end].join(" ");
             chunks.push(chunk);
 
@@ -332,7 +345,8 @@ impl RagSystem {
                 break;
             }
 
-            start += self.config.chunk_size - self.config.chunk_overlap;
+            let step = (end - start).saturating_sub(self.config.chunk_overlap).max(1);
+            start += step;
         }
 
         chunks
