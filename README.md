@@ -1,4 +1,4 @@
-# CuraLit 🔬
+# CuraLit: Local Literature Curation With AI Support
 
 **Literature-Driven LLM Generator for Biomedical Research**
 
