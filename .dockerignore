@@ -1,0 +1,14 @@
+target/
+.git/
+.venv/
+**/__pycache__/
+0_out/
+data/
+qdrant_storage/
+docs/
+graphics/
+tests/
+sampleRunScripts/
+*.log
+*.md
+!README.md
