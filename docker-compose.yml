@@ -1,0 +1,32 @@
+services:
+  curalit:
+    image: ${CURALIT_IMAGE:-your-dockerhub-user/curalit:latest}
+    build: .
+    ports:
+      - "5050:5050"
+    environment:
+      OLLAMA_URL: http://ollama:11434
+      QDRANT_URL: http://qdrant:6334
+    volumes:
+      - ./data:/app/data          # put PubMed XML files here
+      - ./0_out:/app/0_out        # results and reports
+    depends_on:
+      - qdrant
+      - ollama
+    restart: unless-stopped
+
+  qdrant:
+    image: qdrant/qdrant
+    volumes:
+      - qdrant_storage:/qdrant/storage
+    restart: unless-stopped
+
+  ollama:
+    image: ollama/ollama
+    volumes:
+      - ollama_models:/root/.ollama
+    restart: unless-stopped
+
+volumes:
+  qdrant_storage:
+  ollama_models:

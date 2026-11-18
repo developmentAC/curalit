@@ -142,7 +142,7 @@ async fn main() -> Result<()> {
 
             // Create RAG config
             let config = RagConfig {
-                ollama_url: "http://localhost:11434".to_string(),
+                ollama_url: curalit::rag::default_ollama_url(),
                 embedding_model,
                 collection_name,
                 qdrant_path: storage_path,
@@ -216,7 +216,7 @@ async fn main() -> Result<()> {
         } => {
             // Create RAG config
             let config = RagConfig {
-                ollama_url: "http://localhost:11434".to_string(),
+                ollama_url: curalit::rag::default_ollama_url(),
                 embedding_model,
                 collection_name: collection_name.clone(),
                 qdrant_path: storage_path,
@@ -306,7 +306,7 @@ async fn main() -> Result<()> {
         } => {
             // Create RAG config
             let config = RagConfig {
-                ollama_url: "http://localhost:11434".to_string(),
+                ollama_url: curalit::rag::default_ollama_url(),
                 embedding_model,
                 collection_name: collection_name.clone(),
                 qdrant_path: storage_path,

@@ -41,7 +41,7 @@ pub struct RagConfig {
 impl Default for RagConfig {
     fn default() -> Self {
         Self {
-            ollama_url: "http://localhost:11434".to_string(),
+            ollama_url: default_ollama_url(),
             embedding_model: "nomic-embed-text".to_string(),
             collection_name: "curalit_articles".to_string(),
             qdrant_path: PathBuf::from("0_out/qdrant_storage"),
@@ -57,6 +57,16 @@ impl Default for RagConfig {
 const MAX_CHUNK_CHARS: usize = 1800;
 
 pub const QDRANT_URL: &str = "http://localhost:6334";
+
+/// Qdrant gRPC URL; override with the QDRANT_URL environment variable (e.g. in Docker)
+pub fn qdrant_url() -> String {
+    std::env::var("QDRANT_URL").unwrap_or_else(|_| QDRANT_URL.to_string())
+}
+
+/// Ollama base URL; override with the OLLAMA_URL environment variable (e.g. in Docker)
+pub fn default_ollama_url() -> String {
+    std::env::var("OLLAMA_URL").unwrap_or_else(|_| "http://localhost:11434".to_string())
+}
 
 /// A chunked passage from an article
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -114,7 +124,7 @@ impl RagSystem {
         // Initialize Qdrant client
         // Note: This requires a running Qdrant instance
         // Start it with: docker run -p 6333:6333 -p 6334:6334 -v $(pwd)/qdrant_storage:/qdrant/storage qdrant/qdrant
-        let client = Qdrant::from_url(QDRANT_URL)
+        let client = Qdrant::from_url(&qdrant_url())
             .timeout(std::time::Duration::from_secs(30))
             .build()
             .context("Failed to connect to Qdrant. Make sure Qdrant is running on localhost:6333.\n\
@@ -534,7 +544,7 @@ Answer:"#,
     /// Check if Qdrant server is reachable
     pub async fn check_qdrant_connection() -> Result<bool> {
         let client = reqwest::Client::new();
-        match client.get(format!("{}/", QDRANT_URL)).send().await {
+        match client.get(format!("{}/", qdrant_url())).send().await {
             Ok(resp) => Ok(resp.status().is_success()),
             Err(_) => Ok(false),
         }
