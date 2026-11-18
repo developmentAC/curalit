@@ -2,6 +2,8 @@
 
 **Literature-Driven LLM Generator for Biomedical Research**
 
+A parsing program written in Rust to curate articles for the creation of research literature reviews and foundational knowledge. Create Custom AI Research Assistants (LLMs) from PubMed Literature corpora.
+
 ![logo](graphics/curaLit_logo.png)
 
 [Oliver Bonham-Carter](https://www.oliverbonhamcarter.com/) · with development testing by Vincent Mametjanov
@@ -21,7 +23,7 @@ CuraLit extracts relevant articles from PubMed XML datasets and turns them into 
 
 ## Table of Contents
 
-- [CuraLit 🔬](#curalit-)
+- [CuraLit: Local Literature Curation With AI Support](#curalit-local-literature-curation-with-ai-support)
   - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
   - [Requirements](#requirements)

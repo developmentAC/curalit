@@ -1,7 +1,7 @@
 [project]
 name = "curalit"
 version = "0.1.0"
-description = "Add your description here"
+description = "A parsing program written in Rust to curate articles for the creation of research literature reviews and foundational knowledge. Create Custom AI Research Assistants (LLMs) from PubMed Literature corpora. Python code is created to visualize the curated literature and generate a knowledge graph of the research field."
 readme = "README.md"
 authors = [
     { name = "Oliver Bonham-Carter", email = "obonhamcarter@allegheny.edu" }

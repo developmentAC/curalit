@@ -2,8 +2,8 @@
 name = "curalit"
 version = "0.4.4"
 edition = "2021"
-authors = ["Your Name <your.email@example.com>"]
-description = "A tool for creating custom LLMs from PubMed literature for local research"
+authors = ["obonhamcarter@allegheny.edu"]
+description = "A parsing program written in Rust to curate articles for the creation of research literature reviews and foundational knowledge. Create Custom AI Research Assistants (LLMs) from PubMed Literature corpora."
 license = "MIT"
 repository = "https://github.com/yourusername/curalit"
 keywords = ["pubmed", "llm", "medical", "research", "ollama"]
