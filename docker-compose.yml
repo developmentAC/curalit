@@ -1,9 +1,11 @@
 services:
   curalit:
-    image: ${CURALIT_IMAGE:-your-dockerhub-user/curalit:latest}
+    # Pulled from Docker Hub by default. To build from this repo instead:
+    #   docker compose build && docker compose up -d
+    image: ${CURALIT_IMAGE:-obonhamcarter/curalit:0.4.4}
     build: .
     ports:
-      - "5050:5050"
+      - "127.0.0.1:5050:5050"     # browser UI, only reachable from this machine
     environment:
       OLLAMA_URL: http://ollama:11434
       QDRANT_URL: http://qdrant:6334

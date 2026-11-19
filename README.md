@@ -26,6 +26,7 @@ CuraLit extracts relevant articles from PubMed XML datasets and turns them into 
 - [CuraLit: Local Literature Curation With AI Support](#curalit-local-literature-curation-with-ai-support)
   - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
+  - [Quick Start with Docker](#quick-start-with-docker)
   - [Requirements](#requirements)
   - [Installation](#installation)
     - [Download PubMed data](#download-pubmed-data)
@@ -66,7 +67,58 @@ All of this is available either from the command line, or from a **local browser
 ![MeSH_logo](graphics/mesh_01.png)
 *Figure: frequency analysis of MeSH terms found in matching articles.*
 
+## Quick Start with Docker
+
+The fastest way to try CuraLit: no Rust, Python, Ollama or Qdrant to install. You only need [Docker Desktop](https://www.docker.com/products/docker-desktop/) (or Docker Engine with the Compose plugin) running.
+
+```bash
+git clone https://github.com/developmentAC/curalit.git
+cd curalit
+./start_curalit.sh
+```
+
+The script:
+
+1. checks that Docker is installed and running,
+2. creates `data/` (your PubMed XML files) and `0_out/` (your results), copying in a small sample file if `data/` is empty,
+3. pulls and starts three containers: CuraLit (`obonhamcarter/curalit:0.4.4`), Qdrant and Ollama,
+4. downloads the Ollama models `nomic-embed-text` and `llama3` (about 5 GB, first run only),
+5. runs a demo search into `0_out/getting_started/` and opens the browser interface at <http://localhost:5050>.
+
+Day-to-day commands:
+
+| Command | What it does |
+|---|---|
+| `./start_curalit.sh` | Start everything (fast after the first run) |
+| `./start_curalit.sh shell` | Open a command line inside the container, where you run `curalit …` commands |
+| `./start_curalit.sh status` | Show which services are running |
+| `./start_curalit.sh logs` | Follow the CuraLit logs |
+| `./start_curalit.sh stop` | Stop everything; data, results and models are kept |
+| `./start_curalit.sh --skip-models` | Start without downloading the Ollama models |
+
+Example session from the command line:
+
+```bash
+./start_curalit.sh shell
+curalit search -k methanol -k poisoning -d ./data -o myrun
+curalit rag-build -c 0_out/myrun/results.csv
+curalit rag-generate -q "What treatments are used for methanol poisoning?" -m llama3
+exit
+```
+
+Notes:
+
+- Place real PubMed `.xml` files in `data/` (see [Download PubMed data](#download-pubmed-data)). Results appear in `0_out/` on your computer.
+- The published image is built for amd64 (Intel/AMD). It runs on Intel Macs, Windows and Linux; Apple Silicon Macs run it through emulation, which is slower.
+- Ollama inside Docker on macOS runs on the CPU only, so answers take longer than with a native Ollama install.
+- The browser interface has no login and is bound to `localhost` only. See [docs/docker-usage.md](docs/docker-usage.md) for remote servers, running without this repository, and troubleshooting.
+- Prefer plain Compose? `docker compose up -d` uses the same [docker-compose.yml](docker-compose.yml); download models with `docker compose exec ollama ollama pull llama3`.
+
+---
+
 ## Requirements
+
+Requirements for building and running CuraLit from source (not needed for Docker):
 
 | Tool | Purpose | Required for |
 |---|---|---|
@@ -259,6 +311,7 @@ See [tests/README.md](tests/README.md) for details on what each test suite cover
 
 ## Further Documentation
 
+- [docs/docker-usage.md](docs/docker-usage.md) — running CuraLit with Docker (servers, remote access, troubleshooting)
 - [docs/DATABASE_FEATURE.md](docs/DATABASE_FEATURE.md) — fact-verification database deep dive
 - [docs/QUICKSTART.md](docs/QUICKSTART.md) — condensed quick-start guide
 - [docs/CHANGELOG.md](docs/CHANGELOG.md) — release history
