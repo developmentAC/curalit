@@ -311,6 +311,7 @@ See [tests/README.md](tests/README.md) for details on what each test suite cover
 
 ## Further Documentation
 
+- [docs/docker_running_steps.md](docs/docker_running_steps.md) — step-by-step Docker guide, including Ollama and model setup
 - [docs/docker-usage.md](docs/docker-usage.md) — running CuraLit with Docker (servers, remote access, troubleshooting)
 - [docs/DATABASE_FEATURE.md](docs/DATABASE_FEATURE.md) — fact-verification database deep dive
 - [docs/QUICKSTART.md](docs/QUICKSTART.md) — condensed quick-start guide
